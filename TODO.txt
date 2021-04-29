@@ -1,0 +1,8 @@
+Liste contrainte :
+Bicyclette nom = nom assemblage donc contrainte sa doit etre la meme
+Clé primaire double dans Assemblage ( nom & grandeur )
+
+
+
+Invention pour les groupes de 3:
+Employéé => gere l'assemblage et les stock
