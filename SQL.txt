@@ -1,0 +1,71 @@
+CREATE SCHEMA `velomax` ;
+
+CREATE TABLE assemblage (nomassemblage uniqueidentifier NOT NULL, grandeurassemblage varchar(255), cadre varchar(255), guidon varchar(255), freins varchar(255), selle varchar(255), derailleuravant varchar(255), derailleurarriere varchar(255), roueavant varchar(255), rouearriere varchar(255), reflecteur varchar(255), pedalleur varchar(255), ordinateur varchar(255), panier varchar(255));
+
+CREATE TABLE bicyclette (idbicy uniqueidentifier NOT NULL, nombicy varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime, nomassemblage uniqueidentifier); 
+
+CREATE TABLE itemstock (iditemstock uniqueidentifier NOT NULL, idbicy uniqueidentifier, numpiece uniqueidentifier);
+
+CREATE TABLE piecedetache (numpiece uniqueidentifier NOT NULL, description varchar(255), nomfournisseur varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod datetime, siret uniqueidentifier);
+
+CREATE TABLE fournisseur (siret uniqueidentifier NOT NULL, nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
+
+CREATE TABLE itemcmd (iditemscmd uniqueidentifier NOT NULL, quantite int, numcommande uniqueidentifier);
+
+CREATE TABLE commande (numcommande uniqueidentifier NOT NULL, datecommande datetime, adrlivraison varchar(255), datelivraison datetime, idclient uniqueidentifier);
+
+CREATE TABLE client (idclient uniqueidentifier NOT NULL, rueclient varchar(255), codepostaleclient int, provinceclient varchar(255), villeclient varchar(255)); 
+
+CREATE TABLE entreprise (identre uniqueidentifier NOT NULL, nomentre varchar(255), remiseentre float, idclient uniqueidentifier);
+
+CREATE TABLE particulier (idparticulier uniqueidentifier NOT NULL, nomclient varchar(255), prenomclient varchar(255), idclient uniqueidentifier, idfidelio uniqueidentifier);
+
+CREATE TABLE fidelio (idfidelio uniqueidentifier NOT NULL, descfidelio varchar(255), cout float, duree int, rabais float); 
+
+CREATE TABLE provenir (iditemstock uniqueidentifier NOT NULL, iditemscmd uniqueidentifier NOT NULL);
+
+ALTER TABLE assemblage ADD CONSTRAINT PK_assemblage PRIMARY KEY (nomassemblage);
+
+ALTER TABLE bicyclette ADD CONSTRAINT PK_bicyclette PRIMARY KEY (idbicy);
+
+ALTER TABLE itemstock ADD CONSTRAINT PK_itemstock PRIMARY KEY (iditemstock);
+
+ALTER TABLE piecedetache ADD CONSTRAINT PK_piecedetache PRIMARY KEY (numpiece);
+
+ALTER TABLE fournisseur ADD CONSTRAINT PK_fournisseur PRIMARY KEY (siret);
+
+ALTER TABLE itemcmd ADD CONSTRAINT PK_itemcmd PRIMARY KEY (iditemscmd);
+
+ALTER TABLE commande ADD CONSTRAINT PK_commande PRIMARY KEY (numcommande);
+
+ALTER TABLE client ADD CONSTRAINT PK_client PRIMARY KEY (idclient);
+
+ALTER TABLE entreprise ADD CONSTRAINT PK_entreprise PRIMARY KEY (identre);
+
+ALTER TABLE particulier ADD CONSTRAINT PK_particulier PRIMARY KEY (idparticulier);
+
+ALTER TABLE fidelio ADD CONSTRAINT PK_fidelio PRIMARY KEY (idfidelio);
+
+ALTER TABLE provenir ADD CONSTRAINT PK_provenir PRIMARY KEY (iditemstock, iditemscmd); 
+
+ALTER TABLE bicyclette ADD CONSTRAINT FK_bicyclette_nomassemblage FOREIGN KEY (nomassemblage) REFERENCES assemblage (nomassemblage);
+
+ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_idbicy FOREIGN KEY (idbicy) REFERENCES bicyclette (idbicy); 
+
+ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_numpiece FOREIGN KEY (numpiece) REFERENCES piecedetache (numpiece);
+
+ALTER TABLE piecedetache ADD CONSTRAINT FK_piecedetache_siret FOREIGN KEY (siret) REFERENCES fournisseur (siret);
+
+ALTER TABLE itemcmd ADD CONSTRAINT FK_itemcmd_numcommande FOREIGN KEY (numcommande) REFERENCES commande (numcommande);
+
+ALTER TABLE commande ADD CONSTRAINT FK_commande_idclient FOREIGN KEY (idclient) REFERENCES client (idclient);
+
+ALTER TABLE entreprise ADD CONSTRAINT FK_entreprise_idclient FOREIGN KEY (idclient) REFERENCES client (idclient);
+
+ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idclient FOREIGN KEY (idclient) REFERENCES client (idclient);
+
+ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idfidelio FOREIGN KEY (idfidelio) REFERENCES fidelio (idfidelio);
+
+ALTER TABLE provenir ADD CONSTRAINT FK_provenir_iditemstock FOREIGN KEY (iditemstock) REFERENCES itemstock (iditemstock);
+
+ ALTER TABLE provenir ADD CONSTRAINT FK_provenir_iditemscmd FOREIGN KEY (iditemscmd) REFERENCES itemcmd (iditemscmd);
