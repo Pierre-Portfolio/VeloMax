@@ -5,7 +5,7 @@ CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL
 DROP TABLE IF EXISTS bicyclette;
 CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
 DROP TABLE IF EXISTS itemstock;
-CREATE TABLE itemstock (iditemstock INT NOT NULL, idbicy int, numpiece VARCHAR(255));
+CREATE TABLE itemstock (iditemstock INT PRIMARY KEY NOT NULL AUTO_INCREMENT, idbicy int, numpiece VARCHAR(255));
 DROP TABLE IF EXISTS piecedetache;
 CREATE TABLE piecedetache (numpiece varchar(255)  NOT NULL, descpiece varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod int, siret varchar(255));
 DROP TABLE IF EXISTS fournisseur;
@@ -25,7 +25,7 @@ CREATE TABLE fidelio (idfidelio INT PRIMARY KEY NOT NULL AUTO_INCREMENT , descfi
 
 ALTER TABLE assemblage ADD CONSTRAINT PK_assemblage PRIMARY KEY (nom,grandeur );
 ALTER TABLE bicyclette ADD CONSTRAINT PK_bicyclette PRIMARY KEY (idbicy);
-ALTER TABLE itemstock ADD CONSTRAINT PK_itemstock PRIMARY KEY (iditemstock); 
+/*ALTER TABLE itemstock ADD CONSTRAINT PK_itemstock PRIMARY KEY (iditemstock); */
 ALTER TABLE piecedetache ADD CONSTRAINT PK_piecedetache PRIMARY KEY (numpiece);  
 ALTER TABLE fournisseur ADD CONSTRAINT PK_fournisseur PRIMARY KEY (siret);  
 ALTER TABLE itemcmd ADD CONSTRAINT PK_itemcmd PRIMARY KEY (iditemscmd);  
@@ -122,3 +122,24 @@ INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintr
 ('C32','cadre Adultes','1',12,'2010-04-02 15:28:22','2010-04-02 15:28:22',3,123456789124834),
 ('C34','cadre Adultes','2',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834),
 ('C76','cadre Jeunes','3',13,'2010-04-02 15:28:22','2010-04-02 15:28:22',2,837038217323928);
+
+INSERT INTO itemstock (idbicy,numpiece)
+ VALUES
+(null,'C32'),
+(null,'C34'),
+(null,'C76'),
+(101,''),
+(102,''),
+(103,''),
+(104,''),
+(105,''),
+(106,''),
+(107,''),
+(108,''),
+(109,''),
+(110,''),
+(111,''),
+(112,''),
+(113,''),
+(114,''),
+(115,'');
