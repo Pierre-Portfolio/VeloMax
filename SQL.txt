@@ -21,7 +21,7 @@ CREATE TABLE entreprise (identre INT NOT NULL, nomentre varchar(255), remiseentr
 DROP TABLE IF EXISTS particulier;
 CREATE TABLE particulier (idparticulier INT NOT NULL, nomclient varchar(255), prenomclient varchar(255), idclient int, idfidelio int);
 DROP TABLE IF EXISTS fidelio;
-CREATE TABLE fidelio (idfidelio INT NOT NULL, descfidelio varchar(255), cout float, duree int, rabais float); 
+CREATE TABLE fidelio (idfidelio INT NOT NULL, descfidelio varchar(255), cout int, duree int, rabais int); 
 
 ALTER TABLE assemblage ADD CONSTRAINT PK_assemblage PRIMARY KEY (nom,grandeur );
 ALTER TABLE bicyclette ADD CONSTRAINT PK_bicyclette PRIMARY KEY (idbicy);
@@ -52,12 +52,12 @@ INSERT INTO assemblage (nom, grandeur, cadre, guidon,freins,selle,derailleuravan
  ('MontBlanc', 'Jeunes', 'C76', 'G7','F3','S88','DV17','DR87','R48','R47','','P12','O2',''),
  ('Hooligan', 'Jeunes', 'C76', 'G7','F3','S88','DV87','DR86','R12','R32','','P12','',''),
  ('Orléans', 'Hommes', 'C43', 'G9','F9','S37','DV57','DR86','R19','R18','R02','P34','',''),
-  ('Orléans', 'Dames', 'C44f', 'G9','F9','S35','DV57','DR86','R19','R18','R02','P34','',''),
+ ('Orléans', 'Dames', 'C44f', 'G9','F9','S35','DV57','DR86','R19','R18','R02','P34','',''),
  ('BlueJay', 'Hommes', 'C43', 'G9','F9','S37','DV57','DR87','R19','R18','R02','P34','O4',''),
  ('BlueJay', 'Adultes', 'C43f', 'G9','F9','S35','DV57','DR87','R19','R18','R02','P34','O4',''),
  ('Trail Explorer', 'Filles', 'C01', 'G12','','S02','','','R1','R2','R09','P1','','S01'),
  ('Trail Explorer', 'Adultes', 'C02', 'G12','','S03','','','R1','R2','R09','P1','','S05'),
-  ('Night Hawk ', 'Jeunes', 'C15', 'G12','F9','S36','DV15','DR23','R11','R12','R10','P15','','S74'),
+ ('Night Hawk ', 'Jeunes', 'C15', 'G12','F9','S36','DV15','DR23','R11','R12','R10','P15','','S74'),
  ('Tierra Verde', 'Garçons', 'C87', 'G12','F9','S36','DV41','DR76','R11','R12','R10','P15','','S74'),
  ('Tierra Verde', 'Dames', 'C87f', 'G12','F9','S34','DV41','DR76','R11','R12','R10','P15','','S73'),
  ('Mud Zinger I ', 'Jeunes', 'C25', 'G7','F3','S87','DV132','DR52','R44','R47','','P15','',''),
@@ -81,8 +81,10 @@ INSERT INTO assemblage (nom, grandeur, cadre, guidon,freins,selle,derailleuravan
 (113, 'Tierra Verde', 'Dames', 199,'Classique','2010-04-02 15:28:22','2010-04-02 15:28:22'),
 (114, 'Mud Zinger I', 'Jeunes', 279,'BMX','2010-04-02 15:28:22','2010-04-02 15:28:22'),
 (115, 'Mud Zinger II ', 'Adultes', 359,'BMX','2010-04-02 15:28:22','2010-04-02 15:28:22');
-  
 
- 
-
- 
+ INSERT INTO fidelio (descfidelio ,cout ,duree ,rabais)
+ VALUES
+('Fidélio', 15, 1,5),
+('Fidélio Or', 25, 1,8),
+('Fidélio Platine', 60, 1,10),
+('Fidélio Max', 100, 1,12);
