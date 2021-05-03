@@ -7,9 +7,9 @@ CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varcha
 DROP TABLE IF EXISTS itemstock;
 CREATE TABLE itemstock (iditemstock INT NOT NULL, idbicy int, numpiece int);
 DROP TABLE IF EXISTS piecedetache;
-CREATE TABLE piecedetache (numpiece INT  NOT NULL, description varchar(255), nomfournisseur varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod datetime, siret int);
+CREATE TABLE piecedetache (numpiece INT  NOT NULL, description varchar(255), nomfournisseur varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod datetime, siret varchar(255));
 DROP TABLE IF EXISTS fournisseur;
-CREATE TABLE fournisseur (siret INT  NOT NULL, nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
+CREATE TABLE fournisseur (siret varchar(255), nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
 DROP TABLE IF EXISTS itemcmd;
 CREATE TABLE itemcmd (iditemscmd INT   NOT NULL, quantite int, iditemstock int, numcommande int);
 DROP TABLE IF EXISTS commande;
@@ -110,3 +110,9 @@ INSERT INTO entreprise (nomentre,remiseentre,idclient)
 ('HG', 10,5),
 ('Riot Game', 2 ,6),
 ('Facebook',  30,7);
+
+INSERT INTO fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)
+ VALUES
+(123456789124834,'Babel',"Babel@gmail.com",'12 rue du general','fournisseur de guidon'),
+(837038217323928,'Sony',"Sony@gmail.com",'18 impasse du concombre','fournisseur de selle'),
+(082136183927173,'Nintendo',"Nintendo@gmail.com",'78 rue du la bouteille','fournisseur de pedale');
