@@ -5,11 +5,11 @@ CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL
 DROP TABLE IF EXISTS bicyclette;
 CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
 DROP TABLE IF EXISTS itemstock;
-CREATE TABLE itemstock (iditemstock INT NOT NULL, idbicy int, numpiece int);
+CREATE TABLE itemstock (iditemstock INT NOT NULL, idbicy int, numpiece VARCHAR(255));
 DROP TABLE IF EXISTS piecedetache;
-CREATE TABLE piecedetache (numpiece INT  NOT NULL, description varchar(255), nomfournisseur varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod datetime, siret varchar(255));
+CREATE TABLE piecedetache (numpiece varchar(255)  NOT NULL, descpiece varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod int, siret varchar(255));
 DROP TABLE IF EXISTS fournisseur;
-CREATE TABLE fournisseur (siret varchar(255), nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
+CREATE TABLE fournisseur (siret varchar(255) NOT NULL, nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
 DROP TABLE IF EXISTS itemcmd;
 CREATE TABLE itemcmd (iditemscmd INT   NOT NULL, quantite int, iditemstock int, numcommande int);
 DROP TABLE IF EXISTS commande;
@@ -116,3 +116,9 @@ INSERT INTO fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)
 (123456789124834,'Babel',"Babel@gmail.com",'12 rue du general','fournisseur de guidon'),
 (837038217323928,'Sony',"Sony@gmail.com",'18 impasse du concombre','fournisseur de selle'),
 (082136183927173,'Nintendo',"Nintendo@gmail.com",'78 rue du la bouteille','fournisseur de pedale');
+
+INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)
+ VALUES
+('C32','cadre Adultes','1',12,'2010-04-02 15:28:22','2010-04-02 15:28:22',3,123456789124834),
+('C34','cadre Adultes','2',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834),
+('C76','cadre Jeunes','3',13,'2010-04-02 15:28:22','2010-04-02 15:28:22',2,837038217323928);
