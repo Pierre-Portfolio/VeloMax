@@ -13,7 +13,7 @@ CREATE TABLE fournisseur (siret varchar(255) NOT NULL, nomentreprise varchar(255
 DROP TABLE IF EXISTS itemcmd;
 CREATE TABLE itemcmd (iditemscmd INT   NOT NULL, quantite int, iditemstock int, numcommande int);
 DROP TABLE IF EXISTS commande;
-CREATE TABLE commande (numcommande INT  NOT NULL, datecommande datetime, adrlivraison varchar(255), datelivraison datetime, idclient int);
+CREATE TABLE commande (numcommande INT PRIMARY KEY NOT NULL AUTO_INCREMENT, datecommande datetime, adrlivraison varchar(255), datelivraison datetime, idclient int);
 DROP TABLE IF EXISTS clientele;
 CREATE TABLE clientele (idclient INT PRIMARY KEY NOT NULL AUTO_INCREMENT, rueclient varchar(255), codepostaleclient int, provinceclient varchar(255), villeclient varchar(255)); 
 DROP TABLE IF EXISTS entreprise;
@@ -29,7 +29,7 @@ ALTER TABLE bicyclette ADD CONSTRAINT PK_bicyclette PRIMARY KEY (idbicy);
 ALTER TABLE piecedetache ADD CONSTRAINT PK_piecedetache PRIMARY KEY (numpiece);  
 ALTER TABLE fournisseur ADD CONSTRAINT PK_fournisseur PRIMARY KEY (siret);  
 ALTER TABLE itemcmd ADD CONSTRAINT PK_itemcmd PRIMARY KEY (iditemscmd);  
-ALTER TABLE commande ADD CONSTRAINT PK_commande PRIMARY KEY (numcommande);  
+/*ALTER TABLE commande ADD CONSTRAINT PK_commande PRIMARY KEY (numcommande);  */
 /*ALTER TABLE clientele ADD CONSTRAINT PK_clientele PRIMARY KEY (idclient);  */
 /*ALTER TABLE entreprise ADD CONSTRAINT PK_entreprise PRIMARY KEY (identre);  */
 /*ALTER TABLE particulier ADD CONSTRAINT PK_particulier PRIMARY KEY (idparticulier);  */
@@ -143,3 +143,9 @@ INSERT INTO itemstock (idbicy,numpiece)
 (113,''),
 (114,''),
 (115,'');
+
+INSERT INTO commande (datecommande,adrlivraison,datelivraison,idclient)
+ VALUES
+('2010-04-01 15:28:22','76 rue du machin','2010-04-02 15:28:22',3),
+('2010-04-01 15:29:22','73 rue du collab','2010-04-02 15:28:22',1),
+('2010-04-01 15:30:22','6 rue du coca','2010-04-02 15:28:22',5);
