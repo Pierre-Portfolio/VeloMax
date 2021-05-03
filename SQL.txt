@@ -17,9 +17,9 @@ CREATE TABLE commande (numcommande INT  NOT NULL, datecommande datetime, adrlivr
 DROP TABLE IF EXISTS clientele;
 CREATE TABLE clientele (idclient INT PRIMARY KEY NOT NULL AUTO_INCREMENT, rueclient varchar(255), codepostaleclient int, provinceclient varchar(255), villeclient varchar(255)); 
 DROP TABLE IF EXISTS entreprise;
-CREATE TABLE entreprise (identre INT  NOT NULL, nomentre varchar(255), remiseentre float, idclient int);
+CREATE TABLE entreprise (identre  INT PRIMARY KEY NOT NULL AUTO_INCREMENT, nomentre varchar(255), remiseentre float, idclient int);
 DROP TABLE IF EXISTS particulier;
-CREATE TABLE particulier (idparticulier INT  NOT NULL, nomclient varchar(255), prenomclient varchar(255), idclient int, idfidelio int);
+CREATE TABLE particulier (idparticulier INT PRIMARY KEY NOT NULL AUTO_INCREMENT, nomclient varchar(255), prenomclient varchar(255), idclient int, idfidelio int);
 DROP TABLE IF EXISTS fidelio;
 CREATE TABLE fidelio (idfidelio INT PRIMARY KEY NOT NULL AUTO_INCREMENT , descfidelio varchar(255), cout int, duree int, rabais int); 
 
@@ -31,8 +31,8 @@ ALTER TABLE fournisseur ADD CONSTRAINT PK_fournisseur PRIMARY KEY (siret);
 ALTER TABLE itemcmd ADD CONSTRAINT PK_itemcmd PRIMARY KEY (iditemscmd);  
 ALTER TABLE commande ADD CONSTRAINT PK_commande PRIMARY KEY (numcommande);  
 /*ALTER TABLE clientele ADD CONSTRAINT PK_clientele PRIMARY KEY (idclient);  */
-ALTER TABLE entreprise ADD CONSTRAINT PK_entreprise PRIMARY KEY (identre);  
-ALTER TABLE particulier ADD CONSTRAINT PK_particulier PRIMARY KEY (idparticulier);  
+/*ALTER TABLE entreprise ADD CONSTRAINT PK_entreprise PRIMARY KEY (identre);  */
+/*ALTER TABLE particulier ADD CONSTRAINT PK_particulier PRIMARY KEY (idparticulier);  */
 ALTER TABLE bicyclette ADD CONSTRAINT FK_bicyclette_nomassemblage FOREIGN KEY (nom,grandeur) REFERENCES assemblage (nom,grandeur);  
 ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_idbicy FOREIGN KEY (idbicy) REFERENCES bicyclette (idbicy);  
 ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_numpiece FOREIGN KEY (numpiece) REFERENCES piecedetache (numpiece);  
@@ -93,4 +93,20 @@ INSERT INTO assemblage (nom, grandeur, cadre, guidon,freins,selle,derailleuravan
 ('rue de la tour', 75000, 'IDF','Paris'),
 ('avenue Lafayette', 75000, 'IDF','Paris'),
 ('impasse des iles', 75000, 'IDF','Paris'),
-('rue de la toile', 75000, 'IDF','Paris');
+('rue de la toile', 75000, 'IDF','Paris'),
+('avenue rio', 78180, 'IDF','Voisin-le-Bx'),
+('impasse de esilv', 75000, 'IDF','Paris'),
+('rue de l aubrac', 75000, 'IDF','Paris');
+
+INSERT INTO particulier (nomclient,prenomclient,idclient,idfidelio)
+ VALUES
+('Martin', 'Louna', 1,1),
+('Martin', 'Pierre', 2,2),
+('Tribot', 'Thibault', 3,3),
+('ROC', 'Yan', 4,4);
+
+INSERT INTO entreprise (nomentre,remiseentre,idclient)
+ VALUES
+('HG', 10,5),
+('Riot Game', 2 ,6),
+('Facebook',  30,7);
