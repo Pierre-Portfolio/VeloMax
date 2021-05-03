@@ -3,7 +3,7 @@ SET FOREIGN_KEY_CHECKS=0;*/
 DROP TABLE IF EXISTS assemblage;
 CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL, cadre varchar(255), guidon varchar(255), freins varchar(255), selle varchar(255), derailleuravant varchar(255), derailleurarriere varchar(255), roueavant varchar(255), rouearriere varchar(255), reflecteur varchar(255), pedalleur varchar(255), ordinateur varchar(255), panier varchar(255));
 DROP TABLE IF EXISTS bicyclette;
-CREATE TABLE bicyclette (idbicy  INT AUTO_INCREMENT NOT NULL, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
+CREATE TABLE bicyclette (idbicy  INT NOT NULL AUTO_INCREMENT, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
 DROP TABLE IF EXISTS itemstock;
 CREATE TABLE itemstock (iditemstock INT AUTO_INCREMENT NOT NULL, idbicy int, numpiece int);
 DROP TABLE IF EXISTS piecedetache;
