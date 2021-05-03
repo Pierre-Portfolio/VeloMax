@@ -3,25 +3,25 @@ SET FOREIGN_KEY_CHECKS=0;*/
 DROP TABLE IF EXISTS assemblage;
 CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL, cadre varchar(255), guidon varchar(255), freins varchar(255), selle varchar(255), derailleuravant varchar(255), derailleurarriere varchar(255), roueavant varchar(255), rouearriere varchar(255), reflecteur varchar(255), pedalleur varchar(255), ordinateur varchar(255), panier varchar(255));
 DROP TABLE IF EXISTS bicyclette;
-CREATE TABLE bicyclette (idbicy  INT NOT NULL AUTO_INCREMENT, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
+CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
 DROP TABLE IF EXISTS itemstock;
-CREATE TABLE itemstock (iditemstock INT AUTO_INCREMENT NOT NULL, idbicy int, numpiece int);
+CREATE TABLE itemstock (iditemstock INT NOT NULL, idbicy int, numpiece int);
 DROP TABLE IF EXISTS piecedetache;
-CREATE TABLE piecedetache (numpiece INT AUTO_INCREMENT NOT NULL, description varchar(255), nomfournisseur varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod datetime, siret int);
+CREATE TABLE piecedetache (numpiece INT  NOT NULL, description varchar(255), nomfournisseur varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod datetime, siret int);
 DROP TABLE IF EXISTS fournisseur;
-CREATE TABLE fournisseur (siret INT AUTO_INCREMENT NOT NULL, nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
+CREATE TABLE fournisseur (siret INT  NOT NULL, nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
 DROP TABLE IF EXISTS itemcmd;
-CREATE TABLE itemcmd (iditemscmd INT  AUTO_INCREMENT NOT NULL, quantite int, iditemstock int, numcommande int);
+CREATE TABLE itemcmd (iditemscmd INT   NOT NULL, quantite int, iditemstock int, numcommande int);
 DROP TABLE IF EXISTS commande;
-CREATE TABLE commande (numcommande INT AUTO_INCREMENT NOT NULL, datecommande datetime, adrlivraison varchar(255), datelivraison datetime, idclient int);
+CREATE TABLE commande (numcommande INT  NOT NULL, datecommande datetime, adrlivraison varchar(255), datelivraison datetime, idclient int);
 DROP TABLE IF EXISTS clientele;
-CREATE TABLE clientele (idclient INT AUTO_INCREMENT NOT NULL, rueclient varchar(255), codepostaleclient int, provinceclient varchar(255), villeclient varchar(255)); 
+CREATE TABLE clientele (idclient INT PRIMARY KEY NOT NULL AUTO_INCREMENT, rueclient varchar(255), codepostaleclient int, provinceclient varchar(255), villeclient varchar(255)); 
 DROP TABLE IF EXISTS entreprise;
-CREATE TABLE entreprise (identre INT AUTO_INCREMENT NOT NULL, nomentre varchar(255), remiseentre float, idclient int);
+CREATE TABLE entreprise (identre INT  NOT NULL, nomentre varchar(255), remiseentre float, idclient int);
 DROP TABLE IF EXISTS particulier;
-CREATE TABLE particulier (idparticulier INT AUTO_INCREMENT NOT NULL, nomclient varchar(255), prenomclient varchar(255), idclient int, idfidelio int);
+CREATE TABLE particulier (idparticulier INT  NOT NULL, nomclient varchar(255), prenomclient varchar(255), idclient int, idfidelio int);
 DROP TABLE IF EXISTS fidelio;
-CREATE TABLE fidelio (idfidelio INT AUTO_INCREMENT NOT NULL, descfidelio varchar(255), cout int, duree int, rabais int); 
+CREATE TABLE fidelio (idfidelio INT PRIMARY KEY NOT NULL AUTO_INCREMENT , descfidelio varchar(255), cout int, duree int, rabais int); 
 
 ALTER TABLE assemblage ADD CONSTRAINT PK_assemblage PRIMARY KEY (nom,grandeur );
 ALTER TABLE bicyclette ADD CONSTRAINT PK_bicyclette PRIMARY KEY (idbicy);
@@ -30,10 +30,9 @@ ALTER TABLE piecedetache ADD CONSTRAINT PK_piecedetache PRIMARY KEY (numpiece);
 ALTER TABLE fournisseur ADD CONSTRAINT PK_fournisseur PRIMARY KEY (siret);  
 ALTER TABLE itemcmd ADD CONSTRAINT PK_itemcmd PRIMARY KEY (iditemscmd);  
 ALTER TABLE commande ADD CONSTRAINT PK_commande PRIMARY KEY (numcommande);  
-ALTER TABLE clientele ADD CONSTRAINT PK_clientele PRIMARY KEY (idclient);  
+/*ALTER TABLE clientele ADD CONSTRAINT PK_clientele PRIMARY KEY (idclient);  */
 ALTER TABLE entreprise ADD CONSTRAINT PK_entreprise PRIMARY KEY (identre);  
 ALTER TABLE particulier ADD CONSTRAINT PK_particulier PRIMARY KEY (idparticulier);  
-ALTER TABLE fidelio ADD CONSTRAINT PK_fidelio PRIMARY KEY (idfidelio);  
 ALTER TABLE bicyclette ADD CONSTRAINT FK_bicyclette_nomassemblage FOREIGN KEY (nom,grandeur) REFERENCES assemblage (nom,grandeur);  
 ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_idbicy FOREIGN KEY (idbicy) REFERENCES bicyclette (idbicy);  
 ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_numpiece FOREIGN KEY (numpiece) REFERENCES piecedetache (numpiece);  
@@ -88,3 +87,10 @@ INSERT INTO assemblage (nom, grandeur, cadre, guidon,freins,selle,derailleuravan
 ('Fidélio Or', 25, 1,8),
 ('Fidélio Platine', 60, 1,10),
 ('Fidélio Max', 100, 1,12);
+
+ INSERT INTO clientele ( rueclient ,codepostaleclient ,provinceclient,villeclient)
+ VALUES
+('rue de la tour', 75000, 'IDF','Paris'),
+('avenue Lafayette', 75000, 'IDF','Paris'),
+('impasse des iles', 75000, 'IDF','Paris'),
+('rue de la toile', 75000, 'IDF','Paris');
