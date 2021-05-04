@@ -37,17 +37,27 @@ namespace VeloMax
         #endregion 
 
         #region Variable Globale
-        // creation de l'objet mysql
+        //Creation de l'objet mysql
         MySqlConnection connection = createDB();
 
-        /*
         // permet de savoir la fenetre actuel
         // On crée toutes les pages dynamique
+        Grid DynamicGridMateriel = new Grid();
         Grid DynamicGridClient = new Grid();
-        public DataGrid myGridClient = new DataGrid();
-        public DataGrid myGridCommis = new DataGrid();
-        public DataGrid myGridLivreur = new DataGrid();
+        Grid DynamicGridCommands = new Grid();
+        Grid DynamicGridStats = new Grid();
+        Grid DynamicGridFournisseur = new Grid();
+        Grid DynamicGridDemo = new Grid();
 
+        /*
+        public DataGrid myGridMateriel = new DataGrid();
+        public DataGrid myGridClient = new DataGrid();
+        public DataGrid myGridCommands = new DataGrid();
+        public DataGrid myGridStats = new DataGrid();
+        public DataGrid myGridFournisseur = new DataGrid();
+        public DataGrid myGridDemo = new DataGrid();
+        */
+        /*
         Grid DynamicGridCommands = new Grid();
         ListView ListeViewCommande = new ListView();
         ComboBox cbRecherche = new ComboBox();
@@ -56,6 +66,14 @@ namespace VeloMax
         Grid DynamicGridAdmin = new Grid();
         */
         #endregion
+
+        #region Generation DynamicGrid
+        public void GeneMateriel()
+        {
+
+        }
+
+        #endregion Generation DynamicGrid
 
         #region Refresh
         public void Refresh()
@@ -71,10 +89,12 @@ namespace VeloMax
 
         #endregion Refresh
 
+        #region main
         public MainWindow()
         {
         
         }
+        #endregion
 
         #region Evenement
         private void MaterielBtn_Click(object sender, RoutedEventArgs e)
