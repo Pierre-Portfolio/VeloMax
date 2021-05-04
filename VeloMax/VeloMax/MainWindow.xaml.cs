@@ -56,9 +56,68 @@ namespace VeloMax
         Grid DynamicGridAdmin = new Grid();
         */
         #endregion
+
+        #region Refresh
+        public void Refresh()
+        {
+            // on refresh les couleurs des bouttons
+            MaterielBtn.Background = new SolidColorBrush(Colors.Green);
+            ClientsBtn.Background = new SolidColorBrush(Colors.Green);
+            CommandesBtn.Background = new SolidColorBrush(Colors.Green);
+            StatistiqueBtn.Background = new SolidColorBrush(Colors.Green);
+            FournisseurBtn.Background = new SolidColorBrush(Colors.Green);
+            DemoBtn.Background = new SolidColorBrush(Colors.Green);
+        }
+
+        #endregion Refresh
+
         public MainWindow()
         {
         
         }
+
+        #region Evenement
+        private void MaterielBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            MaterielBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MessageBox.Show("En cour de dev par Pierre");
+        }
+
+        private void ClientsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            ClientsBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MessageBox.Show("En cour de dev par Pierre");
+        }
+
+        private void CommandesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            CommandesBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MessageBox.Show("En cour de dev par Amine");
+        }
+
+        private void StatistiqueBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            StatistiqueBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MessageBox.Show("En cour de dev par Amine");
+        }
+
+        private void FournisseurBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            FournisseurBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MessageBox.Show("En cour de dev par Yanis");
+        }
+
+        private void DemoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            DemoBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MessageBox.Show("En cour de dev par Yanis");
+        }
+        #endregion Evenement
     }
 }
