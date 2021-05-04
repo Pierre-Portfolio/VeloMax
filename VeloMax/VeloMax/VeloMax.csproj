@@ -6,4 +6,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\..\Downloads\MySql.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

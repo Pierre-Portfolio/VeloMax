@@ -6,7 +6,40 @@
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="MainGrid" Margin="0,0,0,10">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="116*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
+            <Grid.Background>
+                <ImageBrush ImageSource="C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\VeloMax\banner.png"/>
+            </Grid.Background>
+        </Grid>
+
+        <Button x:Name="MaterielBtn" Content="Materiel" Grid.Row="1" Grid.Column="0" Background="Green"  BorderThickness="0"  Grid.ColumnSpan="1" />
+        <Button x:Name="ClientsBtn" Content="Clients" Grid.Row="1" Grid.Column="1" Background="Green"  BorderThickness="0" Grid.ColumnSpan="1"/>
+        <Button x:Name="CommandesBtn" Content="Commandes" Grid.Row="1" Grid.Column="2" Background="Green" BorderThickness="0" Grid.ColumnSpan="1" />
+        <Button x:Name="StatistiqueBtn" Content="Statistiques" Grid.Row="1" Grid.Column="3" Background="Green" BorderThickness="0" Grid.ColumnSpan="1" />
+        <Button x:Name="FournisseurBtn" Content="Fournisseur" Grid.Row="1" Grid.Column="4" Background="Green"  BorderThickness="0"  Grid.ColumnSpan="1"/>
+        <Button x:Name="DemoBtn" Content="Demo" Grid.Row="1" Grid.Column="5" Background="Green" BorderThickness="0" Grid.ColumnSpan="1" />
+        
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,0,-13" >
+            <Grid.Background>
+                <ImageBrush ImageSource="C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\VeloMax\banner2.jpg"/>
+            </Grid.Background>
+        </Grid>
     </Grid>
 </Window>

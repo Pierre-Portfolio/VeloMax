@@ -1,5 +1,5 @@
 ﻿VeloMax
-1.0.0.0
+
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\VeloMax\App.xaml
 11407045341
 
-51858061156
+3-1233169557
 1931404301626
 MainWindow.xaml;
 
-True
+False
 
