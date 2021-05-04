@@ -1,8 +1,15 @@
-Liste contrainte :
-Bicyclette nom = nom assemblage donc contrainte sa doit etre la meme
-Clé primaire double dans Assemblage ( nom & grandeur )
+GRANDE PARTIE :
+	Gestion Materiel -> piece & velo // appercu du stock par piece , fournisseur & en plus pour velo la marque ect ect // penser a egalement crée une alerte si piece en manque et c'est le mec qui decide entre les pieces lequels prendres
+	gestion Clientele -> client & Fidelio
+	Gestion Commande -> commande client // verif le stock pour livraison temp voulu ou crée une estimation
+	Gestion Fournisseur -> fournisseur 
+	Gestion Statistique -> voir pdf +  export data e// export stock faible (XML) pour cmd export liste client dont truc fidelité (JSON) sonn fini ( 2 mois) avec l'historique d'achat
+	Démo -> voir pdf
 
 
 
-Invention pour les groupes de 3:
-Employéé => gere l'assemblage et les stock
+CONTRAINTE GROUPE DE 3 => les triggers, les procédures et que vous faîtes preuve de créativité 
+// je propose donc un systeme de connection pour les vendeur permettant ducoup de savoir qui effectue la commande des client ( pratique ) // ducoup création du vendeur du mois par exemple
+Contrainte projet => 1 requete sunchro , 1 auto jointure & 1 unions ( noté dans ce txt pour quon sache ou elle sont pour le rapport )
+
+
