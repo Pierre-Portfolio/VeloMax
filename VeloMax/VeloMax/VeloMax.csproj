@@ -7,9 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="velo_logo.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="MySql.Data">
       <HintPath>..\..\..\..\Downloads\MySql.Data.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="velo_logo.jpeg" />
   </ItemGroup>
 
 </Project>
