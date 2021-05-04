@@ -48,29 +48,62 @@ namespace VeloMax
         Grid DynamicGridStats = new Grid();
         Grid DynamicGridFournisseur = new Grid();
         Grid DynamicGridDemo = new Grid();
-
-        /*
-        public DataGrid myGridMateriel = new DataGrid();
-        public DataGrid myGridClient = new DataGrid();
-        public DataGrid myGridCommands = new DataGrid();
-        public DataGrid myGridStats = new DataGrid();
-        public DataGrid myGridFournisseur = new DataGrid();
-        public DataGrid myGridDemo = new DataGrid();
-        */
-        /*
-        Grid DynamicGridCommands = new Grid();
-        ListView ListeViewCommande = new ListView();
-        ComboBox cbRecherche = new ComboBox();
-
-        Grid DynamicGridStat = new Grid();
-        Grid DynamicGridAdmin = new Grid();
-        */
         #endregion
 
         #region Generation DynamicGrid
         public void GeneMateriel()
         {
+            /* ==== Creation partie client ====*/
+            // création grid dynamic
+            DynamicGridMateriel.HorizontalAlignment = HorizontalAlignment.Left;
+            DynamicGridMateriel.Height = 400;
+            DynamicGridMateriel.Margin = new Thickness(0, 0, 0, 0);
+            DynamicGridMateriel.VerticalAlignment = VerticalAlignment.Center;
+            DynamicGridMateriel.Width = 780;
 
+            // Create Columns
+            Grid.SetRow(DynamicGridMateriel, 2);
+            Grid.SetColumn(DynamicGridMateriel, 0);
+            Grid.SetColumnSpan(DynamicGridMateriel, 4);
+            ColumnDefinition gridColMatos1 = new ColumnDefinition();
+            DynamicGridMateriel.ColumnDefinitions.Add(gridColMatos1);
+
+            // Create Rows
+            RowDefinition gridRowMatos1 = new RowDefinition();
+            gridRowMatos1.Height = new GridLength(30);
+            RowDefinition gridRowMatos2 = new RowDefinition();
+            gridRowMatos2.Height = new GridLength(100);
+            RowDefinition gridRowMatos3 = new RowDefinition();
+            gridRowMatos3.Height = new GridLength(30);
+            RowDefinition gridRowMatos4 = new RowDefinition();
+            gridRowMatos4.Height = new GridLength(100);
+            RowDefinition gridRowMatos5 = new RowDefinition();
+            gridRowMatos5.Height = new GridLength(30);
+            RowDefinition gridRowMatos6 = new RowDefinition();
+            gridRowMatos6.Height = new GridLength(100);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos1);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos2);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos3);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos4);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos5);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos6);
+            DynamicGridMateriel.Margin = new Thickness(100, 20, 0, 0);
+
+            // titre 1
+            TextBlock txtBlock1 = new TextBlock();
+            txtBlock1.Text = "Liste des bicyclettes";
+            txtBlock1.FontSize = 14;
+            txtBlock1.Width = 700;
+            txtBlock1.TextAlignment = TextAlignment.Center;
+            txtBlock1.Background = new SolidColorBrush(Colors.Black);
+            txtBlock1.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock1.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock1.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock1, 0);
+            Grid.SetColumn(txtBlock1, 0);
+            Grid.SetColumnSpan(txtBlock1, 4);
+            DynamicGridMateriel.Children.Add(txtBlock1);
         }
 
         #endregion Generation DynamicGrid
@@ -85,6 +118,32 @@ namespace VeloMax
             StatistiqueBtn.Background = new SolidColorBrush(Colors.Green);
             FournisseurBtn.Background = new SolidColorBrush(Colors.Green);
             DemoBtn.Background = new SolidColorBrush(Colors.Green);
+          
+            // On refresh les dynamicGrid
+            if (MainGrid.Children.Contains(DynamicGridMateriel))
+            {
+                MainGrid.Children.Remove(DynamicGridMateriel);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridClient))
+            {
+                MainGrid.Children.Remove(DynamicGridClient);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridCommands))
+            {
+                MainGrid.Children.Remove(DynamicGridCommands);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridStats))
+            {
+                MainGrid.Children.Remove(DynamicGridStats);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridFournisseur))
+            {
+                MainGrid.Children.Remove(DynamicGridFournisseur);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridDemo))
+            {
+                MainGrid.Children.Remove(DynamicGridDemo);
+            }
         }
 
         #endregion Refresh
@@ -92,7 +151,8 @@ namespace VeloMax
         #region main
         public MainWindow()
         {
-        
+            //generation des 6 sous menu
+            GeneMateriel();
         }
         #endregion
 
@@ -101,6 +161,7 @@ namespace VeloMax
         {
             Refresh();
             MaterielBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            MainGrid.Children.Add(DynamicGridClient);
             MessageBox.Show("En cour de dev par Pierre");
         }
 
