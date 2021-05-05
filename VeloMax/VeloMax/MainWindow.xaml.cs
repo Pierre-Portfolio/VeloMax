@@ -42,12 +42,12 @@ namespace VeloMax
 
         // permet de savoir la fenetre actuel
         // On crée toutes les pages dynamique
-        Grid DynamicGridMateriel = new Grid();
-        Grid DynamicGridClient = new Grid();
-        Grid DynamicGridCommands = new Grid();
-        Grid DynamicGridStats = new Grid();
-        Grid DynamicGridFournisseur = new Grid();
-        Grid DynamicGridDemo = new Grid();
+        public Grid DynamicGridMateriel = new Grid();
+        public Grid DynamicGridClient = new Grid();
+        public Grid DynamicGridCommands = new Grid();
+        public Grid DynamicGridStats = new Grid();
+        public Grid DynamicGridFournisseur = new Grid();
+        public Grid DynamicGridDemo = new Grid();
         #endregion
 
         #region Generation DynamicGrid
@@ -62,9 +62,9 @@ namespace VeloMax
             DynamicGridMateriel.Width = 780;
 
             // Create Columns
-            Grid.SetRow(DynamicGridMateriel, 2);
+            Grid.SetRow(DynamicGridMateriel, 6);
             Grid.SetColumn(DynamicGridMateriel, 0);
-            Grid.SetColumnSpan(DynamicGridMateriel, 4);
+            Grid.SetColumnSpan(DynamicGridMateriel, 6);
             ColumnDefinition gridColMatos1 = new ColumnDefinition();
             DynamicGridMateriel.ColumnDefinitions.Add(gridColMatos1);
 
@@ -100,9 +100,9 @@ namespace VeloMax
             txtBlock1.VerticalAlignment = VerticalAlignment.Top;
             txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
             txtBlock1.FontWeight = FontWeights.Bold;
-            Grid.SetRow(txtBlock1, 0);
+            Grid.SetRow(txtBlock1, 2);
             Grid.SetColumn(txtBlock1, 0);
-            Grid.SetColumnSpan(txtBlock1, 4);
+            Grid.SetColumnSpan(txtBlock1, 1);
             DynamicGridMateriel.Children.Add(txtBlock1);
         }
 
@@ -153,6 +153,7 @@ namespace VeloMax
         {
             //generation des 6 sous menu
             GeneMateriel();
+            
         }
         #endregion
 
@@ -160,43 +161,44 @@ namespace VeloMax
         private void MaterielBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
-            MaterielBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
-            MainGrid.Children.Add(DynamicGridClient);
+            MaterielBtn.Background = new SolidColorBrush(Colors.White);
+
+            MainGrid.Children.Add(DynamicGridMateriel);
             MessageBox.Show("En cour de dev par Pierre");
         }
 
         private void ClientsBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
-            ClientsBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            ClientsBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Pierre");
         }
 
         private void CommandesBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
-            CommandesBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            CommandesBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Amine");
         }
 
         private void StatistiqueBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
-            StatistiqueBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            StatistiqueBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Amine");
         }
 
         private void FournisseurBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
-            FournisseurBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            FournisseurBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Yanis");
         }
 
         private void DemoBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
-            DemoBtn.Background = new SolidColorBrush(Colors.Olive) { Opacity = 0 };
+            DemoBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Yanis");
         }
         #endregion Evenement

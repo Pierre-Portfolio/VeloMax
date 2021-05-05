@@ -37,9 +37,6 @@
         <Button x:Name="DemoBtn" Content="Demo" Grid.Row="1" Grid.Column="5" Background="Green" BorderThickness="0" Grid.ColumnSpan="1" Click="DemoBtn_Click" />
 
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,0,-13" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
             <Grid.Background>
                 <ImageBrush ImageSource="C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\VeloMax\banner2.jpg"/>
             </Grid.Background>
