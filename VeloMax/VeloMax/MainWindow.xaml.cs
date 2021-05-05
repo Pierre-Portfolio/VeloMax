@@ -87,7 +87,7 @@ namespace VeloMax
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos4);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos5);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos6);
-            DynamicGridMateriel.Margin = new Thickness(100, 20, 0, 0);
+            DynamicGridMateriel.Margin = new Thickness(0, -100, 0, 0);
 
             // titre 1
             TextBlock txtBlock1 = new TextBlock();
