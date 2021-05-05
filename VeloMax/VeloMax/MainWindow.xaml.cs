@@ -25,14 +25,57 @@ namespace VeloMax
     public partial class MainWindow : Window
     {
 
-        #region creation DB
+        #region Gestion DB
         public static MySqlConnection createDB()
         {
-            MySqlConnection maConnexion = null;
-            maConnexion = new MySqlConnection("SERVER=localhost;PORT=3306;" + "DATABASE=velomax;" + "UID=root;PASSWORD=root;");
-            return maConnexion;
-            //maConnexion.Open();
-            //maConnexion.Close();
+            //MySqlConnection maConnexion = null;
+            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=loueur;UID=root;PASSWORD=root;SSLMODE=none;";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            //maConnexion = new MySqlConnection("SERVER=localhost;PORT=3306;" + "DATABASE=velomax;" + "UID=root;PASSWORD=root;");
+            try
+            {
+                connection.Open();
+                MessageBox.Show("Connection Established!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Connection Error!\n" + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return connection;
+        }
+
+        static void requeteSQL(MySqlConnection connection)
+        //liste des marques
+        {
+            connection.Open();
+
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText =
+             " SELECT * FROM velomax.particulier;";
+
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            //string marque;
+            //string modele;
+            while (reader.Read())// parcours ligne par ligne
+            {
+                // prix = Convert.ToInt32(Console.ReadLine());
+                MessageBox.Show((string)reader.GetValue(0));
+                //modele = modele + " " + (string)reader.GetValue(1);
+
+                /*
+                // récupération de la 1ère colonne (il n'y en a qu'une dans la requête !)
+                Console.WriteLine(marque);
+                Console.WriteLine(modele);
+                */
+            }
+
+            connection.Close();
         }
         #endregion 
 
@@ -42,12 +85,14 @@ namespace VeloMax
 
         // permet de savoir la fenetre actuel
         // On crée toutes les pages dynamique
-        public Grid DynamicGridMateriel = new Grid();
-        public Grid DynamicGridClient = new Grid();
-        public Grid DynamicGridCommands = new Grid();
-        public Grid DynamicGridStats = new Grid();
-        public Grid DynamicGridFournisseur = new Grid();
-        public Grid DynamicGridDemo = new Grid();
+        Grid DynamicGridMateriel = new Grid();
+        public DataGrid myGridBicy = new DataGrid();
+
+        Grid DynamicGridClient = new Grid();
+        Grid DynamicGridCommands = new Grid();
+        Grid DynamicGridStats = new Grid();
+        Grid DynamicGridFournisseur = new Grid();
+        Grid DynamicGridDemo = new Grid();
         #endregion
 
         #region Generation DynamicGrid
@@ -102,8 +147,25 @@ namespace VeloMax
             txtBlock1.FontWeight = FontWeights.Bold;
             Grid.SetRow(txtBlock1, 2);
             Grid.SetColumn(txtBlock1, 0);
-            Grid.SetColumnSpan(txtBlock1, 1);
+            Grid.SetColumnSpan(txtBlock1, 6);
             DynamicGridMateriel.Children.Add(txtBlock1);
+
+            // tableau des clients
+            myGridBicy.Items.Clear();
+            myGridBicy.Width = 700;
+            myGridBicy.Height = 100;
+            //Dictionary<int, Client> l = p1.Clients;
+            //myGridClient.ItemsSource = l.Values;
+            myGridBicy.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridBicy.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridBicy.Margin = new Thickness(0, -22, 0, 0);
+            myGridBicy.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridBicy.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridBicy.IsReadOnly = true;
+            Grid.SetRow(myGridBicy, 3);
+            Grid.SetColumn(myGridBicy, 0);
+            Grid.SetColumnSpan(myGridBicy, 6);
+            DynamicGridMateriel.Children.Add(myGridBicy);
         }
 
         #endregion Generation DynamicGrid
@@ -153,7 +215,7 @@ namespace VeloMax
         {
             //generation des 6 sous menu
             GeneMateriel();
-            
+            //requeteSQL(connection);
         }
         #endregion
 
