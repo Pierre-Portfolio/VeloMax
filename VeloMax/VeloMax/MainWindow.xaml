@@ -25,7 +25,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
             <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\VeloMax\banner.png"/>
+                <ImageBrush ImageSource="/banner.png"/>
             </Grid.Background>
         </Grid>
 
@@ -38,7 +38,7 @@
 
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,0,-13" >
             <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\VeloMax\banner2.jpg"/>
+                <ImageBrush ImageSource="/banner2.jpg"/>
             </Grid.Background>
         </Grid>
     </Grid>

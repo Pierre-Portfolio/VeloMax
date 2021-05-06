@@ -180,7 +180,7 @@ namespace VeloMax
             StatistiqueBtn.Background = new SolidColorBrush(Colors.Green);
             FournisseurBtn.Background = new SolidColorBrush(Colors.Green);
             DemoBtn.Background = new SolidColorBrush(Colors.Green);
-          
+
             // On refresh les dynamicGrid
             if (MainGrid.Children.Contains(DynamicGridMateriel))
             {
