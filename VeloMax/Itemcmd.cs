@@ -42,7 +42,7 @@ namespace VeloMax
             get { return this.numcommande; }
         }
 
-        public string AfficherBoisson()
+        public override string ToString()
         {
             return this.Iditemscmd + " " + this.Quantite + " " + this.Iditemstock + " " + this.Numcommande;
         }

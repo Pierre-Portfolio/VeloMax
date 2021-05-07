@@ -68,6 +68,10 @@ namespace VeloMax
         {
             get { return this.siret; }
         }
-        
+
+        public override string ToString()
+        {
+            return this.numpiece + " " + this.descpiece + " " + this.numprodcatalogue + " " + this.prixpiece + " " + this.dateintroprod + " " + this.datediscontprod + " " + this.delaiapprovprod + " " + this.siret;
+        }
     }
 }

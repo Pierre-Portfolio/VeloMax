@@ -69,6 +69,12 @@
     </Compile>
     <Compile Include="Assemblage.cs" />
     <Compile Include="Bicyclette.cs" />
+    <Compile Include="clientele.cs" />
+    <Compile Include="commande .cs" />
+    <Compile Include="Entreprise.cs" />
+    <Compile Include="Fidelio.cs" />
+    <Compile Include="Fournisseur.cs" />
+    <Compile Include="Itemcmd.cs" />
     <Compile Include="ItemStock.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -76,6 +82,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Particulier.cs" />
     <Compile Include="PieceDetache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -49,7 +49,7 @@ namespace VeloMax
             get { return this.libellefourniseur; }
         }
 
-        public string AfficherBoisson()
+        public override string ToString()
         {
             return this.Siret + " " + this.Nomentreprise + " " + this.Contact + " " + this.Adrfour + " " + this.Libellefourniseur;
         }

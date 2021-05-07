@@ -35,7 +35,7 @@ namespace VeloMax
             get { return this.numpiece; }
         }
 
-        public string AfficherBoisson()
+        public override string ToString()
         {
             return this.Iditemstock + " " + this.Idbicy + " " + this.Numpiece;
         }

@@ -63,5 +63,11 @@ namespace VeloMax
             get { return this.datediscontinuationbicy; }
         }
 
+
+        public override string ToString()
+        {
+            return this.idbicy + " " + this.nom + " " + this.grandeur + " " + this.prixbicy + " " + this.ligneproduit + " " + this.dateintrobicy + " " + this.datediscontinuationbicy;
+        }
+
     }
 }

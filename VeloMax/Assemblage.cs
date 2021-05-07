@@ -114,7 +114,7 @@ namespace VeloMax
         /// <summary>
         /// Creation du string des boissons
         /// </summary>
-        public string AfficherBoisson()
+        public override string ToString()
         {
             return this.Nom + " " + this.Grandeur + " " + this.Cadre + " " + this.Guidon + " " + this.Freins + " " + this.Selle + " " + this.Derailleuravant + " " + this.Derailleurarriere + " " + this.Roueavant + " " + this.Rouearriere + " " + this.Reflecteur + " " + this.Pedalleur + " " + this.Ordinateur + " " + this.Panier;
         }
