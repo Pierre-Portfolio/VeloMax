@@ -8,7 +8,7 @@ namespace VeloMax
 {
     class Bicyclette
     {
-        private string idbicy;
+        private int idbicy;
         private string nom;
         private string grandeur;
         private float prixbicy;
@@ -17,7 +17,7 @@ namespace VeloMax
         private DateTime datediscontinuationbicy;
 
 
-        public Bicyclette(string idbicy, string nom, string grandeur, float prixbicy, string ligneproduit, DateTime dateintrobicy, DateTime datediscontinuationbicy)
+        public Bicyclette(int idbicy, string nom, string grandeur, float prixbicy, string ligneproduit, DateTime dateintrobicy, DateTime datediscontinuationbicy)
         {
             this.idbicy = idbicy;
             this.nom = nom;
@@ -28,7 +28,7 @@ namespace VeloMax
             this.datediscontinuationbicy = datediscontinuationbicy;
         }
 
-        public string Idbicy
+        public int Idbicy
         {
             get { return this.idbicy; }
         }
