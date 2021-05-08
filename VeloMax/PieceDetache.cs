@@ -11,13 +11,13 @@ namespace VeloMax
         private string numpiece;
         private string descpiece;
         private int numprodcatalogue;
-        private float prixpiece;
+        private int prixpiece;
         private DateTime dateintroprod;
         private DateTime datediscontprod;
         private int delaiapprovprod;
         private string siret;
 
-        public PieceDetache(string numpiece,string descpiece,int numprodcatalogue,float prixpiece, DateTime dateintroprod, DateTime datediscontprod,int delaiapprovprod,string siret)
+        public PieceDetache(string numpiece,string descpiece,int numprodcatalogue, int prixpiece, DateTime dateintroprod, DateTime datediscontprod,int delaiapprovprod,string siret)
         {
             this.numpiece = numpiece;
             this.descpiece = descpiece;
@@ -44,7 +44,7 @@ namespace VeloMax
             get { return this.numprodcatalogue; }
         }
 
-        public float Prixpiece
+        public int Prixpiece
         {
             get { return this.prixpiece; }
         }

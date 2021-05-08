@@ -50,7 +50,6 @@ namespace VeloMax
         }
 
         static string requeteSQLSELECT(MySqlConnection connection ,string requete, int nbarg)
-        //liste des marques
         {
 
             connection.Open();
@@ -94,6 +93,7 @@ namespace VeloMax
         // On crée toutes les pages dynamique
         Grid DynamicGridMateriel = new Grid();
         public DataGrid myGridBicy = new DataGrid();
+        public DataGrid myGridPiece = new DataGrid();
 
         Grid DynamicGridClient = new Grid();
         Grid DynamicGridCommands = new Grid();
@@ -253,6 +253,103 @@ namespace VeloMax
             btnChercherBicy.Margin = new Thickness(300, -141, 0, 0);
             //btnChercher.Click += new RoutedEventHandler(OpenChercherClient);
             DynamicGridMateriel.Children.Add(btnChercherBicy);
+
+
+            // titre 2
+            TextBlock txtBlock2 = new TextBlock();
+            txtBlock2.Text = "Liste des pieces";
+            txtBlock2.FontSize = 14;
+            txtBlock2.Width = 700;
+            txtBlock2.TextAlignment = TextAlignment.Center;
+            txtBlock2.Background = new SolidColorBrush(Colors.Black);
+            txtBlock2.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock2.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock2.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock2.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock2, 4);
+            Grid.SetColumn(txtBlock2, 0);
+            Grid.SetColumnSpan(txtBlock2, 6);
+            DynamicGridMateriel.Children.Add(txtBlock2);
+
+            // tableau des bicyclette
+            myGridPiece.Items.Clear();
+            myGridPiece.Width = 700;
+            myGridPiece.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.piecedetache;";
+            reader = command.ExecuteReader();
+            Dictionary<int, PieceDetache> myDictPiece = new Dictionary<int, PieceDetache>();
+            key = 0;
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myDictPiece.Add(key++, new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                key++;
+            }
+            myGridPiece.ItemsSource = myDictPiece.Values;
+            connection.Close();
+
+            //on define le reste
+            myGridPiece.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridPiece.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridPiece.Margin = new Thickness(0, -22, 0, 0);
+            myGridPiece.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridPiece.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridPiece.IsReadOnly = true;
+            Grid.SetRow(myGridPiece, 5);
+            Grid.SetColumn(myGridPiece, 0);
+            Grid.SetColumnSpan(myGridPiece, 6);
+            DynamicGridMateriel.Children.Add(myGridPiece);
+
+            //Btn ajouter
+            Button btnAddPiece = new Button();
+            btnAddPiece.Content = "";
+            btnAddPiece.Background = Brushes.Green;
+            btnAddPiece.Height = 15;
+            btnAddPiece.Width = 15;
+            Grid.SetRow(btnAddPiece, 5);
+            Grid.SetColumn(btnAddPiece, 0);
+            Grid.SetColumnSpan(btnAddPiece, 6);
+            btnAddPiece.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddPiece.Margin = new Thickness(150, -141, 0, 0);
+            btnAddPiece.ToolTip = "Ajouter un client";
+            btnAddPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddClient.Click += new RoutedEventHandler(OpenAddClient);
+            DynamicGridMateriel.Children.Add(btnAddPiece);
+
+            //Btn modifier
+            Button btnModifPiece = new Button();
+            btnModifPiece.Content = "";
+            btnModifPiece.Background = Brushes.Green;
+            btnModifPiece.Height = 15;
+            btnModifPiece.Width = 15;
+            Grid.SetRow(btnModifPiece, 5);
+            Grid.SetColumn(btnModifPiece, 0);
+            Grid.SetColumnSpan(btnModifPiece, 6);
+            btnModifPiece.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifPiece.Margin = new Thickness(200, -141, 0, 0);
+            btnModifPiece.ToolTip = "Modifier un client";
+            btnModifPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
+            DynamicGridMateriel.Children.Add(btnModifPiece);
+
+            //Btn del
+            Button btnSuprPiece = new Button();
+            btnSuprPiece.Content = "";
+            btnSuprPiece.Background = Brushes.Red;
+            btnSuprPiece.Height = 15;
+            btnSuprPiece.Width = 15;
+            Grid.SetRow(btnSuprPiece, 5);
+            Grid.SetColumn(btnSuprPiece, 0);
+            Grid.SetColumnSpan(btnSuprPiece, 6);
+            btnSuprPiece.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprPiece.ToolTip = "Supprimer un client";
+            btnSuprPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprPiece.Margin = new Thickness(250, -141, 0, 0);
+            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
+            DynamicGridMateriel.Children.Add(btnSuprPiece);
         }
 
         #endregion Generation DynamicGrid
