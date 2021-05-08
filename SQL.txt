@@ -120,8 +120,6 @@ INSERT INTO fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)
 
 INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)
  VALUES
-
-
 ('C32','Adultes','1',12,'2010-04-02 15:28:22','2010-04-02 15:28:22',3,123456789124834),
 ('C34','Adultes','2',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834),
 ('C76','Jeunes','3',13,'2010-04-02 15:28:22','2010-04-02 15:28:22',2,837038217323928),
@@ -198,15 +196,11 @@ INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintr
 ('P12','Unisexe','29',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834);
 
 
-
-
-
 INSERT INTO itemstock (idbicy,numpiece)
  VALUES
 (null,'C32'),
 (null,'C34'),
 (null,'C76'),
-<<<<<<< HEAD
 (null,'P15'),
 (null,'P1'),
 (null,'S01'),
@@ -221,22 +215,7 @@ INSERT INTO itemstock (idbicy,numpiece)
 (null,'G9'),
 (null,'S87'),
 (null,'S88'),
-(101,''),
-(102,''),
-(103,''),
-(104,''),
-(105,''),
-(106,''),
-(107,''),
-(108,''),
-(109,''),
-(110,''),
-(111,''),
-(112,''),
-(113,''),
-(114,''),
-(115,'');
-=======
+
 (101,null),
 (102,null),
 (103,null),
@@ -252,7 +231,6 @@ INSERT INTO itemstock (idbicy,numpiece)
 (113,null),
 (114,null),
 (115,null);
->>>>>>> 3437cf9e6ebd00d56368d470270547909721490b
 
 INSERT INTO commande (datecommande,adrlivraison,datelivraison,idclient)
  VALUES

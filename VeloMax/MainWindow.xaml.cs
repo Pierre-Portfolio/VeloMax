@@ -18,7 +18,7 @@ using System.ComponentModel;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.SqlClient;
-using System.Globalization;
+using System.Diagnostics;
 
 namespace VeloMax
 {
@@ -49,24 +49,27 @@ namespace VeloMax
             return connection;
         }
 
-        static DataGrid requeteSQL(MySqlConnection connection)
+        static string requeteSQLSELECT(MySqlConnection connection ,string requete, int nbarg)
         //liste des marques
         {
-            DataGrid encourdemodif = new DataGrid();
+
             connection.Open();
-
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText =
-             " SELECT * FROM velomax.particulier;";
-
+            command.CommandText = requete;
             MySqlDataReader reader;
             reader = command.ExecuteReader();
-
-            //string marque;
-            //string modele;
+            string result = "";
             while (reader.Read())// parcours ligne par ligne
             {
-                encourdemodif.ItemsSource = (string)reader.GetValue(0);
+                result += reader.GetValue(0).ToString();
+
+                for (int i = 1; i < nbarg; i++)
+                {
+                    result += ";" + reader.GetValue(i).ToString();
+                }
+                
+                result += Console.ReadLine() + "\n";
+                //encourdemodif.ItemsSource = (string)reader.GetValue(0);
                 // prix = Convert.ToInt32(Console.ReadLine());
                 //MessageBox.Show((string)reader.GetValue(0));
                 //modele = modele + " " + (string)reader.GetValue(1);
@@ -79,7 +82,7 @@ namespace VeloMax
             }
 
             connection.Close();
-            return encourdemodif;
+            return result;
         }
         #endregion
 
@@ -158,8 +161,23 @@ namespace VeloMax
             myGridBicy.Items.Clear();
             myGridBicy.Width = 700;
             myGridBicy.Height = 100;
-            //Dictionary<int, Client> l = p1.Clients;
-            //myGridClient.ItemsSource = l.Values;
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.bicyclette;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            Dictionary<int, Bicyclette> myDictBicy = new Dictionary<int, Bicyclette>();
+            int key = 0;
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myDictBicy.Add(key++, new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                key++;
+            }
+            myGridBicy.ItemsSource = myDictBicy.Values;
+
+            //on define le reste
             myGridBicy.Foreground = new SolidColorBrush(Colors.Orange);
             myGridBicy.GridLinesVisibility = DataGridGridLinesVisibility.None;
             myGridBicy.Margin = new Thickness(0, -22, 0, 0);

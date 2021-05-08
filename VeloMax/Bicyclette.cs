@@ -11,13 +11,13 @@ namespace VeloMax
         private int idbicy;
         private string nom;
         private string grandeur;
-        private float prixbicy;
+        private int prixbicy;
         private string ligneproduit;
         private DateTime dateintrobicy;
         private DateTime datediscontinuationbicy;
 
 
-        public Bicyclette(int idbicy, string nom, string grandeur, float prixbicy, string ligneproduit, DateTime dateintrobicy, DateTime datediscontinuationbicy)
+        public Bicyclette(int idbicy, string nom, string grandeur, int prixbicy, string ligneproduit, DateTime dateintrobicy, DateTime datediscontinuationbicy)
         {
             this.idbicy = idbicy;
             this.nom = nom;
@@ -43,7 +43,7 @@ namespace VeloMax
             get { return this.grandeur; }
         }
 
-        public float Prixbicy
+        public int Prixbicy
         {
             get { return this.prixbicy; }
         }
