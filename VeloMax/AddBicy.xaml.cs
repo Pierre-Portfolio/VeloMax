@@ -60,7 +60,7 @@ namespace VeloMax
             {
                 listProduit.Add(reader.GetValue(0).ToString());
             }
-            BoxGrandeur.ItemsSource = listProduit;
+            BoxligneProd.ItemsSource = listProduit;
             connection.Close();
         }
 
