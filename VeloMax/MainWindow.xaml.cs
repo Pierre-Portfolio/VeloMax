@@ -31,7 +31,7 @@ namespace VeloMax
         #region Gestion DB
         public static MySqlConnection createDB()
         {
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=loueur;UID=root;PASSWORD=root;SSLMODE=none;";
+            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=velomax;UID=root;PASSWORD=root;SSLMODE=none;";
             MySqlConnection connection = new MySqlConnection(connectionString);
             try
             {
