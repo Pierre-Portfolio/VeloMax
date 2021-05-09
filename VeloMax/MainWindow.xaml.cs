@@ -92,8 +92,13 @@ namespace VeloMax
         // permet de savoir la fenetre actuel
         // On crée toutes les pages dynamique
         Grid DynamicGridMateriel = new Grid();
+        public DataGrid myGridAssemblage = new DataGrid();
         public DataGrid myGridBicy = new DataGrid();
         public DataGrid myGridPiece = new DataGrid();
+        public List<object> myListAssemblage = new List<object>();
+        public int key = 0;
+        public List<object> myListBicy = new List<object>();
+        //public Dictionary<int, object> myDictBicy = new Dictionary<int, object>();
 
         Grid DynamicGridClient = new Grid();
         Grid DynamicGridCommands = new Grid();
@@ -139,7 +144,103 @@ namespace VeloMax
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos4);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos5);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos6);
-            DynamicGridMateriel.Margin = new Thickness(0, -100, 0, 0);
+            DynamicGridMateriel.Margin = new Thickness(0, 0, 0, 0);
+
+            // titre 0
+            TextBlock txtBlock0 = new TextBlock();
+            txtBlock0.Text = "Liste des assemblages";
+            txtBlock0.FontSize = 14;
+            txtBlock0.Width = 700;
+            txtBlock0.TextAlignment = TextAlignment.Center;
+            txtBlock0.Background = new SolidColorBrush(Colors.Black);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock0.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock0, 0);
+            Grid.SetColumn(txtBlock0, 0);
+            Grid.SetColumnSpan(txtBlock0, 6);
+            DynamicGridMateriel.Children.Add(txtBlock0);
+
+            // tableau des bicyclette
+            myGridAssemblage.Items.Clear();
+            myGridAssemblage.Width = 700;
+            myGridAssemblage.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.assemblage;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+            }
+            myGridAssemblage.ItemsSource = myListAssemblage;
+            connection.Close();
+
+            //on define le reste
+            myGridAssemblage.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridAssemblage.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridAssemblage.Margin = new Thickness(0, -22, 0, 0);
+            myGridAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridAssemblage.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridAssemblage.IsReadOnly = true;
+            Grid.SetRow(myGridAssemblage, 1);
+            Grid.SetColumn(myGridAssemblage, 0);
+            Grid.SetColumnSpan(myGridAssemblage, 6);
+            DynamicGridMateriel.Children.Add(myGridAssemblage);
+
+            //Btn ajouter
+            Button btnAddAssemblage = new Button();
+            btnAddAssemblage.Content = "";
+            btnAddAssemblage.Background = Brushes.Green;
+            btnAddAssemblage.Height = 15;
+            btnAddAssemblage.Width = 15;
+            Grid.SetRow(btnAddAssemblage, 0);
+            Grid.SetColumn(btnAddAssemblage, 0);
+            Grid.SetColumnSpan(btnAddAssemblage, 6);
+            btnAddAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddAssemblage.Margin = new Thickness(175, -12, 0, 0);
+            btnAddAssemblage.ToolTip = "Ajouter un client";
+            btnAddAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            btnAddAssemblage.Click += new RoutedEventHandler(OpenAddAssemblage);
+            DynamicGridMateriel.Children.Add(btnAddAssemblage);
+
+            //Btn modifier
+            Button btnModifAssemblage = new Button();
+            btnModifAssemblage.Content = "";
+            btnModifAssemblage.Background = Brushes.Green;
+            btnModifAssemblage.Height = 15;
+            btnModifAssemblage.Width = 15;
+            Grid.SetRow(btnModifAssemblage, 0);
+            Grid.SetColumn(btnModifAssemblage, 0);
+            Grid.SetColumnSpan(btnModifAssemblage, 6);
+            btnModifAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifAssemblage.Margin = new Thickness(225, -12, 0, 0);
+            btnModifAssemblage.ToolTip = "Modifier un client";
+            btnModifAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
+            DynamicGridMateriel.Children.Add(btnModifAssemblage);
+
+            //Btn del
+            Button btnSuprAssemblage = new Button();
+            btnSuprAssemblage.Content = "";
+            btnSuprAssemblage.Background = Brushes.Red;
+            btnSuprAssemblage.Height = 15;
+            btnSuprAssemblage.Width = 15;
+            Grid.SetRow(btnSuprAssemblage, 0);
+            Grid.SetColumn(btnSuprAssemblage, 0);
+            Grid.SetColumnSpan(btnSuprAssemblage, 6);
+            btnSuprAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprAssemblage.ToolTip = "Supprimer un client";
+            btnSuprAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprAssemblage.Margin = new Thickness(275, -12, 0, 0);
+            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
+            DynamicGridMateriel.Children.Add(btnSuprAssemblage);
 
             // titre 1
             TextBlock txtBlock1 = new TextBlock();
@@ -164,18 +265,15 @@ namespace VeloMax
 
             // on recupere les datas
             connection.Open();
-            MySqlCommand command = connection.CreateCommand();
+            command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM velomax.bicyclette;";
-            MySqlDataReader reader;
             reader = command.ExecuteReader();
-            Dictionary<int, Bicyclette> myDictBicy = new Dictionary<int, Bicyclette>();
-            int key = 0;
+            
             while (reader.Read())// parcours ligne par ligne
             {
-                myDictBicy.Add(key++, new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                key++;
+                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
             }
-            myGridBicy.ItemsSource = myDictBicy.Values;
+            myGridBicy.ItemsSource = myListBicy;
             connection.Close();
 
             //on define le reste
@@ -200,10 +298,10 @@ namespace VeloMax
             Grid.SetColumn(btnAddBicy, 0);
             Grid.SetColumnSpan(btnAddBicy, 6);
             btnAddBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddBicy.Margin = new Thickness(150, -141, 0, 0);
+            btnAddBicy.Margin = new Thickness(175, -141, 0, 0);
             btnAddBicy.ToolTip = "Ajouter un client";
             btnAddBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddClient.Click += new RoutedEventHandler(OpenAddClient);
+            btnAddBicy.Click += new RoutedEventHandler(OpenAddBicy);
             DynamicGridMateriel.Children.Add(btnAddBicy);
 
             //Btn modifier
@@ -216,7 +314,7 @@ namespace VeloMax
             Grid.SetColumn(btnModifBicy, 0);
             Grid.SetColumnSpan(btnModifBicy, 6);
             btnModifBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifBicy.Margin = new Thickness(200, -141, 0, 0);
+            btnModifBicy.Margin = new Thickness(225, -141, 0, 0);
             btnModifBicy.ToolTip = "Modifier un client";
             btnModifBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
             //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
@@ -234,26 +332,9 @@ namespace VeloMax
             btnSuprBicy.BorderThickness = new Thickness(0, 0, 0, 0);
             btnSuprBicy.ToolTip = "Supprimer un client";
             btnSuprBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprBicy.Margin = new Thickness(250, -141, 0, 0);
+            btnSuprBicy.Margin = new Thickness(275, -141, 0, 0);
             //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
             DynamicGridMateriel.Children.Add(btnSuprBicy);
-
-            //Btn Rechercher
-            Button btnChercherBicy = new Button();
-            btnChercherBicy.Content = "";
-            btnChercherBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnChercherBicy.Background = new SolidColorBrush(Colors.White);
-            btnChercherBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://www.icone-png.com/png/1/1402.png")));
-            btnChercherBicy.Height = 15;
-            btnChercherBicy.Width = 15;
-            btnChercherBicy.ToolTip = "Rechercher un client";
-            Grid.SetRow(btnChercherBicy, 3);
-            Grid.SetColumn(btnChercherBicy, 0);
-            Grid.SetColumnSpan(btnChercherBicy, 6);
-            btnChercherBicy.Margin = new Thickness(300, -141, 0, 0);
-            //btnChercher.Click += new RoutedEventHandler(OpenChercherClient);
-            DynamicGridMateriel.Children.Add(btnChercherBicy);
-
 
             // titre 2
             TextBlock txtBlock2 = new TextBlock();
@@ -313,7 +394,7 @@ namespace VeloMax
             Grid.SetColumn(btnAddPiece, 0);
             Grid.SetColumnSpan(btnAddPiece, 6);
             btnAddPiece.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddPiece.Margin = new Thickness(150, -141, 0, 0);
+            btnAddPiece.Margin = new Thickness(175, -141, 0, 0);
             btnAddPiece.ToolTip = "Ajouter un client";
             btnAddPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
             //btnAddClient.Click += new RoutedEventHandler(OpenAddClient);
@@ -329,7 +410,7 @@ namespace VeloMax
             Grid.SetColumn(btnModifPiece, 0);
             Grid.SetColumnSpan(btnModifPiece, 6);
             btnModifPiece.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifPiece.Margin = new Thickness(200, -141, 0, 0);
+            btnModifPiece.Margin = new Thickness(225, -141, 0, 0);
             btnModifPiece.ToolTip = "Modifier un client";
             btnModifPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
             //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
@@ -347,7 +428,7 @@ namespace VeloMax
             btnSuprPiece.BorderThickness = new Thickness(0, 0, 0, 0);
             btnSuprPiece.ToolTip = "Supprimer un client";
             btnSuprPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprPiece.Margin = new Thickness(250, -141, 0, 0);
+            btnSuprPiece.Margin = new Thickness(275, -141, 0, 0);
             //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
             DynamicGridMateriel.Children.Add(btnSuprPiece);
         }
@@ -404,6 +485,7 @@ namespace VeloMax
         #endregion
 
         #region Evenement
+        #region Evenement Matériel
         private void MaterielBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
@@ -411,40 +493,65 @@ namespace VeloMax
             MainGrid.Children.Add(DynamicGridMateriel);
         }
 
+        private void OpenAddAssemblage(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new AddAssemblage(connection);
+            WindowAddClient.Show();
+
+        }
+
+        private void OpenAddBicy(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new AddBicy(connection,(key + 1));
+            WindowAddClient.Show();
+            
+        }
+        #endregion Evenement Matériel
+
+        #region Evenement Client
         private void ClientsBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
             ClientsBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Pierre");
         }
+        #endregion Evenement Client
 
+        #region Evenement Commandes
         private void CommandesBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
             CommandesBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Amine");
         }
+        #endregion Evenement Commandes
 
+        #region Evenement Commandes
         private void StatistiqueBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
             StatistiqueBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Amine");
         }
+        #endregion Evenement Commandes
 
+        #region Evenement Fournisseur
         private void FournisseurBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
             FournisseurBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Yanis");
         }
+        #endregion Evenement Fournisseur
 
+        #region Evenement Demo
         private void DemoBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
             DemoBtn.Background = new SolidColorBrush(Colors.White);
             MessageBox.Show("En cour de dev par Yanis");
         }
+        #endregion Evenement
         #endregion Evenement
     }
 }

@@ -1,0 +1,61 @@
+﻿<Window x:Class="VeloMax.AddAssemblage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeloMax"
+        mc:Ignorable="d"
+        Title="AddAssemblage" Height="659.8" Width="542.4">
+    <Window.Background>
+        <ImageBrush ImageSource="background.jpg"/>
+    </Window.Background>
+    <Grid Margin="0,-300,418.2,-257.2">
+        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,307,-338,449">
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxNom"  Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
+
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="37" Text="Grandeur :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxGrandeur"  Height="22" Canvas.Left="310" Canvas.Top="57"  Width="150" AutomationProperties.Name="Grandeur" />
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="111" Text="Cadre : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxCadre" Height="22" Canvas.Left="94" Canvas.Top="131" Width="150" AutomationProperties.Name="Prix"/>
+
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="110" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Guidon"/><Run Text=" : "/></TextBlock>
+            <ComboBox Name="BoxGuidon" Height="22" Canvas.Left="310" Canvas.Top="130"  Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="188" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Frein"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxFrein" Height="22" Canvas.Left="94" Canvas.Top="208" Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="188" Text="Selle : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox x:Name="BoxSelle" Height="22" Canvas.Left="310" Canvas.Top="208" Width="150" AutomationProperties.Name="Prix"/>
+            
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="263" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Deraillieur Avant"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxDeraillieurA" Height="22" Canvas.Left="94" Canvas.Top="283"  Width="150" AutomationProperties.Name="Tel"/>
+            
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="263" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Deraillieur arriere"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxDeraillieurB" Height="22" Canvas.Left="310" Canvas.Top="283" Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="344" Text="Roue Avant : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox x:Name="BoxRoueAvant" Height="22" Canvas.Left="94" Canvas.Top="364" Width="150" AutomationProperties.Name="Prix"/>
+
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="344" Text="Roue Arriere : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox x:Name="BoxRoueArriere" Height="22" Canvas.Left="310" Canvas.Top="363"  Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="421" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Reflecteur"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxReflecteur" Height="22" Canvas.Left="94" Canvas.Top="441" Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="421" Text="Pedalleur : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox x:Name="BoxPedalleur" Height="22" Canvas.Left="310" Canvas.Top="441" Width="150" AutomationProperties.Name="Prix"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="496" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Ordinateur"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxOrdinateur" Height="22" Canvas.Left="94" Canvas.Top="516" Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="310" Canvas.Top="496" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Panier"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxPanier" Height="22" Canvas.Left="310" Canvas.Top="516" Width="150" AutomationProperties.Name="Tel"/>
+
+            <Button Content="Valider" Height="25" Canvas.Left="94" Canvas.Top="578" Width="366" Cursor="Hand" Background="#FF34B104" Click="AjouterAssemblage"/>
+
+        </Canvas>
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+﻿<Window x:Class="VeloMax.AddBicy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeloMax"
+        mc:Ignorable="d"
+        Title="Ajouter une Bicyclette" Height="454.8" Width="342.4" Icon="velo_logo.jpeg">
+    <Window.Background>
+        <ImageBrush ImageSource="background.jpg"/>
+    </Window.Background>
+    <Grid Margin="0,-300,418.2,-257.2">
+        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,288,-338,262.8">
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxNom" SelectionChanged="BoxNom_SelectionChanged" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="115" Text="Grandeur :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxGrandeur" SelectionChanged="BoxGrandeur_SelectionChanged" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="192" Text="Prix : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxPrix" Height="22" Canvas.Left="94" Canvas.Top="212" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="259" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Ligne Produit"/><Run Text=" : "/></TextBlock>
+            <ComboBox Name="BoxligneProd" Height="22" Canvas.Left="94" Canvas.Top="279"  Width="150" AutomationProperties.Name="Tel"/>
+            
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="325" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Date Discontinuation"/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxDateDisc" Height="22" Canvas.Left="94" Canvas.Top="345" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+
+            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="390" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterClient"/>
+
+        </Canvas>
+    </Grid>
+</Window>

@@ -31,3 +31,7 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.Prope
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.csproj.GenerateResource.cache
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.csproj.CoreCompileInputs.cache
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.csproj.CopyComplete
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddBicy.g.cs
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddBicy.baml
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddAssemblage.g.cs
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddAssemblage.baml

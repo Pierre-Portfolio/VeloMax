@@ -59,10 +59,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddAssemblage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddBicy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AddAssemblage.xaml.cs">
+      <DependentUpon>AddAssemblage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddBicy.xaml.cs">
+      <DependentUpon>AddBicy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -113,6 +127,9 @@
     <Resource Include="banner.png" />
     <Resource Include="banner2.jpg" />
     <Resource Include="velo_logo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
