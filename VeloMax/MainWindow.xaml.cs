@@ -101,6 +101,7 @@ namespace VeloMax
         //public Dictionary<int, object> myDictBicy = new Dictionary<int, object>();
 
         Grid DynamicGridClient = new Grid();
+        public List<clientele> myListClient = new List<clientele>();
         Grid DynamicGridCommands = new Grid();
         Grid DynamicGridStats = new Grid();
         Grid DynamicGridFournisseur = new Grid();
@@ -488,7 +489,7 @@ namespace VeloMax
             Grid.SetColumn(txtBlock0, 0);
             Grid.SetColumnSpan(txtBlock0, 6);
             DynamicGridClient.Children.Add(txtBlock0);
-            /*
+            
             // tableau des Clients
             myGridAssemblage.Items.Clear();
             myGridAssemblage.Width = 700;
@@ -503,7 +504,7 @@ namespace VeloMax
 
             while (reader.Read())// parcours ligne par ligne
             {
-                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+                myListClient.Add(new clientele(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), reader.GetValue(3).ToString(), reader.GetValue(4).ToString());
 
             }
             myGridAssemblage.ItemsSource = myListAssemblage;
