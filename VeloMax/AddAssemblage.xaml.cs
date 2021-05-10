@@ -20,9 +20,12 @@ namespace VeloMax
     /// </summary>
     public partial class AddAssemblage : Window
     {
+        MySqlConnection connection;
         public AddAssemblage(MySqlConnection connection)
         {
             InitializeComponent();
+            this.connection = connection;
+
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Cadre';";
@@ -170,7 +173,27 @@ namespace VeloMax
 
         private void AjouterAssemblage(object sender, RoutedEventArgs e)
         {
-
+            if (BoxNom.Text != "" && BoxNom.Text.Length != 0)
+            {
+                if (BoxGrandeur.Text != "" && BoxGrandeur.Text.Length != 0)
+                {
+                    Assemblage a1 = new Assemblage(BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(),BoxCadre.Text.ToString(),BoxGuidon.Text.ToString(),BoxFrein.Text.ToString(),BoxSelle.Text.ToString(),BoxDeraillieurA.Text.ToString(),BoxDeraillieurB.Text.ToString(),BoxRoueAvant.Text.ToString(),BoxRoueArriere.Text.ToString(),BoxReflecteur.Text.ToString(),BoxPedalleur.Text.ToString(),BoxOrdinateur.Text.ToString(),BoxPanier.Text.ToString());
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "INSERT INTO velomax.assemblage (nom,grandeur,cadre,guidon,freins,selle,derailleuravant,derailleurarriere,roueavant,rouearriere,reflecteur,pedalleur,ordinateur,panier)VALUES('" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "','" + BoxCadre.Text.ToString() + "','" + BoxGuidon.Text.ToString() + "','" + BoxFrein.Text.ToString() + "','" + BoxSelle.Text.ToString() + "','" + BoxDeraillieurA.Text.ToString() + "','" + BoxDeraillieurB.Text.ToString() + "','" + BoxRoueAvant.Text.ToString() + "','" + BoxRoueArriere.Text.ToString() + "','" + BoxReflecteur.Text.ToString() + "','" + BoxPedalleur.Text.ToString() + "','" + BoxOrdinateur.Text.ToString() + "','" + BoxPanier.Text.ToString() + "');";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Erreur le champ grandeur est vide !");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Erreur le champ nom est vide !");
+            }
         }
     }
 }
