@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class clientele
+    public class clientele
     {
         private int idclient;
         private string rueclient;

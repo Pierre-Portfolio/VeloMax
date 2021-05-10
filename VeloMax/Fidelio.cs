@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class Fidelio
+    public class Fidelio
     {
         private int idfidelio;
         private string descfidelio;

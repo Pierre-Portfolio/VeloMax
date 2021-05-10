@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class PieceDetache
+    public class PieceDetache
     {
         private string numpiece;
         private string descpiece;
