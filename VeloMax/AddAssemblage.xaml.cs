@@ -25,7 +25,7 @@ namespace VeloMax
             InitializeComponent();
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct cadre FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Cadre';";
             MySqlDataReader reader = command.ExecuteReader();
             List<string> listCadre = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -37,7 +37,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct guidon FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Guidon';";
             reader = command.ExecuteReader();
             List<string> listGuidon = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -49,7 +49,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct freins FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Frein';";
             reader = command.ExecuteReader();
             List<string> listFreins = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -61,7 +61,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct selle FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Cadre';";
             reader = command.ExecuteReader();
             List<string> listSelle = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -73,7 +73,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct derailleuravant FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Dérailleur avant'; ";
             reader = command.ExecuteReader();
             List<string> listderailleuravant = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -85,7 +85,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct derailleurarriere FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Dérailleur arrière'; ";
             reader = command.ExecuteReader();
             List<string> listderailleurarriere = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -97,7 +97,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct roueavant FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Roue avant'; ";
             reader = command.ExecuteReader();
             List<string> listroueAvant = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -109,7 +109,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct rouearriere FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Roue arrière'; ";
             reader = command.ExecuteReader();
             List<string> listroueArrierre = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -121,7 +121,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct reflecteur FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Réflecteur'; ";
             reader = command.ExecuteReader();
             List<string> listreflecteur = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -133,7 +133,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct pedalleur FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Pédaleur'; ";
             reader = command.ExecuteReader();
             List<string> listpedalleur = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -145,7 +145,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct ordinateur FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Ordinateur'; ";
             reader = command.ExecuteReader();
             List<string> listordinateur = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -157,7 +157,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT distinct panier FROM velomax.assemblage;";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Panier'; ";
             reader = command.ExecuteReader();
             List<string> listpanier = new List<string>();
             while (reader.Read())// parcours ligne par ligne
