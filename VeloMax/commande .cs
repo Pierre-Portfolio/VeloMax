@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class commande
+    public class commande
     {
         private int numcommande;
         private DateTime datecommande;

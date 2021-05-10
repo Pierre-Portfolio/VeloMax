@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class Itemcmd
+    public class Itemcmd
     {
 
         private string iditemscmd;

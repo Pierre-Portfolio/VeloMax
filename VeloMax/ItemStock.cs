@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class ItemStock
+    public class ItemStock
     {
         private int iditemstock;
         private int idbicy;
