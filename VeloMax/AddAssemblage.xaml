@@ -16,7 +16,7 @@
             <TextBox Name="BoxNom"  Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
 
             <TextBlock Height="20" Canvas.Left="310" Canvas.Top="37" Text="Grandeur :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxGrandeur"  Height="22" Canvas.Left="310" Canvas.Top="57"  Width="150" AutomationProperties.Name="Grandeur" />
+            <ComboBox Name="BoxGrandeur"  Height="22" Canvas.Left="310" Canvas.Top="57"  Width="150" AutomationProperties.Name="Grandeur" />
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="111" Text="Cadre : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
             <ComboBox Name="BoxCadre" Height="22" Canvas.Left="94" Canvas.Top="131" Width="150" AutomationProperties.Name="Prix"/>

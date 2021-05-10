@@ -31,8 +31,20 @@ namespace VeloMax
 
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Cadre';";
+            command.CommandText = "SELECT distinct grandeur FROM velomax.assemblage;";
             MySqlDataReader reader = command.ExecuteReader();
+            List<string> listGrandeur = new List<string>();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                listGrandeur.Add(reader.GetValue(0).ToString());
+            }
+            connection.Close();
+            BoxGrandeur.ItemsSource = listGrandeur;
+
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Cadre';";
+            reader = command.ExecuteReader();
             List<string> listCadre = new List<string>();
             while (reader.Read())// parcours ligne par ligne
             {
