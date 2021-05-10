@@ -101,7 +101,10 @@ namespace VeloMax
         //public Dictionary<int, object> myDictBicy = new Dictionary<int, object>();
 
         Grid DynamicGridClient = new Grid();
+        public DataGrid myGridClient = new DataGrid();
+        public DataGrid myGridFidelio = new DataGrid();
         public List<clientele> myListClient = new List<clientele>();
+        public List<Fidelio> myListFidelio = new List<Fidelio>();
         Grid DynamicGridCommands = new Grid();
         Grid DynamicGridStats = new Grid();
         Grid DynamicGridFournisseur = new Grid();
@@ -489,11 +492,11 @@ namespace VeloMax
             Grid.SetColumn(txtBlock0, 0);
             Grid.SetColumnSpan(txtBlock0, 6);
             DynamicGridClient.Children.Add(txtBlock0);
-            
+
             // tableau des Clients
-            myGridAssemblage.Items.Clear();
-            myGridAssemblage.Width = 700;
-            myGridAssemblage.Height = 100;
+            myGridClient.Items.Clear();
+            myGridClient.Width = 700;
+            myGridClient.Height = 100;
 
             // on recupere les datas
             connection.Open();
@@ -504,24 +507,25 @@ namespace VeloMax
 
             while (reader.Read())// parcours ligne par ligne
             {
-                myListClient.Add(new clientele(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), reader.GetValue(3).ToString(), reader.GetValue(4).ToString());
+                myListClient.Add(new clientele(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), reader.GetValue(3).ToString(), reader.GetValue(4).ToString()));
 
             }
-            myGridAssemblage.ItemsSource = myListAssemblage;
+            myGridClient.ItemsSource = myListClient;
             connection.Close();
 
             //on define le reste
-            myGridAssemblage.Foreground = new SolidColorBrush(Colors.Orange);
-            myGridAssemblage.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridAssemblage.Margin = new Thickness(0, -22, 0, 0);
-            myGridAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
-            myGridAssemblage.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            myGridAssemblage.IsReadOnly = true;
-            Grid.SetRow(myGridAssemblage, 1);
-            Grid.SetColumn(myGridAssemblage, 0);
-            Grid.SetColumnSpan(myGridAssemblage, 6);
-            DynamicGridMateriel.Children.Add(myGridAssemblage);
+            myGridClient.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridClient.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridClient.Margin = new Thickness(0, -22, 0, 0);
+            myGridClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridClient.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridClient.IsReadOnly = true;
+            Grid.SetRow(myGridClient, 1);
+            Grid.SetColumn(myGridClient, 0);
+            Grid.SetColumnSpan(myGridClient, 6);
+            DynamicGridClient.Children.Add(myGridClient);
 
+            /*
             //Btn ajouter
             Button btnAddAssemblage = new Button();
             btnAddAssemblage.Content = "";
