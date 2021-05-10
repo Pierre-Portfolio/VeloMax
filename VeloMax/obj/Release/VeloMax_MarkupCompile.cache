@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\amine\Documents\GitHub\VeloMax\VeloMax\obj\Debug\
+C:\Users\amine\Documents\GitHub\VeloMax\VeloMax\obj\Release\
 VeloMax
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\amine\Documents\GitHub\VeloMax\VeloMax\App.xaml
 31352485755
 
 18453956034
-119-488788005
+15-215643688
 AddAssemblage.xaml;AddBicy.xaml;MainWindow.xaml;
 
-False
+True
 
