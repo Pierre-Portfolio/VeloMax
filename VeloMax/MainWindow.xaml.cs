@@ -107,10 +107,11 @@ namespace VeloMax
         Grid DynamicGridDemo = new Grid();
         #endregion
 
-        #region Generation DynamicGrid
+        #region Génération
+        #region Generation Materiel
         public void GeneMateriel()
         {
-            /* ==== Creation partie client ====*/
+            /* ==== Creation partie matériel ====*/
             // création grid dynamic
             DynamicGridMateriel.HorizontalAlignment = HorizontalAlignment.Left;
             DynamicGridMateriel.Height = 400;
@@ -432,11 +433,16 @@ namespace VeloMax
             //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
             DynamicGridMateriel.Children.Add(btnSuprPiece);
         }
-
-        #endregion Generation DynamicGrid
+        #endregion Generation Materiel
+        #region Client
+        public void GeneClient()
+        {
+        }
+        #endregion Client
+        #endregion Generation
 
         #region Refresh
-        public void Refresh()
+            public void Refresh()
         {
             // on refresh les couleurs des bouttons
             MaterielBtn.Background = new SolidColorBrush(Colors.Green);
@@ -498,6 +504,21 @@ namespace VeloMax
             var WindowAddClient = new AddAssemblage(connection);
             WindowAddClient.Show();
 
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.assemblage;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+            }
+            myGridAssemblage.ItemsSource = myListAssemblage;
+            connection.Close();
+
         }
 
         private void OpenAddBicy(object sender, RoutedEventArgs e)
@@ -553,5 +574,6 @@ namespace VeloMax
         }
         #endregion Evenement
         #endregion Evenement
+
     }
 }
