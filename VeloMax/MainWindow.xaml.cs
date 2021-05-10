@@ -484,7 +484,7 @@ namespace VeloMax
             txtBlock0.Width = 700;
             txtBlock0.TextAlignment = TextAlignment.Center;
             txtBlock0.Background = new SolidColorBrush(Colors.Black);
-            txtBlock0.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
             txtBlock0.VerticalAlignment = VerticalAlignment.Top;
             txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
             txtBlock0.FontWeight = FontWeights.Bold;
@@ -514,7 +514,7 @@ namespace VeloMax
             connection.Close();
 
             //on define le reste
-            myGridClient.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridClient.Foreground = new SolidColorBrush(Colors.Black);
             myGridClient.GridLinesVisibility = DataGridGridLinesVisibility.None;
             myGridClient.Margin = new Thickness(0, -22, 0, 0);
             myGridClient.BorderThickness = new Thickness(0, 0, 0, 0);
@@ -525,148 +525,148 @@ namespace VeloMax
             Grid.SetColumnSpan(myGridClient, 6);
             DynamicGridClient.Children.Add(myGridClient);
 
-            /*
             //Btn ajouter
-            Button btnAddAssemblage = new Button();
-            btnAddAssemblage.Content = "";
-            btnAddAssemblage.Background = Brushes.Green;
-            btnAddAssemblage.Height = 15;
-            btnAddAssemblage.Width = 15;
-            Grid.SetRow(btnAddAssemblage, 0);
-            Grid.SetColumn(btnAddAssemblage, 0);
-            Grid.SetColumnSpan(btnAddAssemblage, 6);
-            btnAddAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddAssemblage.Margin = new Thickness(175, -12, 0, 0);
-            btnAddAssemblage.ToolTip = "Ajouter un Assemblage";
-            btnAddAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            btnAddAssemblage.Click += new RoutedEventHandler(OpenAddAssemblage);
-            DynamicGridMateriel.Children.Add(btnAddAssemblage);
+            Button btnAddClient = new Button();
+            btnAddClient.Content = "";
+            btnAddClient.Background = Brushes.Green;
+            btnAddClient.Height = 15;
+            btnAddClient.Width = 15;
+            Grid.SetRow(btnAddClient, 0);
+            Grid.SetColumn(btnAddClient, 0);
+            Grid.SetColumnSpan(btnAddClient, 6);
+            btnAddClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddClient.Margin = new Thickness(175, -12, 0, 0);
+            btnAddClient.ToolTip = "Ajouter un Client";
+            btnAddClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddClient.Click += new RoutedEventHandler(OpenAddAssemblage);
+            DynamicGridClient.Children.Add(btnAddClient);
 
             //Btn modifier
-            Button btnModifAssemblage = new Button();
-            btnModifAssemblage.Content = "";
-            btnModifAssemblage.Background = Brushes.Green;
-            btnModifAssemblage.Height = 15;
-            btnModifAssemblage.Width = 15;
-            Grid.SetRow(btnModifAssemblage, 0);
-            Grid.SetColumn(btnModifAssemblage, 0);
-            Grid.SetColumnSpan(btnModifAssemblage, 6);
-            btnModifAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifAssemblage.Margin = new Thickness(225, -12, 0, 0);
-            btnModifAssemblage.ToolTip = "Modifier un Assemblage";
-            btnModifAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            Button btnModifClient = new Button();
+            btnModifClient.Content = "";
+            btnModifClient.Background = Brushes.Green;
+            btnModifClient.Height = 15;
+            btnModifClient.Width = 15;
+            Grid.SetRow(btnModifClient, 0);
+            Grid.SetColumn(btnModifClient, 0);
+            Grid.SetColumnSpan(btnModifClient, 6);
+            btnModifClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifClient.Margin = new Thickness(225, -12, 0, 0);
+            btnModifClient.ToolTip = "Modifier un Client";
+            btnModifClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
             //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
-            DynamicGridMateriel.Children.Add(btnModifAssemblage);
+            DynamicGridClient.Children.Add(btnModifClient);
 
             //Btn del
-            Button btnSuprAssemblage = new Button();
-            btnSuprAssemblage.Content = "";
-            btnSuprAssemblage.Background = Brushes.Red;
-            btnSuprAssemblage.Height = 15;
-            btnSuprAssemblage.Width = 15;
-            Grid.SetRow(btnSuprAssemblage, 0);
-            Grid.SetColumn(btnSuprAssemblage, 0);
-            Grid.SetColumnSpan(btnSuprAssemblage, 6);
-            btnSuprAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnSuprAssemblage.ToolTip = "Supprimer un Assemblage";
-            btnSuprAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprAssemblage.Margin = new Thickness(275, -12, 0, 0);
+            Button btnSuprClient = new Button();
+            btnSuprClient.Content = "";
+            btnSuprClient.Background = Brushes.Red;
+            btnSuprClient.Height = 15;
+            btnSuprClient.Width = 15;
+            Grid.SetRow(btnSuprClient, 0);
+            Grid.SetColumn(btnSuprClient, 0);
+            Grid.SetColumnSpan(btnSuprClient, 6);
+            btnSuprClient.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprClient.ToolTip = "Supprimer un Client";
+            btnSuprClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprClient.Margin = new Thickness(275, -12, 0, 0);
             //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
-            DynamicGridMateriel.Children.Add(btnSuprAssemblage);
+            DynamicGridClient.Children.Add(btnSuprClient);
 
+            // Fidelio
             // titre 1
             TextBlock txtBlock1 = new TextBlock();
-            txtBlock1.Text = "Liste des bicyclettes";
+            txtBlock1.Text = "Liste des Fidelios";
             txtBlock1.FontSize = 14;
             txtBlock1.Width = 700;
             txtBlock1.TextAlignment = TextAlignment.Center;
             txtBlock1.Background = new SolidColorBrush(Colors.Black);
-            txtBlock1.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock1.Foreground = new SolidColorBrush(Colors.White);
             txtBlock1.VerticalAlignment = VerticalAlignment.Top;
             txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
             txtBlock1.FontWeight = FontWeights.Bold;
             Grid.SetRow(txtBlock1, 2);
             Grid.SetColumn(txtBlock1, 0);
             Grid.SetColumnSpan(txtBlock1, 6);
-            DynamicGridMateriel.Children.Add(txtBlock1);
+            DynamicGridClient.Children.Add(txtBlock1);
 
-            // tableau des bicyclette
-            myGridBicy.Items.Clear();
-            myGridBicy.Width = 700;
-            myGridBicy.Height = 100;
+            // tableau des Fidelios
+            myGridFidelio.Items.Clear();
+            myGridFidelio.Width = 700;
+            myGridFidelio.Height = 100;
 
             // on recupere les datas
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.bicyclette;";
+            command.CommandText = "SELECT * FROM velomax.fidelio;";
             reader = command.ExecuteReader();
             
             while (reader.Read())// parcours ligne par ligne
             {
-                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                myListFidelio.Add(new Fidelio(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), Convert.ToInt32(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
             }
-            myGridBicy.ItemsSource = myListBicy;
+            myGridFidelio.ItemsSource = myListBicy;
             connection.Close();
 
             //on define le reste
-            myGridBicy.Foreground = new SolidColorBrush(Colors.Orange);
-            myGridBicy.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridBicy.Margin = new Thickness(0, -22, 0, 0);
-            myGridBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            myGridBicy.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            myGridBicy.IsReadOnly = true;
-            Grid.SetRow(myGridBicy, 3);
-            Grid.SetColumn(myGridBicy, 0);
-            Grid.SetColumnSpan(myGridBicy, 6);
-            DynamicGridMateriel.Children.Add(myGridBicy);
+            myGridFidelio.Foreground = new SolidColorBrush(Colors.Black);
+            myGridFidelio.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridFidelio.Margin = new Thickness(0, -22, 0, 0);
+            myGridFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridFidelio.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridFidelio.IsReadOnly = true;
+            Grid.SetRow(myGridFidelio, 3);
+            Grid.SetColumn(myGridFidelio, 0);
+            Grid.SetColumnSpan(myGridFidelio, 6);
+            DynamicGridClient.Children.Add(myGridFidelio);
 
             //Btn ajouter
-            Button btnAddBicy = new Button();
-            btnAddBicy.Content = "";
-            btnAddBicy.Background = Brushes.Green;
-            btnAddBicy.Height = 15;
-            btnAddBicy.Width = 15;
-            Grid.SetRow(btnAddBicy, 3);
-            Grid.SetColumn(btnAddBicy, 0);
-            Grid.SetColumnSpan(btnAddBicy, 6);
-            btnAddBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddBicy.Margin = new Thickness(175, -141, 0, 0);
-            btnAddBicy.ToolTip = "Ajouter une Bicyclette";
-            btnAddBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            btnAddBicy.Click += new RoutedEventHandler(OpenAddBicy);
-            DynamicGridMateriel.Children.Add(btnAddBicy);
+            Button btnAddFidelio = new Button();
+            btnAddFidelio.Content = "";
+            btnAddFidelio.Background = Brushes.Green;
+            btnAddFidelio.Height = 15;
+            btnAddFidelio.Width = 15;
+            Grid.SetRow(btnAddFidelio, 3);
+            Grid.SetColumn(btnAddFidelio, 0);
+            Grid.SetColumnSpan(btnAddFidelio, 6);
+            btnAddFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddFidelio.Margin = new Thickness(175, -141, 0, 0);
+            btnAddFidelio.ToolTip = "Ajouter un Fidelio";
+            btnAddFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddFidelio.Click += new RoutedEventHandler(OpenAddBicy);
+            DynamicGridMateriel.Children.Add(btnAddFidelio);
 
             //Btn modifier
-            Button btnModifBicy = new Button();
-            btnModifBicy.Content = "";
-            btnModifBicy.Background = Brushes.Green;
-            btnModifBicy.Height = 15;
-            btnModifBicy.Width = 15;
-            Grid.SetRow(btnModifBicy, 3);
-            Grid.SetColumn(btnModifBicy, 0);
-            Grid.SetColumnSpan(btnModifBicy, 6);
-            btnModifBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifBicy.Margin = new Thickness(225, -141, 0, 0);
-            btnModifBicy.ToolTip = "Modifier une Bicyclette";
-            btnModifBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
-            DynamicGridMateriel.Children.Add(btnModifBicy);
+            Button btnModifFidelio = new Button();
+            btnModifFidelio.Content = "";
+            btnModifFidelio.Background = Brushes.Green;
+            btnModifFidelio.Height = 15;
+            btnModifFidelio.Width = 15;
+            Grid.SetRow(btnModifFidelio, 3);
+            Grid.SetColumn(btnModifFidelio, 0);
+            Grid.SetColumnSpan(btnModifFidelio, 6);
+            btnModifFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifFidelio.Margin = new Thickness(225, -141, 0, 0);
+            btnModifFidelio.ToolTip = "Modifier un Fidelio";
+            btnModifFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifFidelio.Click += new RoutedEventHandler(ButtonModifClient);
+            DynamicGridMateriel.Children.Add(btnModifFidelio);
 
             //Btn del
-            Button btnSuprBicy = new Button();
-            btnSuprBicy.Content = "";
-            btnSuprBicy.Background = Brushes.Red;
-            btnSuprBicy.Height = 15;
-            btnSuprBicy.Width = 15;
-            Grid.SetRow(btnSuprBicy, 3);
-            Grid.SetColumn(btnSuprBicy, 0);
-            Grid.SetColumnSpan(btnSuprBicy, 6);
-            btnSuprBicy.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnSuprBicy.ToolTip = "Supprimer une Bicyclette";
-            btnSuprBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprBicy.Margin = new Thickness(275, -141, 0, 0);
-            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
-            DynamicGridMateriel.Children.Add(btnSuprBicy);*/
+            Button btnSuprFidelio = new Button();
+            btnSuprFidelio.Content = "";
+            btnSuprFidelio.Background = Brushes.Red;
+            btnSuprFidelio.Height = 15;
+            btnSuprFidelio.Width = 15;
+            Grid.SetRow(btnSuprFidelio, 3);
+            Grid.SetColumn(btnSuprFidelio, 0);
+            Grid.SetColumnSpan(btnSuprFidelio, 6);
+            btnSuprFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprFidelio.ToolTip = "Supprimer un Fidelio";
+            btnSuprFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprFidelio.Margin = new Thickness(275, -141, 0, 0);
+            //btnSuprFidelio.Click += new RoutedEventHandler(ButtonSupClient);
+            DynamicGridMateriel.Children.Add(btnSuprFidelio);
         }
         #endregion Client
         #endregion Generation
