@@ -95,9 +95,9 @@ namespace VeloMax
         public DataGrid myGridAssemblage = new DataGrid();
         public DataGrid myGridBicy = new DataGrid();
         public DataGrid myGridPiece = new DataGrid();
-        public List<object> myListAssemblage = new List<object>();
         public int key = 0;
-        public List<object> myListBicy = new List<object>();
+        public List<Assemblage> myListAssemblage = new List<Assemblage>();
+        public List<Bicyclette> myListBicy = new List<Bicyclette>();
         //public Dictionary<int, object> myDictBicy = new Dictionary<int, object>();
 
         Grid DynamicGridClient = new Grid();
@@ -174,7 +174,6 @@ namespace VeloMax
             command.CommandText = "SELECT * FROM velomax.assemblage;";
             MySqlDataReader reader;
             reader = command.ExecuteReader();
-
             while (reader.Read())// parcours ligne par ligne
             {
                 myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
@@ -489,7 +488,7 @@ namespace VeloMax
             Grid.SetColumn(txtBlock0, 0);
             Grid.SetColumnSpan(txtBlock0, 6);
             DynamicGridClient.Children.Add(txtBlock0);
-
+            /*
             // tableau des Clients
             myGridAssemblage.Items.Clear();
             myGridAssemblage.Width = 700;
@@ -667,11 +666,6 @@ namespace VeloMax
         #endregion Client
         #endregion Generation
 
-
-
-
-
-
         #region Refresh
         public void Refresh()
         {
@@ -733,24 +727,8 @@ namespace VeloMax
 
         private void OpenAddAssemblage(object sender, RoutedEventArgs e)
         {
-            var WindowAddClient = new AddAssemblage(connection);
+            var WindowAddClient = new AddAssemblage(connection,this);
             WindowAddClient.Show();
-
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.assemblage;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
-
-            }
-            myGridAssemblage.ItemsSource = myListAssemblage;
-            connection.Close();
-
         }
 
         private void OpenAddBicy(object sender, RoutedEventArgs e)

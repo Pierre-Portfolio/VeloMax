@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    class Assemblage
+    public class Assemblage
     {
         private string nom;
         private string grandeur;
