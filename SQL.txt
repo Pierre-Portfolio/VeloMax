@@ -200,6 +200,11 @@ INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintr
 ('P15','Pédaleur','64',12,'2010-04-02 15:28:22','2010-04-02 15:28:22',3,123456789124834);
 
 
+('R02','Réflecteur','65',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834),
+('R09','Réflecteur','66',12,'2010-04-02 15:28:22','2010-04-02 15:28:22',3,123456789124834),
+('R10','Réflecteur','67',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834);
+
+
 INSERT INTO itemstock (idbicy,numpiece)
  VALUES
 (null,'C32'),
