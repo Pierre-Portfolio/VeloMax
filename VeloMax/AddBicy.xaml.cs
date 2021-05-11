@@ -22,12 +22,12 @@ namespace VeloMax
     {
         public MySqlConnection connection;
         public MainWindow mw;
-        public List<Object> listBicy;
         public int key;
-        public AddBicy(MySqlConnection connection, int key)
+        public AddBicy(MySqlConnection connection, MainWindow mw)
         {
             InitializeComponent();
-            this.key = key;
+            this.connection = connection;
+            this.mw = mw;
 
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
@@ -66,12 +66,40 @@ namespace VeloMax
 
         private void BoxNom_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("1");
+            if(BoxGrandeur.Text.ToString() == "")
+            {
+                connection.Open();
+                MySqlCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT grandeur FROM velomax.assemblage where nom='" + BoxNom.SelectedItem.ToString() + "';";
+                MySqlDataReader reader = command.ExecuteReader();
+                List<string> listNom = new List<string>();
+                while (reader.Read())// parcours ligne par ligne
+                {
+                    listNom.Add(reader.GetValue(0).ToString());
+                }
+                connection.Close();
+                BoxGrandeur.Items.Refresh();
+                BoxGrandeur.ItemsSource = listNom;
+            }
         }
 
         private void BoxGrandeur_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("2");
+            if (BoxNom.Text.ToString() == "")
+            {
+                connection.Open();
+                MySqlCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT nom FROM velomax.assemblage where grandeur = '" + BoxGrandeur.SelectedItem.ToString() + "';";
+                MySqlDataReader reader = command.ExecuteReader();
+                List<string> listGrandeur = new List<string>();
+                while (reader.Read())// parcours ligne par ligne
+                {
+                    listGrandeur.Add(reader.GetValue(0).ToString());
+                }
+                connection.Close();
+                BoxNom.Items.Refresh();
+                BoxNom.ItemsSource = listGrandeur;
+            }
         }
 
 
@@ -95,25 +123,20 @@ namespace VeloMax
                                     DateTime res2;
                                     if (DateTime.TryParse(BoxDateDisc.Text.ToString(), out res2))
                                     {
-                                        Bicyclette b1 = new Bicyclette(key, BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(), res, BoxligneProd.Text.ToString(), DateTime.Now, res2);
-                                        /*
+                                        DateTime dt1 = DateTime.Now;
+                                        mw.key = mw.key + 1;
+                                        Bicyclette b1 = new Bicyclette(mw.key, BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(), res, BoxligneProd.Text.ToString(), dt1, res2);
+                                        mw.myListBicy.Add(b1);
+                                        mw.myGridBicy.ItemsSource = mw.myListBicy;
+                                        mw.myGridBicy.Items.Refresh();
+
                                         connection.Open();
                                         MySqlCommand command = connection.CreateCommand();
-                                        string textSQL = "";
-                                        command.CommandText = "SELECT * FROM velomax.piecedetache;";
-                                        reader = command.ExecuteReader();
-                                        Dictionary<int, PieceDetache> myDictPiece = new Dictionary<int, PieceDetache>();
-                                        key = 0;
-                                        while (reader.Read())// parcours ligne par ligne
-                                        {
-                                            myDictPiece.Add(key++, new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
-                                            key++;
-                                        }
-                                        myGridPiece.ItemsSource = myDictPiece.Values;
+                                        command.CommandText = "INSERT INTO velomax.bicyclette (idbicy,nom,grandeur,prixbicy,ligneproduit,dateintrobicy,datediscontinuationbicy)VALUES(" + mw.key.ToString() + ",'" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "'," + BoxPrix.Text + ",'" + BoxligneProd.Text.ToString() + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "');";
+                                        MessageBox.Show(command.CommandText.ToString());
+                                        MySqlDataReader reader = command.ExecuteReader();
                                         connection.Close();
-
                                         this.Close();
-                                        */
                                     }
                                     else
                                     {

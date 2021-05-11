@@ -158,7 +158,7 @@ namespace VeloMax
             txtBlock0.Width = 700;
             txtBlock0.TextAlignment = TextAlignment.Center;
             txtBlock0.Background = new SolidColorBrush(Colors.Black);
-            txtBlock0.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
             txtBlock0.VerticalAlignment = VerticalAlignment.Top;
             txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
             txtBlock0.FontWeight = FontWeights.Bold;
@@ -187,7 +187,7 @@ namespace VeloMax
             connection.Close();
 
             //on define le reste
-            myGridAssemblage.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridAssemblage.Foreground = new SolidColorBrush(Colors.Black);
             myGridAssemblage.GridLinesVisibility = DataGridGridLinesVisibility.None;
             myGridAssemblage.Margin = new Thickness(0, -22, 0, 0);
             myGridAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
@@ -227,7 +227,7 @@ namespace VeloMax
             btnModifAssemblage.Margin = new Thickness(225, -12, 0, 0);
             btnModifAssemblage.ToolTip = "Modifier un Assemblage";
             btnModifAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
+            //btnModifAssemblage.Click += new RoutedEventHandler(ButtonModifClient);
             DynamicGridMateriel.Children.Add(btnModifAssemblage);
 
             //Btn del
@@ -253,7 +253,7 @@ namespace VeloMax
             txtBlock1.Width = 700;
             txtBlock1.TextAlignment = TextAlignment.Center;
             txtBlock1.Background = new SolidColorBrush(Colors.Black);
-            txtBlock1.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock1.Foreground = new SolidColorBrush(Colors.White);
             txtBlock1.VerticalAlignment = VerticalAlignment.Top;
             txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
             txtBlock1.FontWeight = FontWeights.Bold;
@@ -276,12 +276,13 @@ namespace VeloMax
             while (reader.Read())// parcours ligne par ligne
             {
                 myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                key = Convert.ToInt32(reader.GetValue(0));
             }
             myGridBicy.ItemsSource = myListBicy;
             connection.Close();
 
             //on define le reste
-            myGridBicy.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridBicy.Foreground = new SolidColorBrush(Colors.Black);
             myGridBicy.GridLinesVisibility = DataGridGridLinesVisibility.None;
             myGridBicy.Margin = new Thickness(0, -22, 0, 0);
             myGridBicy.BorderThickness = new Thickness(0, 0, 0, 0);
@@ -347,7 +348,7 @@ namespace VeloMax
             txtBlock2.Width = 700;
             txtBlock2.TextAlignment = TextAlignment.Center;
             txtBlock2.Background = new SolidColorBrush(Colors.Black);
-            txtBlock2.Foreground = new SolidColorBrush(Colors.Green);
+            txtBlock2.Foreground = new SolidColorBrush(Colors.White);
             txtBlock2.VerticalAlignment = VerticalAlignment.Top;
             txtBlock2.HorizontalAlignment = HorizontalAlignment.Center;
             txtBlock2.FontWeight = FontWeights.Bold;
@@ -367,17 +368,15 @@ namespace VeloMax
             command.CommandText = "SELECT * FROM velomax.piecedetache;";
             reader = command.ExecuteReader();
             Dictionary<int, PieceDetache> myDictPiece = new Dictionary<int, PieceDetache>();
-            key = 0;
             while (reader.Read())// parcours ligne par ligne
             {
                 myDictPiece.Add(key++, new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
-                key++;
             }
             myGridPiece.ItemsSource = myDictPiece.Values;
             connection.Close();
 
             //on define le reste
-            myGridPiece.Foreground = new SolidColorBrush(Colors.Orange);
+            myGridPiece.Foreground = new SolidColorBrush(Colors.Black);
             myGridPiece.GridLinesVisibility = DataGridGridLinesVisibility.None;
             myGridPiece.Margin = new Thickness(0, -22, 0, 0);
             myGridPiece.BorderThickness = new Thickness(0, 0, 0, 0);
@@ -634,7 +633,7 @@ namespace VeloMax
             btnAddFidelio.ToolTip = "Ajouter un Fidelio";
             btnAddFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
             //btnAddFidelio.Click += new RoutedEventHandler(OpenAddBicy);
-            DynamicGridMateriel.Children.Add(btnAddFidelio);
+            DynamicGridClient.Children.Add(btnAddFidelio);
 
             //Btn modifier
             Button btnModifFidelio = new Button();
@@ -738,7 +737,7 @@ namespace VeloMax
 
         private void OpenAddBicy(object sender, RoutedEventArgs e)
         {
-            var WindowAddClient = new AddBicy(connection,(key + 1));
+            var WindowAddClient = new AddBicy(connection, this);
             WindowAddClient.Show();
             
         }
