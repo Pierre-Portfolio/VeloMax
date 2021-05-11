@@ -48,41 +48,6 @@ namespace VeloMax
             }
             return connection;
         }
-
-        static string requeteSQLSELECT(MySqlConnection connection ,string requete, int nbarg)
-        {
-
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = requete;
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-            string result = "";
-            while (reader.Read())// parcours ligne par ligne
-            {
-                result += reader.GetValue(0).ToString();
-
-                for (int i = 1; i < nbarg; i++)
-                {
-                    result += ";" + reader.GetValue(i).ToString();
-                }
-                
-                result += Console.ReadLine() + "\n";
-                //encourdemodif.ItemsSource = (string)reader.GetValue(0);
-                // prix = Convert.ToInt32(Console.ReadLine());
-                //MessageBox.Show((string)reader.GetValue(0));
-                //modele = modele + " " + (string)reader.GetValue(1);
-
-                /*
-                // récupération de la 1ère colonne (il n'y en a qu'une dans la requête !)
-                Console.WriteLine(marque);
-                Console.WriteLine(modele);
-                */
-            }
-
-            connection.Close();
-            return result;
-        }
         #endregion
 
         #region Variable Globale
@@ -98,7 +63,7 @@ namespace VeloMax
         public int key = 0;
         public List<Assemblage> myListAssemblage = new List<Assemblage>();
         public List<Bicyclette> myListBicy = new List<Bicyclette>();
-        //public Dictionary<int, object> myDictBicy = new Dictionary<int, object>();
+        public List<PieceDetache> myDictBicy = new List<PieceDetache>();
 
         Grid DynamicGridClient = new Grid();
         public DataGrid myGridClient = new DataGrid();
@@ -400,7 +365,7 @@ namespace VeloMax
             btnAddPiece.Margin = new Thickness(175, -141, 0, 0);
             btnAddPiece.ToolTip = "Ajouter une Piece";
             btnAddPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddClient.Click += new RoutedEventHandler(OpenAddClient);
+            btnAddPiece.Click += new RoutedEventHandler(OpenAddPiece);
             DynamicGridMateriel.Children.Add(btnAddPiece);
 
             //Btn modifier
@@ -740,6 +705,13 @@ namespace VeloMax
             var WindowAddClient = new AddBicy(connection, this);
             WindowAddClient.Show();
             
+        }
+
+        private void OpenAddPiece(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new AddBicy(connection, this);
+            WindowAddClient.Show();
+
         }
         #endregion Evenement Matériel
 
