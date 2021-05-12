@@ -101,8 +101,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModifAssemblage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModifAssemblage.xaml.cs">
+      <DependentUpon>ModifAssemblage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Particulier.cs" />
     <Compile Include="PieceDetache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -193,7 +193,7 @@ namespace VeloMax
             btnModifAssemblage.Margin = new Thickness(225, -12, 0, 0);
             btnModifAssemblage.ToolTip = "Modifier un Assemblage";
             btnModifAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifAssemblage.Click += new RoutedEventHandler(ButtonModifClient);
+            btnModifAssemblage.Click += new RoutedEventHandler(ButtonModifAssemblage);
             DynamicGridMateriel.Children.Add(btnModifAssemblage);
 
             //Btn del
@@ -698,6 +698,12 @@ namespace VeloMax
         private void OpenAddAssemblage(object sender, RoutedEventArgs e)
         {
             var WindowAddClient = new AddAssemblage(connection,this);
+            WindowAddClient.Show();
+        }
+
+        private void ButtonModifAssemblage(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new ModifAssemblage(connection, this);
             WindowAddClient.Show();
         }
 

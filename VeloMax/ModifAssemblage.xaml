@@ -54,7 +54,7 @@
             <TextBlock Height="20" Canvas.Left="310" Canvas.Top="496" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Panier"/><Run Text=" : "/></TextBlock>
             <ComboBox x:Name="BoxPanier" Height="22" Canvas.Left="310" Canvas.Top="516" Width="150" AutomationProperties.Name="Tel"/>
 
-            <Button Content="Valider" Height="25" Canvas.Left="94" Canvas.Top="578" Width="366" Cursor="Hand" Background="#FF34B104" Click="AjouterAssemblage"/>
+            <Button Content="Valider" Height="25" Canvas.Left="94" Canvas.Top="578" Width="366" Cursor="Hand" Background="#FF34B104" Click="BtnModifAssemblage"/>
 
         </Canvas>
     </Grid>
