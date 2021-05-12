@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="AddAssemblage" Height="659.8" Width="542.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
+        Title="AddAssemblage" Height="659.8" Width="558.2" Icon="velo_logo.jpeg" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>

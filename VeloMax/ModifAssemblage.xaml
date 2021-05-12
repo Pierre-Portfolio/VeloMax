@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>
     <Grid Margin="0,-300,418.2,-257.2">
-        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,307,-338,449">
+        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="-12,300,-208.2,454.4">
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
             <TextBox Name="BoxNom"  Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />

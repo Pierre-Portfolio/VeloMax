@@ -634,6 +634,14 @@ namespace VeloMax
             DynamicGridMateriel.Children.Add(btnSuprFidelio);
         }
         #endregion Client
+
+        #region Demo
+        public void GeneDemo()
+        {
+
+        }
+
+        #endregion Demo
         #endregion Generation
 
         #region Refresh
@@ -682,6 +690,7 @@ namespace VeloMax
             //generation des 6 sous menu
             GeneMateriel();
             GeneClient();
+            GeneDemo();
             //requeteSQL(connection);
         }
         #endregion
@@ -705,6 +714,24 @@ namespace VeloMax
         {
             var WindowAddClient = new ModifAssemblage(connection, this);
             WindowAddClient.Show();
+            /*
+            if (myGridClient.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridClient.SelectedItems)
+                {
+                    ModifClient w = new ModifClient((Client)o, p1);
+                    w.Show();
+                    w.BoxNom.Text = ((Client)o).NomClient;
+                    w.BoxPrenom.Text = ((Client)o).PrenomClient;
+                    w.BoxAdresse.Text = ((Client)o).AdrClient;
+                    w.BoxTel.Text = Convert.ToString(((Client)o).TelClient);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! ");
+            }
+            */
         }
 
         private void OpenAddBicy(object sender, RoutedEventArgs e)

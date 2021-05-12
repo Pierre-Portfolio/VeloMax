@@ -7,6 +7,8 @@ GRANDE PARTIE :
 	Démo -> voir pdf
 
 
+Crée un Triggers qui gere les dates de continuité
+
 CONTRAINTE GROUPE DE 3 => les triggers, les procédures et que vous faîtes preuve de créativité 
 // je propose donc un systeme de connection pour les vendeur permettant ducoup de savoir qui effectue la commande des client ( pratique ) // ducoup création du vendeur du mois par exemple
 Contrainte projet => 1 requete sunchro , 1 auto jointure & 1 unions ( noté dans ce txt pour quon sache ou elle sont pour le rapport )
