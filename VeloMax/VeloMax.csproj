@@ -67,6 +67,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +80,9 @@
     </Compile>
     <Compile Include="AddBicy.xaml.cs">
       <DependentUpon>AddBicy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPiece.xaml.cs">
+      <DependentUpon>AddPiece.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -94,15 +101,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddPiece.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPiece.xaml.cs">
-      <DependentUpon>AddPiece.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Particulier.cs" />
     <Compile Include="PieceDetache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -709,7 +709,7 @@ namespace VeloMax
 
         private void OpenAddPiece(object sender, RoutedEventArgs e)
         {
-            var WindowAddClient = new AddBicy(connection, this);
+            var WindowAddClient = new AddPiece(connection, this);
             WindowAddClient.Show();
 
         }

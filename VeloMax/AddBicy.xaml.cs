@@ -22,7 +22,6 @@ namespace VeloMax
     {
         public MySqlConnection connection;
         public MainWindow mw;
-        public int key;
         public AddBicy(MySqlConnection connection, MainWindow mw)
         {
             InitializeComponent();
