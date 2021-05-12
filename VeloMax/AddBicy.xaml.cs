@@ -139,7 +139,7 @@ namespace VeloMax
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Erreur , veuillez modifier la saisie de la date de discontinuation !");
+                                        MessageBox.Show("Erreur , veuillez modifier la saisie de la date de discontinuité !");
                                     }
 
                                 }
@@ -155,7 +155,7 @@ namespace VeloMax
                         }
                         else
                         {
-                            MessageBox.Show("Erreur le champ prix est doit contenir que un nombre ronds !");
+                            MessageBox.Show("Erreur le champ prix doit contenir que un nombre ronds !");
                         }
                     }
                     else

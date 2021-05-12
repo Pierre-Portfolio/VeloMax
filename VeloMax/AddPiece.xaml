@@ -5,35 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="AddPiece" Height="564.8" Width="342.4">
+        Title="AddPiece" Height="484.8" Width="342.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>
     <Grid Margin="0,-300,418.2,-257.2">
         <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,302,-338,358.8">
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Numero Piece :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxNumPiece" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="67" Text="Numero Piece :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxNumPiece" Height="22" Canvas.Left="94" Canvas.Top="87" Width="150" AutomationProperties.Name="Nom" />
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="95" Text="Description Piece:" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <ComboBox Name="BoxDescPiece"  Height="22" Canvas.Left="94" Canvas.Top="115"  Width="150" AutomationProperties.Name="Grandeur" />
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="125" Text="Description Piece:" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxDescPiece"  Height="22" Canvas.Left="94" Canvas.Top="145"  Width="150" AutomationProperties.Name="Grandeur" />
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="158" Text="Num Prod Catalogue : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxNumProdCata" Height="22" Canvas.Left="94" Canvas.Top="178" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="185" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Prix Piece"/><Run Text=" : "/></TextBlock>
+            <TextBox Name="BoxPrix" Height="22" Canvas.Left="94" Canvas.Top="205"  Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="223" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Prix Piece"/><Run Text=" : "/></TextBlock>
-            <TextBox Name="BoxPrix" Height="22" Canvas.Left="94" Canvas.Top="243"  Width="150" AutomationProperties.Name="Tel"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="249" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Date Discontinuité Prod"/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxDateDisc" Height="22" Canvas.Left="94" Canvas.Top="269" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="287" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Date Discontinuité Prod"/><Run Text=" : "/></TextBlock>
-            <TextBox x:Name="BoxDateDisc" Height="22" Canvas.Left="94" Canvas.Top="307" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="313" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Delai en jour"/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxDelai" Height="22" Canvas.Left="94" Canvas.Top="333"  Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="351" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Delai en jour"/><Run Text=" : "/></TextBlock>
-            <TextBox x:Name="BoxDelai" Height="22" Canvas.Left="94" Canvas.Top="371"  Width="150" AutomationProperties.Name="Tel"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="373" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Numero de Siret"/><Run Text=" : "/></TextBlock>
+            <ComboBox x:Name="BoxSiret" Height="22" Canvas.Left="94" Canvas.Top="393" Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="411" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Numero de Siret"/><Run Text=" : "/></TextBlock>
-            <ComboBox x:Name="BoxSiret" Height="22" Canvas.Left="94" Canvas.Top="431" Width="150" AutomationProperties.Name="Tel"/>
-
-            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="472" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterPiece"/>
+            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="434" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterPiece"/>
 
         </Canvas>
     </Grid>
