@@ -64,30 +64,31 @@ namespace VeloMax
                                     {
 
                                         int res3;
-                                        if (int.TryParse(BoxPrix.Text.ToString(), out res3))
+                                        if (int.TryParse(BoxDelai.Text.ToString(), out res3))
                                         {
-                                            if (res >= 0)
+                                            if (res3 >= 0)
                                             {
                                                 if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
                                                 {
                                                     MessageBox.Show("REUSSIE");
-                                                    /*
+                                                    
                                                     DateTime dt1 = DateTime.Now;
-                                                    mw.key = mw.key + 1;
-                                                    Bicyclette b1 = new Bicyclette(mw.key, BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(), res, BoxligneProd.Text.ToString(), dt1, res2);
-                                                    mw.myListBicy.Add(b1);
-                                                    mw.myGridBicy.ItemsSource = mw.myListBicy;
-                                                    mw.myGridBicy.Items.Refresh();
-
+                                                    mw.keyPiece = mw.keyPiece + 1; 
+                                                    PieceDetache p1 = new PieceDetache( BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece , res, dt1, res2, res3 , BoxSiret.Text.ToString());
+                                                    mw.myListPiece.Add(p1);
+                                                    mw.myGridPiece.ItemsSource = mw.myListPiece;
+                                                    mw.myGridPiece.Items.Refresh();
+                                                
                                                     connection.Open();
                                                     MySqlCommand command = connection.CreateCommand();
-                                                    command.CommandText = "INSERT INTO velomax.bicyclette (idbicy,nom,grandeur,prixbicy,ligneproduit,dateintrobicy,datediscontinuationbicy)VALUES(" + mw.key.ToString() + ",'" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "'," + BoxPrix.Text + ",'" + BoxligneProd.Text.ToString() + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "');";
+                                                    command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES(" + BoxNumPiece.Text.ToString() + ",'" + BoxDescPiece.Text.ToString() + "','" + mw.keyPiece + "'," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") +  "','" + res3 + "','" + BoxSiret.Text.ToString() + "');";
                                                     MessageBox.Show(command.CommandText.ToString());
                                                     MySqlDataReader reader = command.ExecuteReader();
                                                     connection.Close();
-                                                    this.Close();*/
-                                                }
-                                                else
+                                                    this.Close();
+                                                
+                                            }
+                                            else
                                                 {
                                                     MessageBox.Show("Erreur le champ contenant le champ de numéro de siret est vide !");
                                                 }
