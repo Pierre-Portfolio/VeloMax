@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace VeloMax
 {
     /// <summary>
-    /// Logique d'interaction pour OpenAddPiece.xaml
+    /// Logique d'interaction pour AddPiece.xaml
     /// </summary>
-    public partial class OpenAddPiece : Window
+    public partial class AddPiece : Window
     {
-        public OpenAddPiece()
+        public AddPiece()
         {
             InitializeComponent();
         }

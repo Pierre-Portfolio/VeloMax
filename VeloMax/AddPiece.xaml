@@ -1,11 +1,11 @@
-﻿<Window x:Class="VeloMax.OpenAddPiece"
+﻿<Window x:Class="VeloMax.AddPiece"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="OpenAddPiece" Height="564.8" Width="347">
+        Title="AddPiece" Height="564.8" Width="342.4">
     <Window.Background>
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>
@@ -29,12 +29,12 @@
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="351" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Delai en jour"/><Run Text=" : "/></TextBlock>
             <TextBox x:Name="BoxDelai" Height="22" Canvas.Left="94" Canvas.Top="371"  Width="150" AutomationProperties.Name="Tel"/>
-            
+
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="411" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Numero de Siret"/><Run Text=" : "/></TextBlock>
             <TextBox x:Name="BoxSiret" Height="22" Canvas.Left="94" Canvas.Top="431" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
 
-            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="472" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterClient"/>
-            
+            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="472" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterPiece"/>
+
         </Canvas>
     </Grid>
 </Window>

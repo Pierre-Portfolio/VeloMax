@@ -84,3 +84,4 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\System.Numeri
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\MySql.Data.xml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.exe.config
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddPiece.g.cs
