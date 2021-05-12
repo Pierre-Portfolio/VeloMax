@@ -60,10 +60,11 @@ namespace VeloMax
         public DataGrid myGridAssemblage = new DataGrid();
         public DataGrid myGridBicy = new DataGrid();
         public DataGrid myGridPiece = new DataGrid();
-        public int key = 0;
+        public int keyBicy = 0;
+        public int keyPiece = 0;
         public List<Assemblage> myListAssemblage = new List<Assemblage>();
         public List<Bicyclette> myListBicy = new List<Bicyclette>();
-        public List<PieceDetache> myDictBicy = new List<PieceDetache>();
+        public List<PieceDetache> myListPiece = new List<PieceDetache>();
 
         Grid DynamicGridClient = new Grid();
         public DataGrid myGridClient = new DataGrid();
@@ -241,7 +242,7 @@ namespace VeloMax
             while (reader.Read())// parcours ligne par ligne
             {
                 myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                key = Convert.ToInt32(reader.GetValue(0));
+                keyBicy = Convert.ToInt32(reader.GetValue(0));
             }
             myGridBicy.ItemsSource = myListBicy;
             connection.Close();
@@ -332,12 +333,11 @@ namespace VeloMax
             command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM velomax.piecedetache;";
             reader = command.ExecuteReader();
-            Dictionary<int, PieceDetache> myDictPiece = new Dictionary<int, PieceDetache>();
             while (reader.Read())// parcours ligne par ligne
             {
-                myDictPiece.Add(key++, new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
             }
-            myGridPiece.ItemsSource = myDictPiece.Values;
+            myGridPiece.ItemsSource = myListPiece;
             connection.Close();
 
             //on define le reste
