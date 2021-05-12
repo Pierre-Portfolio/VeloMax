@@ -16,7 +16,7 @@
             <TextBox Name="BoxNumPiece" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="95" Text="Description Piece:" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxDescPiece"  Height="22" Canvas.Left="94" Canvas.Top="115"  Width="150" AutomationProperties.Name="Grandeur" />
+            <ComboBox Name="BoxDescPiece"  Height="22" Canvas.Left="94" Canvas.Top="115"  Width="150" AutomationProperties.Name="Grandeur" />
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="158" Text="Num Prod Catalogue : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
             <TextBox Name="BoxNumProdCata" Height="22" Canvas.Left="94" Canvas.Top="178" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
@@ -31,7 +31,7 @@
             <TextBox x:Name="BoxDelai" Height="22" Canvas.Left="94" Canvas.Top="371"  Width="150" AutomationProperties.Name="Tel"/>
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="411" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Numero de Siret"/><Run Text=" : "/></TextBlock>
-            <TextBox x:Name="BoxSiret" Height="22" Canvas.Left="94" Canvas.Top="431" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+            <ComboBox x:Name="BoxSiret" Height="22" Canvas.Left="94" Canvas.Top="431" Width="150" AutomationProperties.Name="Tel"/>
 
             <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="472" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterPiece"/>
 
