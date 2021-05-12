@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="Ajouter une Bicyclette" Height="454.8" Width="342.4" Icon="velo_logo.jpeg">
+        Title="Ajouter une Bicyclette" Height="454.8" Width="342.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>
