@@ -123,15 +123,15 @@ namespace VeloMax
                                     if (DateTime.TryParse(BoxDateDisc.Text.ToString(), out res2))
                                     {
                                         DateTime dt1 = DateTime.Now;
-                                        mw.key = mw.key + 1;
-                                        Bicyclette b1 = new Bicyclette(mw.key, BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(), res, BoxligneProd.Text.ToString(), dt1, res2);
+                                        mw.keyBicy = mw.keyBicy + 1;
+                                        Bicyclette b1 = new Bicyclette(mw.keyBicy, BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(), res, BoxligneProd.Text.ToString(), dt1, res2);
                                         mw.myListBicy.Add(b1);
                                         mw.myGridBicy.ItemsSource = mw.myListBicy;
                                         mw.myGridBicy.Items.Refresh();
 
                                         connection.Open();
                                         MySqlCommand command = connection.CreateCommand();
-                                        command.CommandText = "INSERT INTO velomax.bicyclette (idbicy,nom,grandeur,prixbicy,ligneproduit,dateintrobicy,datediscontinuationbicy)VALUES(" + mw.key.ToString() + ",'" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "'," + BoxPrix.Text + ",'" + BoxligneProd.Text.ToString() + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "');";
+                                        command.CommandText = "INSERT INTO velomax.bicyclette (idbicy,nom,grandeur,prixbicy,ligneproduit,dateintrobicy,datediscontinuationbicy)VALUES(" + mw.keyBicy.ToString() + ",'" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "'," + BoxPrix.Text + ",'" + BoxligneProd.Text.ToString() + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "');";
                                         MessageBox.Show(command.CommandText.ToString());
                                         MySqlDataReader reader = command.ExecuteReader();
                                         connection.Close();
