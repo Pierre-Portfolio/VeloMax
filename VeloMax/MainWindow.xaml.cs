@@ -711,27 +711,20 @@ namespace VeloMax
         }
 
         private void ButtonModifAssemblage(object sender, RoutedEventArgs e)
-        {
-            var WindowAddClient = new ModifAssemblage(connection, this);
-            WindowAddClient.Show();
-            /*
-            if (myGridClient.SelectedItems.Count == 1)
+        {           
+            if (myGridAssemblage.SelectedItems.Count == 1)
             {
-                foreach (Object o in myGridClient.SelectedItems)
+                foreach (Object o in myGridAssemblage.SelectedItems)
                 {
-                    ModifClient w = new ModifClient((Client)o, p1);
+                    ModifAssemblage w = new ModifAssemblage(connection, ((Assemblage)o), this);
                     w.Show();
-                    w.BoxNom.Text = ((Client)o).NomClient;
-                    w.BoxPrenom.Text = ((Client)o).PrenomClient;
-                    w.BoxAdresse.Text = ((Client)o).AdrClient;
-                    w.BoxTel.Text = Convert.ToString(((Client)o).TelClient);
                 }
             }
             else
             {
-                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! ");
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridAssemblage.SelectedItems.Count);
             }
-            */
+            
         }
 
         private void OpenAddBicy(object sender, RoutedEventArgs e)

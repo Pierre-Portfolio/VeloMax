@@ -44,71 +44,85 @@ namespace VeloMax
         public string Nom
         {
             get { return this.nom; }
+            set { this.nom = value; }
         }
 
         public string Grandeur
         {
             get { return this.grandeur; }
+            set { this.grandeur = value; }
         }
 
         public string Cadre
         {
             get { return this.cadre; }
+            set { this.cadre = value; }
         }
 
         public string Guidon
         {
             get { return this.guidon; }
+            set { this.guidon = value; }
         }
 
         public string Freins
         {
             get { return this.freins; }
+            set { this.freins = value; }
         }
 
         public string Selle
         {
             get { return this.selle; }
+            set { this.selle = value; }
         }
 
         public string Derailleuravant
         {
             get { return this.derailleuravant; }
+            set { this.derailleuravant = value; }
         }
 
         public string Derailleurarriere
         {
             get { return this.derailleurarriere; }
+            set { this.derailleurarriere = value; }
         }
 
         public string Roueavant
         {
             get { return this.roueavant; }
+            set { this.roueavant = value; }
         }
 
         public string Rouearriere
         {
             get { return this.rouearriere; }
+            set { this.rouearriere = value; }
         }
 
         public string Reflecteur
         {
             get { return this.reflecteur; }
+            set { this.reflecteur = value; }
         }
 
         public string Pedalleur
         {
             get { return this.pedalleur; }
+            set { this.pedalleur = value; }
         }
 
         public string Ordinateur
         {
             get { return this.ordinateur; }
+            set { this.ordinateur = value; }
         }
 
         public string Panier
         {
             get { return this.panier; }
+            set { this.panier = value; }
         }
 
         /// <summary>
