@@ -81,7 +81,7 @@ namespace VeloMax
                                                 
                                                     connection.Open();
                                                     MySqlCommand command = connection.CreateCommand();
-                                                    command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES(" + BoxNumPiece.Text.ToString() + ",'" + BoxDescPiece.Text.ToString() + "','" + mw.keyPiece + "'," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") +  "','" + res3 + "','" + BoxSiret.Text.ToString() + "');";
+                                                    command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES('" + BoxNumPiece.Text.ToString() + "','" + BoxDescPiece.Text.ToString() + "'," + mw.keyPiece + "," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") +  "'," + res3 + ",'" + BoxSiret.Text.ToString() + "');";
                                                     MessageBox.Show(command.CommandText.ToString());
                                                     MySqlDataReader reader = command.ExecuteReader();
                                                     connection.Close();
