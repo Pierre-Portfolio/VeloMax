@@ -289,7 +289,7 @@ namespace VeloMax
             btnModifBicy.Margin = new Thickness(225, -141, 0, 0);
             btnModifBicy.ToolTip = "Modifier une Bicyclette";
             btnModifBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
+            btnModifBicy.Click += new RoutedEventHandler(ButtonModifBicy);
             DynamicGridMateriel.Children.Add(btnModifBicy);
 
             //Btn del
@@ -616,7 +616,7 @@ namespace VeloMax
             btnModifFidelio.ToolTip = "Modifier un Fidelio";
             btnModifFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
             //btnModifFidelio.Click += new RoutedEventHandler(ButtonModifClient);
-            DynamicGridMateriel.Children.Add(btnModifFidelio);
+            DynamicGridClient.Children.Add(btnModifFidelio);
 
             //Btn del
             Button btnSuprFidelio = new Button();
@@ -632,7 +632,7 @@ namespace VeloMax
             btnSuprFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprFidelio.Margin = new Thickness(275, -141, 0, 0);
             //btnSuprFidelio.Click += new RoutedEventHandler(ButtonSupClient);
-            DynamicGridMateriel.Children.Add(btnSuprFidelio);
+            DynamicGridClient.Children.Add(btnSuprFidelio);
         }
         #endregion Client
 
@@ -733,6 +733,23 @@ namespace VeloMax
             var WindowAddClient = new AddBicy(connection, this);
             WindowAddClient.Show();
             
+        }
+
+        private void ButtonModifBicy(object sender, RoutedEventArgs e)
+        {
+            if (myGridBicy.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridBicy.SelectedItems)
+                {
+                    ModifBicy w = new ModifBicy(connection, ((Bicyclette)o), this);
+                    w.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridBicy.SelectedItems.Count);
+            }
+
         }
 
         private void OpenAddPiece(object sender, RoutedEventArgs e)

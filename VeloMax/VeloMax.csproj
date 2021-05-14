@@ -105,10 +105,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ModifBicy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModifAssemblage.xaml.cs">
       <DependentUpon>ModifAssemblage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModifBicy.xaml.cs">
+      <DependentUpon>ModifBicy.xaml</DependentUpon>
     </Compile>
     <Compile Include="Particulier.cs" />
     <Compile Include="PieceDetache.cs" />

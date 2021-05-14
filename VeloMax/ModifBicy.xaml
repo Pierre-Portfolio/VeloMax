@@ -13,10 +13,10 @@
         <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,288,-338,262.8">
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
-            <ComboBox Name="BoxNom" SelectionChanged="BoxNom_SelectionChanged" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
+            <ComboBox Name="BoxNom" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="115" Text="Grandeur :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <ComboBox Name="BoxGrandeur" SelectionChanged="BoxGrandeur_SelectionChanged" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
+            <ComboBox Name="BoxGrandeur" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="192" Text="Prix : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
             <TextBox Name="BoxPrix" Height="22" Canvas.Left="94" Canvas.Top="212" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
