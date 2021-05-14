@@ -67,6 +67,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddFidelio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddFournisseur.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +92,15 @@
     </Compile>
     <Compile Include="AddBicy.xaml.cs">
       <DependentUpon>AddBicy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddClient.xaml.cs">
+      <DependentUpon>AddClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddFidelio.xaml.cs">
+      <DependentUpon>AddFidelio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddFournisseur.xaml.cs">
+      <DependentUpon>AddFournisseur.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddPiece.xaml.cs">
       <DependentUpon>AddPiece.xaml</DependentUpon>

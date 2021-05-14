@@ -504,7 +504,7 @@ namespace VeloMax
             btnAddClient.Margin = new Thickness(175, -12, 0, 0);
             btnAddClient.ToolTip = "Ajouter un Client";
             btnAddClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddClient.Click += new RoutedEventHandler(OpenAddAssemblage);
+            btnAddClient.Click += new RoutedEventHandler(OpenAddClient);
             DynamicGridClient.Children.Add(btnAddClient);
 
             //Btn modifier
@@ -599,7 +599,7 @@ namespace VeloMax
             btnAddFidelio.Margin = new Thickness(175, -141, 0, 0);
             btnAddFidelio.ToolTip = "Ajouter un Fidelio";
             btnAddFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddFidelio.Click += new RoutedEventHandler(OpenAddBicy);
+            btnAddFidelio.Click += new RoutedEventHandler(OpenAddFidelio);
             DynamicGridClient.Children.Add(btnAddFidelio);
 
             //Btn modifier
@@ -853,6 +853,18 @@ namespace VeloMax
             Refresh();
             ClientsBtn.Background = new SolidColorBrush(Colors.White);
             MainGrid.Children.Add(DynamicGridClient);
+        }
+
+        private void OpenAddClient(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new AddClient(connection, this);
+            WindowAddClient.Show();
+        }
+
+        private void OpenAddFidelio(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new AddFidelio(connection, this);
+            WindowAddClient.Show();
         }
         #endregion Evenement Client
 
