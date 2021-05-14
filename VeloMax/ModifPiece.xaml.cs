@@ -43,10 +43,18 @@ namespace VeloMax
             BoxSiret.ItemsSource = listFournisseur;
 
             // on crée une liste pour la desc
-            BoxDescPiece.ItemsSource = "cadre,guidon,freins,selle,derailleuravant,derailleurarriere,roue,roueavant,rouearriere,reflecteur,pedalleur,ordinateur,panier".Split(',');
+            //CONVERTIR EN ISTE CAR A C UN TABLEAU
+            string[] listPossibilité = "Cadre,Guidon,Freins,Selle,Derailleuravant,Derailleurarriere,Roue,Roueavant,Rouearriere,Reflecteur,Pedalleur,Ordinateur,Panier".Split(',');
+            List<string> lp = new List<string>();
+
+            for (int i = 0; i < listPossibilité.Length;i++){
+                lp.Add(listPossibilité[i]);
+            }
+            BoxDescPiece.ItemsSource = lp;
 
             BoxNumPiece.Text = p.Numpiece;
-            BoxDescPiece.Text = "Cadre";
+            BoxDescPiece.Text = p.Descpiece;
+            BoxDescPiece.IsEnabled = false;
             BoxPrix.Text = p.Prixpiece.ToString();
             BoxDateDisc.Text = p.Datediscontprod.ToString();
             BoxDelai.Text = p.Delaiapprovprod.ToString();
@@ -78,22 +86,71 @@ namespace VeloMax
                                         {
                                             if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
                                             {
-                                                MessageBox.Show("REUSSIE");
-
-                                                DateTime dt1 = DateTime.Now;
-                                                mw.keyPiece = mw.keyPiece + 1;
-                                                PieceDetache p1 = new PieceDetache(BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece, res, dt1, res2, res3, BoxSiret.Text.ToString());
-                                                mw.myListPiece.Add(p1);
-                                                mw.myGridPiece.ItemsSource = mw.myListPiece;
-                                                mw.myGridPiece.Items.Refresh();
-
                                                 connection.Open();
                                                 MySqlCommand command = connection.CreateCommand();
-                                                command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES('" + BoxNumPiece.Text.ToString() + "','" + BoxDescPiece.Text.ToString() + "'," + mw.keyPiece + "," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "'," + res3 + ",'" + BoxSiret.Text.ToString() + "');";
+                                                command.CommandText = "SELECT COUNT(*) from velomax.piecedetache where numpiece = '" + BoxNumPiece.Text + "';";
                                                 MySqlDataReader reader = command.ExecuteReader();
+                                                int nbrow = 0;
+                                                while (reader.Read())// parcours ligne par ligne
+                                                {
+                                                    nbrow = Convert.ToInt32(reader.GetValue(0));
+                                                }
                                                 connection.Close();
-                                                this.Close();
 
+                                                if (nbrow == 0)
+                                                {
+
+                                                    connection.Open();
+                                                    command = connection.CreateCommand();
+                                                    command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString() + "' where numpiece = '" + p.Numpiece + "';";
+                                                    reader = command.ExecuteReader();
+                                                    connection.Close();
+
+                                                    // on recupere les datas
+                                                    connection.Open();
+                                                    command = connection.CreateCommand();
+                                                    command.CommandText = "SELECT * FROM velomax.piecedetache;";
+                                                    reader = command.ExecuteReader();
+                                                    List<PieceDetache> myListPiece = new List<PieceDetache>();
+                                                    while (reader.Read())// parcours ligne par ligne
+                                                    {
+                                                        myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                                                        mw.keyPiece = Convert.ToInt32(reader.GetValue(2));
+                                                    }
+                                                    mw.myGridPiece.ItemsSource = myListPiece;
+                                                    mw.myGridPiece.Items.Refresh();
+                                                    connection.Close();
+
+                                                    if(BoxNumPiece.Text.ToString() != p.Numpiece)
+                                                    {
+                                                        connection.Open();
+                                                        command = connection.CreateCommand();
+                                                        command.CommandText = "UPDATE velomax.assemblage SET " + BoxDescPiece.Text + " = '" + BoxNumPiece.Text + "' WHERE " + BoxDescPiece.Text.ToLower() + " = '" + p.Numpiece + "';";
+                                                        reader = command.ExecuteReader();
+                                                        connection.Close();
+
+                                                        // on recupere les datas
+                                                        connection.Open();
+                                                        command = connection.CreateCommand();
+                                                        command.CommandText = "SELECT * FROM velomax.assemblage;";
+                                                        reader = command.ExecuteReader();
+                                                        List<Assemblage> myListAssemblage = new List<Assemblage>();
+                                                        while (reader.Read())// parcours ligne par ligne
+                                                        {
+                                                            myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+                                                        }
+                                                        mw.myGridAssemblage.ItemsSource = myListAssemblage;
+                                                        mw.myGridAssemblage.Items.Refresh();
+                                                        connection.Close();
+                                                    }
+
+                                                    this.Close();
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("Erreur, une piece porte deja ce nom !");
+                                                }
                                             }
                                             else
                                             {

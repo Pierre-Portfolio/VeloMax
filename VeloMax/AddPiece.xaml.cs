@@ -42,7 +42,7 @@ namespace VeloMax
             BoxSiret.ItemsSource = listFournisseur;
 
             // on crée une liste pour la desc
-            BoxDescPiece.ItemsSource = "cadre,guidon,freins,selle,derailleuravant,derailleurarriere,roue,roueavant,rouearriere,reflecteur,pedalleur,ordinateur,panier".Split(',');
+            BoxDescPiece.ItemsSource = "Cadre,Guidon,Freins,Selle,Derailleuravant,Derailleurarriere,Roue,Roueavant,Rouearriere,Reflecteur,Pedalleur,Ordinateur,Panier".Split(',');
         }
 
         private void AjouterPiece(object sender, RoutedEventArgs e)

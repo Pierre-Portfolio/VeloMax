@@ -122,7 +122,6 @@ namespace VeloMax
                                 
                                 connection.Open();
                                 MySqlCommand command = connection.CreateCommand();
-                                MessageBox.Show("SELECT COUNT(*) from velomax.assemblage where nom = '" + BoxNom.SelectedItem + "' AND grandeur = '" + BoxGrandeur.SelectedItem + "';");
                                 command.CommandText = "SELECT COUNT(*) from velomax.assemblage where nom = '" + BoxNom.SelectedItem + "' AND grandeur = '" + BoxGrandeur.SelectedItem +"';";
                                 MySqlDataReader reader = command.ExecuteReader();
                                 int nbrow = 0;
