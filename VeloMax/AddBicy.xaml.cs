@@ -30,7 +30,7 @@ namespace VeloMax
 
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT DISTINCT nom FROM velomax.bicyclette;";
+            command.CommandText = "SELECT DISTINCT nom FROM velomax.assemblage;";
             MySqlDataReader reader = command.ExecuteReader();
             List<string> listNom = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -41,7 +41,7 @@ namespace VeloMax
             BoxNom.ItemsSource = listNom;
 
             connection.Open();
-            command.CommandText = "SELECT DISTINCT grandeur FROM velomax.bicyclette;";
+            command.CommandText = "SELECT DISTINCT grandeur FROM velomax.assemblage;";
             reader = command.ExecuteReader();
             List<string> listGrandeur = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -65,8 +65,6 @@ namespace VeloMax
 
         private void BoxNom_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if(BoxGrandeur.Text.ToString() == "")
-            {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
                 command.CommandText = "SELECT grandeur FROM velomax.assemblage where nom='" + BoxNom.SelectedItem.ToString() + "';";
@@ -79,13 +77,11 @@ namespace VeloMax
                 connection.Close();
                 BoxGrandeur.Items.Refresh();
                 BoxGrandeur.ItemsSource = listNom;
-            }
+            
         }
 
         private void BoxGrandeur_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (BoxNom.Text.ToString() == "")
-            {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
                 command.CommandText = "SELECT nom FROM velomax.assemblage where grandeur = '" + BoxGrandeur.SelectedItem.ToString() + "';";
@@ -98,7 +94,7 @@ namespace VeloMax
                 connection.Close();
                 BoxNom.Items.Refresh();
                 BoxNom.ItemsSource = listGrandeur;
-            }
+            
         }
 
 

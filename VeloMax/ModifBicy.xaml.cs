@@ -74,8 +74,6 @@ namespace VeloMax
 
         private void BoxNom_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (BoxGrandeur.Text.ToString() == "")
-            {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
                 command.CommandText = "SELECT grandeur FROM velomax.assemblage where nom='" + BoxNom.SelectedItem.ToString() + "';";
@@ -88,14 +86,10 @@ namespace VeloMax
                 connection.Close();
                 BoxGrandeur.Items.Refresh();
                 BoxGrandeur.ItemsSource = listNom;
-            }
-            MessageBox.Show("DDD");
         }
 
         private void BoxGrandeur_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (BoxNom.Text.ToString() == "")
-            {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
                 command.CommandText = "SELECT nom FROM velomax.assemblage where grandeur = '" + BoxGrandeur.SelectedItem.ToString() + "';";
@@ -108,7 +102,6 @@ namespace VeloMax
                 connection.Close();
                 BoxNom.Items.Refresh();
                 BoxNom.ItemsSource = listGrandeur;
-            }
         }
 
         private void AjouterClient(object sender, RoutedEventArgs e)
