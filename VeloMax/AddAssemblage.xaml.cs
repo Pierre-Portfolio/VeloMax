@@ -115,7 +115,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Roue avant'; ";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Roue avant' OR descpiece = 'Roue' ; ";
             reader = command.ExecuteReader();
             List<string> listroueAvant = new List<string>();
             while (reader.Read())// parcours ligne par ligne
@@ -127,7 +127,7 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Roue arrière'; ";
+            command.CommandText = "SELECT numpiece FROM velomax.piecedetache where descpiece = 'Roue arrière' OR descpiece = 'Roue';";
             reader = command.ExecuteReader();
             List<string> listroueArrierre = new List<string>();
             while (reader.Read())// parcours ligne par ligne
