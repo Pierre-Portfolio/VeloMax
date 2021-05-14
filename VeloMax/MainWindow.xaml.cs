@@ -33,6 +33,7 @@ namespace VeloMax
         {
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=velomax;UID=root;PASSWORD=root;SSLMODE=none;";
             MySqlConnection connection = new MySqlConnection(connectionString);
+            /*
             try
             {
                 connection.Open();
@@ -45,7 +46,7 @@ namespace VeloMax
             finally
             {
                 connection.Close();
-            }
+            }*/
             return connection;
         }
         #endregion

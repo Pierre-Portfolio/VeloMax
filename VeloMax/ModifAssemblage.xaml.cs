@@ -196,6 +196,8 @@ namespace VeloMax
             BoxNom.IsEnabled = false;
             BoxGrandeur.IsEnabled = false;
             BoxCadre.SelectedItem = a.Cadre;
+            MessageBox.Show(a.Cadre);
+            MessageBox.Show(BoxCadre.SelectedItem.ToString());
             BoxGuidon.SelectedItem = a.Guidon;
             BoxFrein.SelectedItem = a.Freins;
             BoxSelle.SelectedItem = a.Selle;
@@ -211,10 +213,12 @@ namespace VeloMax
 
         private void BtnModifAssemblage(object sender, RoutedEventArgs e)
         {
-            
+            BoxNom.IsEnabled = true;
+            BoxGrandeur.IsEnabled = true;
+
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            MessageBox.Show("UPDATE velomax.assemblage SET cadre = '" + BoxCadre.SelectedItem.ToString() + "' AND guidon = '" + BoxGuidon.SelectedItem.ToString() + "' AND freins = '" + BoxFrein.SelectedItem.ToString() + "' AND selle = '" + BoxSelle.SelectedItem.ToString() + "' AND derailleuravant = '" + BoxDeraillieurA.SelectedItem.ToString() + "' AND derailleurarriere = '" + BoxDeraillieurB.SelectedItem.ToString() + "' AND roueavant = '" + BoxRoueAvant.SelectedItem.ToString() + "' AND rouearriere = '" + BoxRoueArriere.SelectedItem.ToString() + "' AND reflecteur = '" + BoxReflecteur.SelectedItem.ToString() + "' AND pedalleur = '" + BoxPedalleur.SelectedItem.ToString() + "' AND ordinateur = '" + BoxOrdinateur.SelectedItem.ToString() + "' AND panier = '" + BoxPanier.SelectedItem.ToString() + "' WHERE nom = '" + BoxNom.Text.ToString() + "' AND grandeur = '" + BoxGrandeur.SelectedItem.ToString() + "'");
+            MessageBox.Show("' AND panier = '" + BoxPanier.SelectedItem.ToString() + "'");
             command.CommandText = "UPDATE velomax.assemblage SET cadre = '" + BoxCadre.SelectedItem.ToString() + "' AND guidon = '" + BoxGuidon.SelectedItem.ToString() + "' AND freins = '" + BoxFrein.SelectedItem.ToString() + "' AND selle = '" + BoxSelle.SelectedItem.ToString() + "' AND derailleuravant = '" + BoxDeraillieurA.SelectedItem.ToString() + "' AND derailleurarriere = '" + BoxDeraillieurB.SelectedItem.ToString() + "' AND roueavant = '" + BoxRoueAvant.SelectedItem.ToString() + "' AND rouearriere = '" + BoxRoueArriere.SelectedItem.ToString() + "' AND reflecteur = '" + BoxReflecteur.SelectedItem.ToString() + "' AND pedalleur = '" + BoxPedalleur.SelectedItem.ToString() + "' AND ordinateur = '" + BoxOrdinateur.SelectedItem.ToString() + "' AND panier = '" + BoxPanier.SelectedItem.ToString() + "' WHERE nom = '" + BoxNom.Text.ToString() + "' AND grandeur = '" + BoxGrandeur.SelectedItem.ToString() +"'";
             MySqlDataReader reader = command.ExecuteReader();
             connection.Close();

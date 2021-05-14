@@ -16,16 +16,16 @@
             <TextBox Name="BoxNom"  Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
 
             <TextBlock Height="20" Canvas.Left="310" Canvas.Top="37" Text="Grandeur :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <ComboBox Name="BoxGrandeur"  Height="22" Canvas.Left="310" Canvas.Top="57"  Width="150" AutomationProperties.Name="Grandeur" />
+            <ComboBox x:Name="BoxGrandeur"  Height="22" Canvas.Left="310" Canvas.Top="57"  Width="150" AutomationProperties.Name="Grandeur" />
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="111" Text="Cadre : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <ComboBox Name="BoxCadre" Height="22" Canvas.Left="94" Canvas.Top="131" Width="150" AutomationProperties.Name="Prix"/>
+            <ComboBox x:Name="BoxCadre" Height="22" Canvas.Left="94" Canvas.Top="131" Width="150" AutomationProperties.Name="Cadre"/>
 
             <TextBlock Height="20" Canvas.Left="310" Canvas.Top="110" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Guidon"/><Run Text=" : "/></TextBlock>
-            <ComboBox Name="BoxGuidon" Height="22" Canvas.Left="310" Canvas.Top="130"  Width="150" AutomationProperties.Name="Tel"/>
+            <ComboBox x:Name="BoxGuidon" Height="22" Canvas.Left="310" Canvas.Top="130"  Width="150" AutomationProperties.Name="Guidon"/>
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="188" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Frein"/><Run Text=" : "/></TextBlock>
-            <ComboBox x:Name="BoxFrein" Height="22" Canvas.Left="94" Canvas.Top="208" Width="150" AutomationProperties.Name="Tel"/>
+            <ComboBox x:Name="BoxFrein" Height="22" Canvas.Left="94" Canvas.Top="208" Width="150" AutomationProperties.Name="Frein"/>
 
             <TextBlock Height="20" Canvas.Left="310" Canvas.Top="188" Text="Selle : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
             <ComboBox x:Name="BoxSelle" Height="22" Canvas.Left="310" Canvas.Top="208" Width="150" AutomationProperties.Name="Prix"/>
