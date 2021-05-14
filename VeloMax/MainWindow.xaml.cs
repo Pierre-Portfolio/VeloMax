@@ -639,7 +639,76 @@ namespace VeloMax
         #region Demo
         public void GeneDemo()
         {
+            /* ==== Creation partie matériel ====*/
+            // création grid dynamic
+            DynamicGridDemo.HorizontalAlignment = HorizontalAlignment.Left;
+            DynamicGridDemo.Height = 400;
+            DynamicGridDemo.Margin = new Thickness(0, 0, 0, 0);
+            DynamicGridDemo.VerticalAlignment = VerticalAlignment.Center;
+            DynamicGridDemo.Width = 780;
 
+            // Create Columns
+            Grid.SetRow(DynamicGridDemo, 6);
+            Grid.SetColumn(DynamicGridDemo, 0);
+            Grid.SetColumnSpan(DynamicGridDemo, 6);
+            ColumnDefinition gridColDemo1 = new ColumnDefinition();
+            DynamicGridDemo.ColumnDefinitions.Add(gridColDemo1);
+            ColumnDefinition gridColDemo2 = new ColumnDefinition();
+            DynamicGridDemo.ColumnDefinitions.Add(gridColDemo2);
+
+            // Create Rows
+            RowDefinition gridRowDemo1 = new RowDefinition();
+            gridRowDemo1.Height = new GridLength(30);
+            RowDefinition gridRowDemo2 = new RowDefinition();
+            gridRowDemo2.Height = new GridLength(100);
+            RowDefinition gridRowDemo3 = new RowDefinition();
+            gridRowDemo3.Height = new GridLength(30);
+            RowDefinition gridRowDemo4 = new RowDefinition();
+            gridRowDemo4.Height = new GridLength(100);
+            RowDefinition gridRowDemo5 = new RowDefinition();
+            gridRowDemo5.Height = new GridLength(30);
+            RowDefinition gridRowDemo6 = new RowDefinition();
+            gridRowDemo6.Height = new GridLength(100);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo1);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo2);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo3);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo4);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo5);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo6);
+            DynamicGridDemo.Margin = new Thickness(0, 0, 0, 0);
+
+            // titre 0
+            TextBlock txtBlock0 = new TextBlock();
+            txtBlock0.Text = "Video de présentation de Velomax YPA";
+            txtBlock0.FontSize = 20;
+            txtBlock0.Width = 700;
+            txtBlock0.TextAlignment = TextAlignment.Center;
+            txtBlock0.Background = new SolidColorBrush(Colors.Black);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock0.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock0, 0);
+            Grid.SetColumn(txtBlock0, 0);
+            Grid.SetColumnSpan(txtBlock0, 6);
+            DynamicGridDemo.Children.Add(txtBlock0);
+
+            // On genere la video 
+            MediaElement meVideo = new MediaElement();
+            meVideo.Source = new Uri("C:\\Users\\petil\\OneDrive\\Documents\\GitHub\\VeloMax\\VeloMax\\demoVideo.mp4");
+            meVideo.Height = 800;
+            meVideo.Width = 400;
+            Grid.SetRow(meVideo, 1);
+            Grid.SetColumn(meVideo, 0);
+            Grid.SetColumnSpan(meVideo, 2);
+            meVideo.Opacity = 100;
+            meVideo.Visibility = Visibility.Visible;
+            meVideo.LoadedBehavior = MediaState.Manual;
+            //meVideo.MouseDown += new MouseButtonEventHandler(meVideo_Clicked);
+            meVideo.Play();
+            //myGrid.ColumnDefinitions.Add(meVideo);
+            DynamicGridDemo.Children.Add(meVideo);
+            // myCanvas.Children.Add(myGrid);
         }
 
         #endregion Demo
@@ -819,7 +888,7 @@ namespace VeloMax
         {
             Refresh();
             DemoBtn.Background = new SolidColorBrush(Colors.White);
-            MessageBox.Show("En cour de dev par Yanis");
+            MainGrid.Children.Add(DynamicGridDemo);
         }
         #endregion Evenement Demo
         #endregion Evenement
