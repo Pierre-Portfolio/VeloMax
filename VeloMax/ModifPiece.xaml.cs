@@ -44,6 +44,13 @@ namespace VeloMax
 
             // on crée une liste pour la desc
             BoxDescPiece.ItemsSource = "cadre,guidon,freins,selle,derailleuravant,derailleurarriere,roue,roueavant,rouearriere,reflecteur,pedalleur,ordinateur,panier".Split(',');
+
+            BoxNumPiece.Text = p.Numpiece;
+            BoxDescPiece.Text = p.Descpiece;
+            BoxPrix.Text = p.Prixpiece.ToString();
+            BoxDateDisc.Text = p.Datediscontprod.ToString();
+            BoxDelai.Text = p.Delaiapprovprod.ToString();
+            BoxSiret.Text = p.Siret;
         }
 
         private void AjouterPiece(object sender, RoutedEventArgs e)
