@@ -383,7 +383,7 @@ namespace VeloMax
             btnModifPiece.Margin = new Thickness(225, -141, 0, 0);
             btnModifPiece.ToolTip = "Modifier une Piece";
             btnModifPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
+            btnModifPiece.Click += new RoutedEventHandler(ButtonModifPiece);
             DynamicGridMateriel.Children.Add(btnModifPiece);
 
             //Btn del
@@ -758,6 +758,24 @@ namespace VeloMax
             WindowAddClient.Show();
 
         }
+
+        private void ButtonModifPiece(object sender, RoutedEventArgs e)
+        {
+            if (myGridPiece.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridPiece.SelectedItems)
+                {
+                    ModifPiece w = new ModifPiece(connection, ((PieceDetache)o), this);
+                    w.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridBicy.SelectedItems.Count);
+            }
+
+        }
+        
         #endregion Evenement Matériel
 
         #region Evenement Client
