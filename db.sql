@@ -28,15 +28,15 @@ ALTER TABLE bicyclette ADD CONSTRAINT PK_bicyclette PRIMARY KEY (idbicy);
 ALTER TABLE piecedetache ADD CONSTRAINT PK_piecedetache PRIMARY KEY (numpiece);  
 ALTER TABLE fournisseur ADD CONSTRAINT PK_fournisseur PRIMARY KEY (siret);  
 ALTER TABLE bicyclette ADD CONSTRAINT FK_bicyclette_nomassemblage FOREIGN KEY (nom,grandeur) REFERENCES assemblage (nom,grandeur);  
-ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_idbicy FOREIGN KEY (idbicy) REFERENCES bicyclette (idbicy);  
-ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_numpiece FOREIGN KEY (numpiece) REFERENCES piecedetache (numpiece);  
-ALTER TABLE piecedetache ADD CONSTRAINT FK_piecedetache_siret FOREIGN KEY (siret) REFERENCES fournisseur (siret);  
-ALTER TABLE itemcmd ADD CONSTRAINT FK_itemcmd_iditemstock FOREIGN KEY (iditemstock) REFERENCES itemstock (iditemstock);  
-ALTER TABLE itemcmd ADD CONSTRAINT FK_itemcmd_numcommande FOREIGN KEY (numcommande) REFERENCES commande (numcommande);  
-ALTER TABLE commande ADD CONSTRAINT FK_commande_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient);  
-ALTER TABLE entreprise ADD CONSTRAINT FK_entreprise_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient); 
-ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient);  
-ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idfidelio FOREIGN KEY (idfidelio) REFERENCES fidelio (idfidelio);
+ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_idbicy FOREIGN KEY (idbicy) REFERENCES bicyclette (idbicy) ON DELETE CASCADE;  
+ALTER TABLE itemstock ADD CONSTRAINT FK_itemstock_numpiece FOREIGN KEY (numpiece) REFERENCES piecedetache (numpiece) ON DELETE CASCADE;  
+ALTER TABLE piecedetache ADD CONSTRAINT FK_piecedetache_siret FOREIGN KEY (siret) REFERENCES fournisseur (siret) ON DELETE CASCADE;  
+ALTER TABLE itemcmd ADD CONSTRAINT FK_itemcmd_iditemstock FOREIGN KEY (iditemstock) REFERENCES itemstock (iditemstock) ON DELETE CASCADE;  
+ALTER TABLE itemcmd ADD CONSTRAINT FK_itemcmd_numcommande FOREIGN KEY (numcommande) REFERENCES commande (numcommande) ON DELETE CASCADE;  
+ALTER TABLE commande ADD CONSTRAINT FK_commande_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient) ON DELETE CASCADE;  
+ALTER TABLE entreprise ADD CONSTRAINT FK_entreprise_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient) ON DELETE CASCADE; 
+ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient) ON DELETE CASCADE;  
+ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idfidelio FOREIGN KEY (idfidelio) REFERENCES fidelio (idfidelio) ON DELETE CASCADE;
 
 INSERT INTO fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)
  VALUES
