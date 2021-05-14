@@ -89,6 +89,7 @@ namespace VeloMax
                 BoxGrandeur.Items.Refresh();
                 BoxGrandeur.ItemsSource = listNom;
             }
+            MessageBox.Show("DDD");
         }
 
         private void BoxGrandeur_SelectionChanged(object sender, RoutedEventArgs e)
@@ -124,32 +125,52 @@ namespace VeloMax
                         {
                             if (BoxligneProd.Text != "" && BoxGrandeur.Text.Length != 0)
                             {
+
+                                
                                 connection.Open();
                                 MySqlCommand command = connection.CreateCommand();
-                                MessageBox.Show("UPDATE velomax.bicyclette SET prixbicy = '" + BoxPrix.SelectedText + "',ligneproduit = '" + BoxligneProd.SelectedItem + "', datediscontinuationbicy = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', nom = '" + BoxNom.SelectedItem + "', grandeur = '" + BoxGrandeur.SelectedItem + "' WHERE idbicy = " + b.Idbicy);
-                                command.CommandText = "UPDATE velomax.bicyclette SET prixbicy = '" + BoxPrix.SelectedText + "',ligneproduit = '" + BoxligneProd.SelectedItem + "', datediscontinuationbicy = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', nom = '" + BoxNom.SelectedItem + "', grandeur = '" + BoxGrandeur.SelectedItem + "' WHERE idbicy = " + b.Idbicy;
+                                MessageBox.Show("SELECT COUNT(*) from velomax.assemblage where nom = '" + BoxNom.SelectedItem + "' AND grandeur = '" + BoxGrandeur.SelectedItem + "';");
+                                command.CommandText = "SELECT COUNT(*) from velomax.assemblage where nom = '" + BoxNom.SelectedItem + "' AND grandeur = '" + BoxGrandeur.SelectedItem +"';";
                                 MySqlDataReader reader = command.ExecuteReader();
-                                connection.Close();
-
-                                // on recupere les datas
-                                connection.Open();
-                                command = connection.CreateCommand();
-                                command.CommandText = "SELECT * FROM velomax.bicyclette;";
-                                reader = command.ExecuteReader();
-                                List<Bicyclette> myListBicy = new List<Bicyclette>();
+                                int nbrow = 0;
                                 while (reader.Read())// parcours ligne par ligne
                                 {
-                                    myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                                    mw.keyBicy = Convert.ToInt32(reader.GetValue(0));
+                                    nbrow = Convert.ToInt32(reader.GetValue(0));
                                 }
-                                mw.myGridBicy.ItemsSource = myListBicy;
-                                mw.myGridBicy.Items.Refresh();
                                 connection.Close();
 
-                                this.Close();
+                                if(nbrow == 1)
+                                {
+                                    connection.Open();
+                                    command = connection.CreateCommand();
+                                    command.CommandText = "UPDATE velomax.bicyclette SET prixbicy = " + BoxPrix.Text + ",ligneproduit = '" + BoxligneProd.SelectedItem + "', datediscontinuationbicy = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', nom = '" + BoxNom.SelectedItem + "', grandeur = '" + BoxGrandeur.SelectedItem + "' WHERE idbicy = " + b.Idbicy;
+                                    reader = command.ExecuteReader();
+                                    connection.Close();
 
+                                    // on recupere les datas
+                                    connection.Open();
+                                    command = connection.CreateCommand();
+                                    command.CommandText = "SELECT * FROM velomax.bicyclette;";
+                                    reader = command.ExecuteReader();
+                                    List<Bicyclette> myListBicy = new List<Bicyclette>();
+                                    while (reader.Read())// parcours ligne par ligne
+                                    {
+                                        myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                                        mw.keyBicy = Convert.ToInt32(reader.GetValue(0));
+                                    }
+                                    mw.myGridBicy.ItemsSource = myListBicy;
+                                    mw.myGridBicy.Items.Refresh();
+                                    connection.Close();
+
+                                    this.Close();
                                 }
+                            
                                 else
+                                {
+                                    MessageBox.Show("Erreur, cet clé primaire double n'existe pas dans assemblage !");
+                                }
+                            }
+                            else
                                 {
                                     MessageBox.Show("Erreur le champ Ligne Produit ne doit pas être vide!");
                                 }
