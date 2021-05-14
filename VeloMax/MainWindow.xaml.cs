@@ -70,8 +70,8 @@ namespace VeloMax
         Grid DynamicGridClient = new Grid();
         public DataGrid myGridClient = new DataGrid();
         public DataGrid myGridFidelio = new DataGrid();
-        public List<clientele> myListClient = new List<clientele>();
-        public List<Fidelio> myListFidelio = new List<Fidelio>();
+        public List<clientele> myListClientParti = new List<clientele>();
+        public List<Fidelio> myListClientEntre = new List<Fidelio>();
         Grid DynamicGridCommands = new Grid();
         Grid DynamicGridStats = new Grid();
         Grid DynamicGridFournisseur = new Grid();
@@ -407,7 +407,7 @@ namespace VeloMax
         #region Client
         public void GeneClient()
         {
-            /* ==== Creation partie matériel ====*/
+            /* ==== Creation partie Client ====*/
             // création grid dynamic
             DynamicGridClient.HorizontalAlignment = HorizontalAlignment.Left;
             DynamicGridClient.Height = 400;
@@ -445,7 +445,7 @@ namespace VeloMax
 
             // titre 0
             TextBlock txtBlock0 = new TextBlock();
-            txtBlock0.Text = "Liste des Clients";
+            txtBlock0.Text = "Liste des Clients Particulier";
             txtBlock0.FontSize = 14;
             txtBlock0.Width = 700;
             txtBlock0.TextAlignment = TextAlignment.Center;
@@ -459,24 +459,26 @@ namespace VeloMax
             Grid.SetColumnSpan(txtBlock0, 6);
             DynamicGridClient.Children.Add(txtBlock0);
 
+
             // tableau des Clients
             myGridClient.Items.Clear();
             myGridClient.Width = 700;
             myGridClient.Height = 100;
 
+            /*
             // on recupere les datas
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.clientele;";
+            command.CommandText = "SELECT * FROM velomax.particulier NATURAL JOIN velomax.clientele;";
             MySqlDataReader reader;
             reader = command.ExecuteReader();
 
             while (reader.Read())// parcours ligne par ligne
             {
-                myListClient.Add(new clientele(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), reader.GetValue(3).ToString(), reader.GetValue(4).ToString()));
+                myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), Convert.ToInt32(reader.GetValue(6)), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
 
             }
-            myGridClient.ItemsSource = myListClient;
+            myGridClient.ItemsSource = myListClientParti;
             connection.Close();
 
             //on define le reste
@@ -491,148 +493,152 @@ namespace VeloMax
             Grid.SetColumnSpan(myGridClient, 6);
             DynamicGridClient.Children.Add(myGridClient);
 
-            //Btn ajouter
-            Button btnAddClient = new Button();
-            btnAddClient.Content = "";
-            btnAddClient.Background = Brushes.Green;
-            btnAddClient.Height = 15;
-            btnAddClient.Width = 15;
-            Grid.SetRow(btnAddClient, 0);
-            Grid.SetColumn(btnAddClient, 0);
-            Grid.SetColumnSpan(btnAddClient, 6);
-            btnAddClient.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddClient.Margin = new Thickness(175, -12, 0, 0);
-            btnAddClient.ToolTip = "Ajouter un Client";
-            btnAddClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            btnAddClient.Click += new RoutedEventHandler(OpenAddClient);
-            DynamicGridClient.Children.Add(btnAddClient);
+            /*
 
-            //Btn modifier
-            Button btnModifClient = new Button();
-            btnModifClient.Content = "";
-            btnModifClient.Background = Brushes.Green;
-            btnModifClient.Height = 15;
-            btnModifClient.Width = 15;
-            Grid.SetRow(btnModifClient, 0);
-            Grid.SetColumn(btnModifClient, 0);
-            Grid.SetColumnSpan(btnModifClient, 6);
-            btnModifClient.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifClient.Margin = new Thickness(225, -12, 0, 0);
-            btnModifClient.ToolTip = "Modifier un Client";
-            btnModifClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClient.Click += new RoutedEventHandler(ButtonModifClient);
-            DynamicGridClient.Children.Add(btnModifClient);
+//Btn ajouter
+Button btnAddClientParti = new Button();
+btnAddClientParti.Content = "";
+btnAddClientParti.Background = Brushes.Green;
+btnAddClientParti.Height = 15;
+btnAddClientParti.Width = 15;
+Grid.SetRow(btnAddClientParti, 0);
+Grid.SetColumn(btnAddClientParti, 0);
+Grid.SetColumnSpan(btnAddClientParti, 6);
+btnAddClientParti.BorderThickness = new Thickness(0, 0, 0, 0);
+btnAddClientParti.Margin = new Thickness(225, -12, 0, 0);
+btnAddClientParti.ToolTip = "Ajouter un Client Particulier";
+btnAddClientParti.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+btnAddClientParti.Click += new RoutedEventHandler(OpenAddClientParticulier);
+DynamicGridClient.Children.Add(btnAddClientParti);
 
-            //Btn del
-            Button btnSuprClient = new Button();
-            btnSuprClient.Content = "";
-            btnSuprClient.Background = Brushes.Red;
-            btnSuprClient.Height = 15;
-            btnSuprClient.Width = 15;
-            Grid.SetRow(btnSuprClient, 0);
-            Grid.SetColumn(btnSuprClient, 0);
-            Grid.SetColumnSpan(btnSuprClient, 6);
-            btnSuprClient.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnSuprClient.ToolTip = "Supprimer un Client";
-            btnSuprClient.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprClient.Margin = new Thickness(275, -12, 0, 0);
-            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
-            DynamicGridClient.Children.Add(btnSuprClient);
+//Btn modifier
+Button btnModifClientParti = new Button();
+btnModifClientParti.Content = "";
+btnModifClientParti.Background = Brushes.Green;
+btnModifClientParti.Height = 15;
+btnModifClientParti.Width = 15;
+Grid.SetRow(btnModifClientParti, 0);
+Grid.SetColumn(btnModifClientParti, 0);
+Grid.SetColumnSpan(btnModifClientParti, 6);
+btnModifClientParti.BorderThickness = new Thickness(0, 0, 0, 0);
+btnModifClientParti.Margin = new Thickness(275, -12, 0, 0);
+btnModifClientParti.ToolTip = "Modifier un Client Particulier";
+btnModifClientParti.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+//btnModifClientParti.Click += new RoutedEventHandler(ButtonModifClient);
+DynamicGridClient.Children.Add(btnModifClientParti);
 
-            // Fidelio
-            // titre 1
-            TextBlock txtBlock1 = new TextBlock();
-            txtBlock1.Text = "Liste des Fidelios";
-            txtBlock1.FontSize = 14;
-            txtBlock1.Width = 700;
-            txtBlock1.TextAlignment = TextAlignment.Center;
-            txtBlock1.Background = new SolidColorBrush(Colors.Black);
-            txtBlock1.Foreground = new SolidColorBrush(Colors.White);
-            txtBlock1.VerticalAlignment = VerticalAlignment.Top;
-            txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
-            txtBlock1.FontWeight = FontWeights.Bold;
-            Grid.SetRow(txtBlock1, 2);
-            Grid.SetColumn(txtBlock1, 0);
-            Grid.SetColumnSpan(txtBlock1, 6);
-            DynamicGridClient.Children.Add(txtBlock1);
+//Btn del
+Button btnSuprClientParti = new Button();
+btnSuprClientParti.Content = "";
+btnSuprClientParti.Background = Brushes.Red;
+btnSuprClientParti.Height = 15;
+btnSuprClientParti.Width = 15;
+Grid.SetRow(btnSuprClientParti, 0);
+Grid.SetColumn(btnSuprClientParti, 0);
+Grid.SetColumnSpan(btnSuprClientParti, 6);
+btnSuprClientParti.BorderThickness = new Thickness(0, 0, 0, 0);
+btnSuprClientParti.ToolTip = "Supprimer un Client Particulier";
+btnSuprClientParti.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+btnSuprClientParti.Margin = new Thickness(325, -12, 0, 0);
+//btnSuprClientParti.Click += new RoutedEventHandler(ButtonSupClient);
+DynamicGridClient.Children.Add(btnSuprClientParti);
 
-            // tableau des Fidelios
-            myGridFidelio.Items.Clear();
-            myGridFidelio.Width = 700;
-            myGridFidelio.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.fidelio;";
-            reader = command.ExecuteReader();
-            
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListFidelio.Add(new Fidelio(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), Convert.ToInt32(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
-            }
-            myGridFidelio.ItemsSource = myListBicy;
-            connection.Close();
+// Client particulier
+// titre 1
+TextBlock txtBlock1 = new TextBlock();
+txtBlock1.Text = "Liste des Client Entreprise";
+txtBlock1.FontSize = 14;
+txtBlock1.Width = 700;
+txtBlock1.TextAlignment = TextAlignment.Center;
+txtBlock1.Background = new SolidColorBrush(Colors.Black);
+txtBlock1.Foreground = new SolidColorBrush(Colors.White);
+txtBlock1.VerticalAlignment = VerticalAlignment.Top;
+txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
+txtBlock1.FontWeight = FontWeights.Bold;
+Grid.SetRow(txtBlock1, 2);
+Grid.SetColumn(txtBlock1, 0);
+Grid.SetColumnSpan(txtBlock1, 6);
+DynamicGridClient.Children.Add(txtBlock1);
 
-            //on define le reste
-            myGridFidelio.Foreground = new SolidColorBrush(Colors.Black);
-            myGridFidelio.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridFidelio.Margin = new Thickness(0, -22, 0, 0);
-            myGridFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
-            myGridFidelio.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            myGridFidelio.IsReadOnly = true;
-            Grid.SetRow(myGridFidelio, 3);
-            Grid.SetColumn(myGridFidelio, 0);
-            Grid.SetColumnSpan(myGridFidelio, 6);
-            DynamicGridClient.Children.Add(myGridFidelio);
+// tableau des Fidelios
+myGridFidelio.Items.Clear();
+myGridFidelio.Width = 700;
+myGridFidelio.Height = 100;
 
-            //Btn ajouter
-            Button btnAddFidelio = new Button();
-            btnAddFidelio.Content = "";
-            btnAddFidelio.Background = Brushes.Green;
-            btnAddFidelio.Height = 15;
-            btnAddFidelio.Width = 15;
-            Grid.SetRow(btnAddFidelio, 3);
-            Grid.SetColumn(btnAddFidelio, 0);
-            Grid.SetColumnSpan(btnAddFidelio, 6);
-            btnAddFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddFidelio.Margin = new Thickness(175, -141, 0, 0);
-            btnAddFidelio.ToolTip = "Ajouter un Fidelio";
-            btnAddFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            btnAddFidelio.Click += new RoutedEventHandler(OpenAddFidelio);
-            DynamicGridClient.Children.Add(btnAddFidelio);
+// on recupere les datas
+connection.Open();
+command = connection.CreateCommand();
+command.CommandText = "SELECT * FROM velomax.entreprise NATURAL JOIN velomax.clientele;";
+reader = command.ExecuteReader();
 
-            //Btn modifier
-            Button btnModifFidelio = new Button();
-            btnModifFidelio.Content = "";
-            btnModifFidelio.Background = Brushes.Green;
-            btnModifFidelio.Height = 15;
-            btnModifFidelio.Width = 15;
-            Grid.SetRow(btnModifFidelio, 3);
-            Grid.SetColumn(btnModifFidelio, 0);
-            Grid.SetColumnSpan(btnModifFidelio, 6);
-            btnModifFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifFidelio.Margin = new Thickness(225, -141, 0, 0);
-            btnModifFidelio.ToolTip = "Modifier un Fidelio";
-            btnModifFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifFidelio.Click += new RoutedEventHandler(ButtonModifClient);
-            DynamicGridClient.Children.Add(btnModifFidelio);
+while (reader.Read())// parcours ligne par ligne
+{
+myListClientEntre.Add(new Fidelio(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2)), Convert.ToInt32(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
+}
+myGridFidelio.ItemsSource = myListClientEntre;
+connection.Close();
 
-            //Btn del
-            Button btnSuprFidelio = new Button();
-            btnSuprFidelio.Content = "";
-            btnSuprFidelio.Background = Brushes.Red;
-            btnSuprFidelio.Height = 15;
-            btnSuprFidelio.Width = 15;
-            Grid.SetRow(btnSuprFidelio, 3);
-            Grid.SetColumn(btnSuprFidelio, 0);
-            Grid.SetColumnSpan(btnSuprFidelio, 6);
-            btnSuprFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnSuprFidelio.ToolTip = "Supprimer un Fidelio";
-            btnSuprFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprFidelio.Margin = new Thickness(275, -141, 0, 0);
-            //btnSuprFidelio.Click += new RoutedEventHandler(ButtonSupClient);
-            DynamicGridClient.Children.Add(btnSuprFidelio);
+//on define le reste
+myGridFidelio.Foreground = new SolidColorBrush(Colors.Black);
+myGridFidelio.GridLinesVisibility = DataGridGridLinesVisibility.None;
+myGridFidelio.Margin = new Thickness(0, -22, 0, 0);
+myGridFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+myGridFidelio.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+myGridFidelio.IsReadOnly = true;
+Grid.SetRow(myGridFidelio, 3);
+Grid.SetColumn(myGridFidelio, 0);
+Grid.SetColumnSpan(myGridFidelio, 6);
+DynamicGridClient.Children.Add(myGridFidelio);
+
+//Btn ajouter
+Button btnAddFidelio = new Button();
+btnAddFidelio.Content = "";
+btnAddFidelio.Background = Brushes.Green;
+btnAddFidelio.Height = 15;
+btnAddFidelio.Width = 15;
+Grid.SetRow(btnAddFidelio, 3);
+Grid.SetColumn(btnAddFidelio, 0);
+Grid.SetColumnSpan(btnAddFidelio, 6);
+btnAddFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+btnAddFidelio.Margin = new Thickness(225, -141, 0, 0);
+btnAddFidelio.ToolTip = "Ajouter un Client Particulier";
+btnAddFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+btnAddFidelio.Click += new RoutedEventHandler(OpenAddClientEntreprise);
+DynamicGridClient.Children.Add(btnAddFidelio);
+
+//Btn modifier
+Button btnModifFidelio = new Button();
+btnModifFidelio.Content = "";
+btnModifFidelio.Background = Brushes.Green;
+btnModifFidelio.Height = 15;
+btnModifFidelio.Width = 15;
+Grid.SetRow(btnModifFidelio, 3);
+Grid.SetColumn(btnModifFidelio, 0);
+Grid.SetColumnSpan(btnModifFidelio, 6);
+btnModifFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+btnModifFidelio.Margin = new Thickness(275, -141, 0, 0);
+btnModifFidelio.ToolTip = "Modifier un Client Particulier";
+btnModifFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+//btnModifFidelio.Click += new RoutedEventHandler(ButtonModifClient);
+DynamicGridClient.Children.Add(btnModifFidelio);
+
+//Btn del
+Button btnSuprFidelio = new Button();
+btnSuprFidelio.Content = "";
+btnSuprFidelio.Background = Brushes.Red;
+btnSuprFidelio.Height = 15;
+btnSuprFidelio.Width = 15;
+Grid.SetRow(btnSuprFidelio, 3);
+Grid.SetColumn(btnSuprFidelio, 0);
+Grid.SetColumnSpan(btnSuprFidelio, 6);
+btnSuprFidelio.BorderThickness = new Thickness(0, 0, 0, 0);
+btnSuprFidelio.ToolTip = "Supprimer un Client Particulier";
+btnSuprFidelio.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+btnSuprFidelio.Margin = new Thickness(325, -141, 0, 0);
+//btnSuprFidelio.Click += new RoutedEventHandler(ButtonSupClient);
+DynamicGridClient.Children.Add(btnSuprFidelio);
+*/
         }
         #endregion Client
 
@@ -695,7 +701,11 @@ namespace VeloMax
 
             // On genere la video 
             MediaElement meVideo = new MediaElement();
-            meVideo.Source = new Uri("C:\\Users\\petil\\OneDrive\\Documents\\GitHub\\VeloMax\\VeloMax\\demoVideo.mp4");
+            //meVideo.Source = new Uri("C:\\Users\\petil\\OneDrive\\Documents\\GitHub\\VeloMax\\VeloMax\\demoVideo.mp4");
+            Uri test = new Uri("http://pierre-petillion.fr/musique/musique.mp4");
+            MessageBox.Show(test.AbsoluteUri);
+            meVideo.Source = test;
+            //MessageBox.Show(meVideo.Source.PathAndQuery);
             meVideo.Height = 800;
             meVideo.Width = 400;
             Grid.SetRow(meVideo, 1);
@@ -855,13 +865,13 @@ namespace VeloMax
             MainGrid.Children.Add(DynamicGridClient);
         }
 
-        private void OpenAddClient(object sender, RoutedEventArgs e)
+        private void OpenAddClientParticulier(object sender, RoutedEventArgs e)
         {
             var WindowAddClient = new AddClient(connection, this);
             WindowAddClient.Show();
         }
 
-        private void OpenAddFidelio(object sender, RoutedEventArgs e)
+        private void OpenAddClientEntreprise(object sender, RoutedEventArgs e)
         {
             var WindowAddClient = new AddFidelio(connection, this);
             WindowAddClient.Show();

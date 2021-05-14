@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="AddFidelio" Height="450" Width="800">
+        Title="Ajouter un Fidelio" Height="450" Width="800" Icon="velo_logo.jpeg" ResizeMode="NoResize">
     <Grid>
         
     </Grid>

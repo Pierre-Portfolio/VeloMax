@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    public class Fournisseur
+    public class Fournisseur 
     {
         private string siret;
         private string nomentreprise;
         private string contact;
         private string adrfour;
         private string libellefourniseur;
-
 
         public Fournisseur(string siret, string nomentreprise, string contact, string adrfour,string libellefourniseur)
         {

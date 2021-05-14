@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    public class Entreprise
+    public class Entreprise : clientele
     {
         private string identre;
         private string nomentre;
         private float remiseentre;
-        private int idclient;
 
-        public Entreprise(string identre, string nomentre, float remiseentre, int idclient)
+        public Entreprise(string identre, string nomentre, float remiseentre, int idclient, string rueclient, int codepostaleclient, string provinceclient, string villeclient) : base ( idclient,  rueclient,  codepostaleclient,  provinceclient,  villeclient)
         {
             this.identre = identre;
             this.nomentre = nomentre;
             this.remiseentre = remiseentre;
-            this.idclient = idclient;
         }
 
         public string Identre
@@ -36,14 +34,9 @@ namespace VeloMax
             get { return this.remiseentre; }
         }
 
-        public int Idclient
-        {
-            get { return this.idclient; }
-        }
-
         public override string ToString()
         {
-            return this.identre + " " + this.nomentre + " " + this.remiseentre + " " + this.idclient;
+            return base.ToString() + this.identre + " " + this.nomentre + " " + this.remiseentre + " ";
         }
     }
 }

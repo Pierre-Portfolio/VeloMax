@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace VeloMax
 {
-    public class Particulier
+    public class Particulier : clientele
     {
         private int idparticulier;
         private string nomclient;
         private string prenomclient;
-        private int idclient;
         private int idfidelio;
 
-        public Particulier(int idparticulier, string nomclient, string prenomclient, int idclient, int idfidelio)
+        public Particulier(int idparticulier, string nomclient, string prenomclient, int idclient, int idfidelio, string rueclient, int codepostaleclient, string provinceclient, string villeclient) : base (idclient, rueclient, codepostaleclient, provinceclient, villeclient)
         {
             this.idparticulier = idparticulier;
             this.nomclient = nomclient;
             this.prenomclient = prenomclient;
-            this.idclient = idclient;
             this.idfidelio = idfidelio;
         }
 
@@ -38,11 +36,6 @@ namespace VeloMax
             get { return this.prenomclient; }
         }
 
-        public int Idclient
-        {
-            get { return this.idclient; }
-        }
-
         public int Idfidelio
         {
             get { return this.idfidelio; }
@@ -50,7 +43,7 @@ namespace VeloMax
 
         public override string ToString()
         {
-            return this.idparticulier + " " + this.nomclient + " " + this.prenomclient + " " + this.idclient + " " + this.idfidelio;
+            return base.ToString() + this.idparticulier + " " + this.nomclient + " " + this.prenomclient + " "  + " " + this.idfidelio;
         }
 
     }
