@@ -528,7 +528,7 @@ namespace VeloMax
             btnModifClientParti.Margin = new Thickness(275, -12, 0, 0);
             btnModifClientParti.ToolTip = "Modifier un Client Particulier";
             btnModifClientParti.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClientParti.Click += new RoutedEventHandler(ButtonModifClient);
+            btnModifClientParti.Click += new RoutedEventHandler(ModifClientParticulier);
             DynamicGridClient.Children.Add(btnModifClientParti);
 
             //Btn del
@@ -924,6 +924,23 @@ namespace VeloMax
             WindowAddClient.Show();
         }
 
+        private void ModifClientParticulier(object sender, RoutedEventArgs e)
+        {
+            if (myGridClientParti.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridClientParti.SelectedItems)
+                {
+                    MotifClientParti w = new MotifClientParti(connection, ((Particulier)o), this);
+                    w.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridAssemblage.SelectedItems.Count);
+            }
+
+        }
+
         private void OpenAddClientEntreprise(object sender, RoutedEventArgs e)
         {
             var WindowAddClient = new AddClientEntre(connection, this);
@@ -940,7 +957,7 @@ namespace VeloMax
         }
         #endregion Evenement Commandes
 
-        #region Evenement Commandes
+        #region Evenement Statistique
         private void StatistiqueBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();

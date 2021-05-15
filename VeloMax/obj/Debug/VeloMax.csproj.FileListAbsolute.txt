@@ -133,3 +133,5 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientPart
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientEntre.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientPart.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.csprojAssemblyReference.cache
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MotifClientParti.g.cs
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MotifClientParti.baml

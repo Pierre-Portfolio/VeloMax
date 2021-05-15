@@ -134,6 +134,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MotifClientParti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModifAssemblage.xaml.cs">
@@ -144,6 +148,9 @@
     </Compile>
     <Compile Include="ModifPiece.xaml.cs">
       <DependentUpon>ModifPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MotifClientParti.xaml.cs">
+      <DependentUpon>MotifClientParti.xaml</DependentUpon>
     </Compile>
     <Compile Include="Particulier.cs" />
     <Compile Include="PieceDetache.cs" />
