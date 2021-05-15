@@ -16,6 +16,7 @@ namespace VeloMax
         private DateTime datediscontprod;
         private int delaiapprovprod;
         private string siret;
+        private int quantite;
 
         public PieceDetache(string numpiece,string descpiece,int numprodcatalogue, int prixpiece, DateTime dateintroprod, DateTime datediscontprod,int delaiapprovprod,string siret)
         {
@@ -67,6 +68,12 @@ namespace VeloMax
         public string Siret
         {
             get { return this.siret; }
+        }
+
+        public int Quantite
+        {
+            get { return this.quantite; }
+            set { this.quantite = value; }
         }
 
         public override string ToString()

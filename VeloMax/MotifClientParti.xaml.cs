@@ -100,13 +100,14 @@ namespace VeloMax
 
                                         connection.Open();
                                         command = connection.CreateCommand();
-                                        command.CommandText = "UPDATE velomax.clientele set rueclient= '" + BoxRueClient.Text.ToString() + "', codepostaleclient = ' " + BoxCodePostale.Text.ToString() + "', provinceclient = '" + BoxProvinceClient.Text.ToString() + "', villeclient ='" + BoxVilleClient.Text.ToString() + "' where idclient = '" + p.Idparticulier + "';";
+                                        command.CommandText = "UPDATE velomax.clientele set rueclient= '" + BoxRueClient.Text.ToString() + "', codepostaleclient = '" + BoxCodePostale.Text.ToString() + "', provinceclient = '" + BoxProvinceClient.Text.ToString() + "', villeclient ='" + BoxVilleClient.Text.ToString() + "' where idclient = '" + p.Idparticulier + "';";
                                         reader = command.ExecuteReader();
                                         connection.Close();
 
                                         connection.Open();
                                         command = connection.CreateCommand();
-                                        command.CommandText = "UPDATE velomax.particulier set nomclient= '" + BoxNomClient.Text.ToString() + "', prenomclient = ' " + BoxPrenomClient.Text.ToString() + "',  idfidelio ='" + idfidel + "' where idclient = '" + p.Idparticulier + "';";
+                                        command.CommandText = "UPDATE velomax.particulier set nomclient= '" + BoxNomClient.Text.ToString() + "', prenomclient = '" + BoxPrenomClient.Text.ToString() + "',  idfidelio ='" + idfidel + "' where idclient = '" + p.Idparticulier + "';";
+                                        command.CommandText = "UPDATE velomax.particulier set nomclient= '" + BoxNomClient.Text.ToString() + "', prenomclient = '" + BoxPrenomClient.Text.ToString() + "',  idfidelio ='" + idfidel + "' where idclient = '" + p.Idparticulier + "';";
                                         reader = command.ExecuteReader();
                                         connection.Close();
 

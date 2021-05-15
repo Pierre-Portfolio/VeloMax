@@ -7,7 +7,7 @@ CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varcha
 DROP TABLE IF EXISTS itemstock;
 CREATE TABLE itemstock (iditemstock INT PRIMARY KEY NOT NULL AUTO_INCREMENT, idbicy int, numpiece VARCHAR(255));
 DROP TABLE IF EXISTS piecedetache;
-CREATE TABLE piecedetache (numpiece varchar(255)  NOT NULL, descpiece varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod int, siret varchar(255));
+CREATE TABLE piecedetache (numpiece varchar(255)  NOT NULL, descpiece varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod int, siret varchar(255),quantiteP int);
 DROP TABLE IF EXISTS fournisseur;
 CREATE TABLE fournisseur (siret varchar(255) NOT NULL, nomentreprise varchar(255), contact varchar(255), adrfour varchar(255), libellefourniseur text);
 DROP TABLE IF EXISTS itemcmd;
@@ -47,7 +47,7 @@ INSERT INTO fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)
 (237038217323927,'Kroos',"Kroos@gmail.com",'18 impasse du concombre','fournisseur d ordinateur'),
 (837038217323865,'Javel',"Javel@gmail.com",'17 impasse du concombre','fournisseur d ordinateur');
 
-INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)
+INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret,quantiteP)
  VALUES
 ('C32','Cadre','1',12,'2010-04-02 15:28:22','2010-04-02 15:28:22',3,123456789124834),
 ('C34','Cadre','2',11,'2010-04-02 15:28:22','2010-04-02 15:28:22',4,123456789124834),

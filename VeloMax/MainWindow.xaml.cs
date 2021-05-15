@@ -77,6 +77,11 @@ namespace VeloMax
         public int keyClientPart = 0;
         Grid DynamicGridCommands = new Grid();
         Grid DynamicGridStats = new Grid();
+        public DataGrid myGridStat = new DataGrid();
+        public DataGrid myGridBicyQ = new DataGrid();
+        public DataGrid myGridPieceQ = new DataGrid();
+        public List<Bicyclette> myListBicyQ = new List<Bicyclette>();
+        public List<PieceDetache> myListPieceDetQ = new List<PieceDetache>();
         Grid DynamicGridFournisseur = new Grid();
         Grid DynamicGridDemo = new Grid();
         //Demo
@@ -408,7 +413,6 @@ namespace VeloMax
             DynamicGridMateriel.Children.Add(btnSuprPiece);
         }
         #endregion Generation Materiel
-
         #region Client
         public void GeneClient()
         {
@@ -649,7 +653,145 @@ namespace VeloMax
 
         }
         #endregion Client
+        #region Stats
+        public void GeneStat()
+        {
+            /* ==== Creation partie Stat ====*/
+            // création grid dynamic
+            DynamicGridStats.HorizontalAlignment = HorizontalAlignment.Left;
+            DynamicGridStats.Height = 400;
+            DynamicGridStats.Margin = new Thickness(0, 0, 0, 0);
+            DynamicGridStats.VerticalAlignment = VerticalAlignment.Center;
+            DynamicGridStats.Width = 780;
 
+            // Create Columns
+            Grid.SetRow(DynamicGridStats, 6);
+            Grid.SetColumn(DynamicGridStats, 0);
+            Grid.SetColumnSpan(DynamicGridStats, 6);
+            ColumnDefinition gridColStat1 = new ColumnDefinition();
+            DynamicGridStats.ColumnDefinitions.Add(gridColStat1);
+
+            // Create Rows
+            RowDefinition gridRowitem1 = new RowDefinition();
+            gridRowitem1.Height = new GridLength(30);
+            RowDefinition gridRowitem2 = new RowDefinition();
+            gridRowitem2.Height = new GridLength(100);
+            RowDefinition gridRowitem3 = new RowDefinition();
+            gridRowitem3.Height = new GridLength(30);
+            RowDefinition gridRowitem4 = new RowDefinition();
+            gridRowitem4.Height = new GridLength(100);
+            RowDefinition gridRowitem5 = new RowDefinition();
+            gridRowitem5.Height = new GridLength(30);
+            RowDefinition gridRowitem6 = new RowDefinition();
+            gridRowitem6.Height = new GridLength(100);
+            DynamicGridStats.RowDefinitions.Add(gridRowitem1);
+            DynamicGridStats.RowDefinitions.Add(gridRowitem2);
+            DynamicGridStats.RowDefinitions.Add(gridRowitem3);
+            DynamicGridStats.RowDefinitions.Add(gridRowitem4);
+            DynamicGridStats.RowDefinitions.Add(gridRowitem5);
+            DynamicGridStats.RowDefinitions.Add(gridRowitem6);
+            DynamicGridStats.Margin = new Thickness(0, 0, 0, 0);
+
+            // titre 0
+            TextBlock txtBlock0 = new TextBlock();
+            txtBlock0.Text = "Liste des Pieces Det Vendus";
+            txtBlock0.FontSize = 14;
+            txtBlock0.Width = 700;
+            txtBlock0.TextAlignment = TextAlignment.Center;
+            txtBlock0.Background = new SolidColorBrush(Colors.Black);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock0.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock0, 0);
+            Grid.SetColumn(txtBlock0, 0);
+            Grid.SetColumnSpan(txtBlock0, 6);
+            DynamicGridStats.Children.Add(txtBlock0);
+
+            // tableau des Pieces détachées vendues
+            myGridPieceQ.Items.Clear();
+            myGridPieceQ.Width = 700;
+            myGridPieceQ.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT piecedetache.numpiece, descpiece, prixpiece, quantite FROM velomax.itemstock natural join velomax.piecedetache natural join velomax.itemcmd where idbicy is Null;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                PieceDetache temp_piece = new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), 0, Convert.ToInt32(reader.GetValue(2)), new DateTime(), new DateTime(), 0, null);
+                temp_piece.Quantite = Convert.ToInt32(reader.GetValue(3));
+                myListPieceDetQ.Add(temp_piece);
+            }
+            myGridPieceQ.ItemsSource = myListPieceDetQ;
+            //myGridPieceQ.Columns[0].Visibility = Visibility.Hidden;
+            connection.Close();
+
+            //on define le reste
+            myGridPieceQ.Foreground = new SolidColorBrush(Colors.Black);
+            myGridPieceQ.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridPieceQ.Margin = new Thickness(0, -22, 0, 0);
+            myGridPieceQ.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridPieceQ.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridPieceQ.IsReadOnly = true;
+            Grid.SetRow(myGridPieceQ, 1);
+            Grid.SetColumn(myGridPieceQ, 0);
+            Grid.SetColumnSpan(myGridPieceQ, 6);
+            DynamicGridStats.Children.Add(myGridPieceQ);
+
+            // titre 1
+            TextBlock txtBlock1 = new TextBlock();
+            txtBlock1.Text = "Liste des Bicyclettes Vendues";
+            txtBlock1.FontSize = 14;
+            txtBlock1.Width = 700;
+            txtBlock1.TextAlignment = TextAlignment.Center;
+            txtBlock1.Background = new SolidColorBrush(Colors.Black);
+            txtBlock1.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock1.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock1.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock1, 0);
+            Grid.SetColumn(txtBlock1, 0);
+            Grid.SetColumnSpan(txtBlock1, 6);
+            DynamicGridStats.Children.Add(txtBlock1);
+
+            // tableau des Pieces détachées vendues
+            myGridBicyQ.Items.Clear();
+            myGridBicyQ.Width = 700;
+            myGridBicyQ.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT bicyclette.idbicy, nom, grandeur, prixbicy, quantite FROM velomax.itemstock natural join velomax.bicyclette natural join velomax.itemcmd where numpiece is Null; ; ";
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                //int idbicy, string nom, string grandeur, int prixbicy, string ligneproduit, DateTime dateintrobicy, DateTime datediscontinuationbicy
+                Bicyclette temp_bicy = new Bicyclette(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3)), null, new DateTime(), new DateTime());
+                temp_bicy.Quantite = Convert.ToInt32(reader.GetValue(4));
+                myListBicyQ.Add(temp_bicy);
+            }
+            myGridBicyQ.ItemsSource = myListBicyQ;
+            connection.Close();
+
+            //on define le reste
+            myGridBicyQ.Foreground = new SolidColorBrush(Colors.Black);
+            myGridBicyQ.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridBicyQ.Margin = new Thickness(0, -22, 0, 0);
+            myGridBicyQ.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridBicyQ.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridBicyQ.IsReadOnly = true;
+            Grid.SetRow(myGridBicyQ, 1);
+            Grid.SetColumn(myGridBicyQ, 0);
+            Grid.SetColumnSpan(myGridBicyQ, 6);
+            DynamicGridStats.Children.Add(myGridBicyQ);
+        }
+        #endregion
         #region Demo
         public void GeneDemo()
         {
@@ -823,6 +965,7 @@ namespace VeloMax
             //generation des 6 sous menu
             GeneMateriel();
             GeneClient();
+            GeneStat();
             GeneDemo();
             //requeteSQL(connection);
         }
