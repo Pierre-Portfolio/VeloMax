@@ -99,7 +99,7 @@ namespace VeloMax
 
 
 
-        private void AjouterClient(object sender, RoutedEventArgs e)
+        private void AjouterBicy(object sender, RoutedEventArgs e)
         {
             if (BoxNom.Text != "" && BoxNom.Text.Length != 0)
             {

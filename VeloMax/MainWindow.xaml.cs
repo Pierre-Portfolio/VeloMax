@@ -72,6 +72,9 @@ namespace VeloMax
         public DataGrid myGridClientEntre = new DataGrid();
         public List<Particulier> myListClientParti = new List<Particulier>();
         public List<Entreprise> myListClientEntre = new List<Entreprise>();
+        public int keyClient = 0;
+        public int keyClientEntre = 0;
+        public int keyClientPart = 0;
         Grid DynamicGridCommands = new Grid();
         Grid DynamicGridStats = new Grid();
         Grid DynamicGridFournisseur = new Grid();
@@ -461,7 +464,6 @@ namespace VeloMax
             Grid.SetColumnSpan(txtBlock0, 6);
             DynamicGridClient.Children.Add(txtBlock0);
 
-
             // tableau des Clients
             myGridClientParti.Items.Clear();
             myGridClientParti.Width = 700;
@@ -476,7 +478,9 @@ namespace VeloMax
 
             while (reader.Read())// parcours ligne par ligne
             {
-                myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+                myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+                keyClient = Convert.ToInt32(reader.GetValue(0));
+                keyClientPart = Convert.ToInt32(reader.GetValue(1));
             }
             myGridClientParti.ItemsSource = myListClientParti;
             connection.Close();
@@ -575,7 +579,9 @@ namespace VeloMax
 
             while (reader.Read())// parcours ligne par ligne
             {
-                myListClientEntre.Add(new Entreprise(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), (float)(reader.GetValue(3)), reader.GetValue(4).ToString(), Convert.ToInt32(reader.GetValue(5)), reader.GetValue(6).ToString(), reader.GetValue(7).ToString()));
+                myListClientEntre.Add(new Entreprise(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), (float)(reader.GetValue(3)), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString()));
+                keyClient = Convert.ToInt32(reader.GetValue(0));
+                keyClientEntre = Convert.ToInt32(reader.GetValue(1));
             }
             myGridClientEntre.ItemsSource = myListClientEntre;
             connection.Close();
@@ -914,13 +920,13 @@ namespace VeloMax
 
         private void OpenAddClientParticulier(object sender, RoutedEventArgs e)
         {
-            var WindowAddClient = new AddClient(connection, this);
+            var WindowAddClient = new AddClientPart(connection, this);
             WindowAddClient.Show();
         }
 
         private void OpenAddClientEntreprise(object sender, RoutedEventArgs e)
         {
-            var WindowAddClient = new AddFidelio(connection, this);
+            var WindowAddClient = new AddClientEntre(connection, this);
             WindowAddClient.Show();
         }
         #endregion Evenement Client

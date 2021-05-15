@@ -10,11 +10,11 @@ namespace VeloMax
     {
         private int idclient;
         private string rueclient;
-        private int codepostaleclient;
+        private string codepostaleclient;
         private string provinceclient;
         private string villeclient;
 
-        public clientele(int idclient, string rueclient, int codepostaleclient, string provinceclient, string villeclient)
+        public clientele(int idclient, string rueclient, string codepostaleclient, string provinceclient, string villeclient)
         {
             this.idclient = idclient;
             this.rueclient = rueclient;
@@ -33,7 +33,7 @@ namespace VeloMax
             get { return this.rueclient; }
         }
 
-        public int Codepostaleclient
+        public string Codepostaleclient
         {
             get { return this.codepostaleclient; }
         }

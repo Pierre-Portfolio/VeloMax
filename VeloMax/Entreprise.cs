@@ -8,18 +8,18 @@ namespace VeloMax
 {
     public class Entreprise : clientele
     {
-        private string identre;
+        private int identre;
         private string nomentre;
         private float remiseentre;
 
-        public Entreprise(int idclient, string identre, string nomentre, float remiseentre, string rueclient, int codepostaleclient, string provinceclient, string villeclient) : base ( idclient,  rueclient,  codepostaleclient,  provinceclient,  villeclient)
+        public Entreprise(int idclient, int identre, string nomentre, float remiseentre, string rueclient, string codepostaleclient, string provinceclient, string villeclient) : base ( idclient,  rueclient,  codepostaleclient,  provinceclient,  villeclient)
         {
             this.identre = identre;
             this.nomentre = nomentre;
             this.remiseentre = remiseentre;
         }
 
-        public string Identre
+        public int Identre
         {
             get { return this.identre; }
         }

@@ -13,7 +13,7 @@ namespace VeloMax
         private string prenomclient;
         private int idfidelio;
 
-        public Particulier(int idclient, int idparticulier, string nomclient, string prenomclient, int idfidelio, string rueclient, int codepostaleclient, string provinceclient, string villeclient) : base (idclient, rueclient, codepostaleclient, provinceclient, villeclient)
+        public Particulier(int idclient, int idparticulier, string nomclient, string prenomclient, int idfidelio, string rueclient, string codepostaleclient, string provinceclient, string villeclient) : base (idclient, rueclient, codepostaleclient, provinceclient, villeclient)
         {
             this.idparticulier = idparticulier;
             this.nomclient = nomclient;

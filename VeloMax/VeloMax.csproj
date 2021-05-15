@@ -67,11 +67,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddClient.xaml">
+    <Page Include="AddClientEntre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddFidelio.xaml">
+    <Page Include="AddClientPart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,11 +93,11 @@
     <Compile Include="AddBicy.xaml.cs">
       <DependentUpon>AddBicy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddClient.xaml.cs">
-      <DependentUpon>AddClient.xaml</DependentUpon>
+    <Compile Include="AddClientEntre.xaml.cs">
+      <DependentUpon>AddClientEntre.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddFidelio.xaml.cs">
-      <DependentUpon>AddFidelio.xaml</DependentUpon>
+    <Compile Include="AddClientPart.xaml.cs">
+      <DependentUpon>AddClientPart.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddFournisseur.xaml.cs">
       <DependentUpon>AddFournisseur.xaml</DependentUpon>

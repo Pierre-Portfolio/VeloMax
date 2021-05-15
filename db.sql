@@ -15,7 +15,7 @@ CREATE TABLE itemcmd (iditemscmd INT PRIMARY KEY NOT NULL AUTO_INCREMENT, quanti
 DROP TABLE IF EXISTS commande;
 CREATE TABLE commande (numcommande INT PRIMARY KEY NOT NULL AUTO_INCREMENT, datecommande datetime, adrlivraison varchar(255), datelivraison datetime, idclient int);
 DROP TABLE IF EXISTS clientele;
-CREATE TABLE clientele (idclient INT PRIMARY KEY NOT NULL AUTO_INCREMENT, rueclient varchar(255), codepostaleclient int, provinceclient varchar(255), villeclient varchar(255)); 
+CREATE TABLE clientele (idclient INT PRIMARY KEY NOT NULL AUTO_INCREMENT, rueclient varchar(255), codepostaleclient varchar(255), provinceclient varchar(255), villeclient varchar(255)); 
 DROP TABLE IF EXISTS entreprise;
 CREATE TABLE entreprise (identre  INT PRIMARY KEY NOT NULL AUTO_INCREMENT, nomentre varchar(255), remiseentre float, idclient int);
 DROP TABLE IF EXISTS particulier;
