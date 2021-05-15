@@ -48,27 +48,34 @@ namespace VeloMax
                                 {
                                     if (res >= 0)
                                     {
-                                        mw.keyClient = mw.keyClient + 1;
-                                        mw.keyClientEntre = mw.keyClientEntre + 1;
+                                        if(BoxVilleClient.Text != "" && BoxVilleClient.Text.Length != 0)
+                                        {
+                                            mw.keyClient = mw.keyClient + 1;
+                                            mw.keyClientEntre = mw.keyClientEntre + 1;
 
-                                        Entreprise e1 = new Entreprise(mw.keyClient, mw.keyClientEntre, BoxNomEntre.Text.ToString(), res, BoxRueClient.Text.ToString(), BoxCodePostale.Text.ToString(), BoxProvinceClient.Text.ToString(),BoxVilleClient.Text.ToString());
-                                        mw.myListClientEntre.Add(e1);
-                                        mw.myGridClientEntre.ItemsSource = mw.myListClientEntre;
-                                        mw.myGridClientEntre.Items.Refresh();
+                                            Entreprise e1 = new Entreprise(mw.keyClient, mw.keyClientEntre, BoxNomEntre.Text.ToString(), res, BoxRueClient.Text.ToString(), BoxCodePostale.Text.ToString(), BoxProvinceClient.Text.ToString(), BoxVilleClient.Text.ToString());
+                                            mw.myListClientEntre.Add(e1);
+                                            mw.myGridClientEntre.ItemsSource = mw.myListClientEntre;
+                                            mw.myGridClientEntre.Items.Refresh();
 
-                                        connection.Open();
-                                        MySqlCommand command = connection.CreateCommand();
-                                        command.CommandText = "INSERT INTO velomax.clientele (idclient,rueclient,codepostaleclient,provinceclient,villeclient)VALUES(" + mw.keyClient.ToString() + ",'" + BoxRueClient.Text.ToString() + "','" + BoxCodePostale.Text.ToString() + "','" + BoxProvinceClient.Text.ToString() + "','" + BoxVilleClient.Text.ToString() + "');";
-                                        MySqlDataReader reader = command.ExecuteReader();
-                                        connection.Close();
+                                            connection.Open();
+                                            MySqlCommand command = connection.CreateCommand();
+                                            command.CommandText = "INSERT INTO velomax.clientele (idclient,rueclient,codepostaleclient,provinceclient,villeclient)VALUES(" + mw.keyClient.ToString() + ",'" + BoxRueClient.Text.ToString() + "','" + BoxCodePostale.Text.ToString() + "','" + BoxProvinceClient.Text.ToString() + "','" + BoxVilleClient.Text.ToString() + "');";
+                                            MySqlDataReader reader = command.ExecuteReader();
+                                            connection.Close();
 
-                                        connection.Open(); 
-                                        command = connection.CreateCommand();
-                                        command.CommandText = "INSERT INTO velomax.entreprise (identre,nomentre,remiseentre,idclient)VALUES(" + mw.keyClientEntre.ToString() + ",'" + BoxNomEntre.Text.ToString() + "'," + res + ", " + mw.keyClient + ");";
-                                        reader = command.ExecuteReader();
-                                        connection.Close();
+                                            connection.Open();
+                                            command = connection.CreateCommand();
+                                            command.CommandText = "INSERT INTO velomax.entreprise (identre,nomentre,remiseentre,idclient)VALUES(" + mw.keyClientEntre.ToString() + ",'" + BoxNomEntre.Text.ToString() + "'," + res + ", " + mw.keyClient + ");";
+                                            reader = command.ExecuteReader();
+                                            connection.Close();
 
-                                        this.Close();
+                                            this.Close();
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Erreur le champ ville est vide !");
+                                        }
 
                                     }
                                     else

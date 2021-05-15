@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-    Title="Ajouter un client Particulier" Height="525.6" Width="342.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
+    Title="Ajouter un client Particulier" Height="595.6" Width="342.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>
     <Grid Margin="0,-300,418.2,-257.2">
-        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,322,-338,328">
+        <Canvas HorizontalAlignment="Left" Height="488" VerticalAlignment="Center" Width="338" Margin="0,325,-338,385.8">
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom Client :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
             <TextBox Name="BoxNomClient" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
@@ -18,19 +18,22 @@
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="115" Text="Prenom Client :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
             <TextBox Name="BoxPrenomClient" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="192" Text="Programme Fidelio: " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxIdFidelio" Height="22" Canvas.Left="94" Canvas.Top="212" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="179" Text="Programme Fidelio: " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxNomFidelio" Height="22" Canvas.Left="94" Canvas.Top="199" Width="150" AutomationProperties.Name="Prix"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="259" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Code Postale"/><Run Text=" : "/></TextBlock>
-            <TextBox Name="BoxCodePostale" Height="22" Canvas.Left="94" Canvas.Top="279"  Width="150" AutomationProperties.Name="Tel"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="243" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Rue client "/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxRueClient" Height="22" Canvas.Left="94" Canvas.Top="263"  Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="325" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Province Client"/><Run Text=" : "/></TextBlock>
-            <TextBox x:Name="BoxProvinceClient" Height="22" Canvas.Left="94" Canvas.Top="345" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="306" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Code Postale"/><Run Text=" : "/></TextBlock>
+            <TextBox Name="BoxCodePostale" Height="22" Canvas.Left="94" Canvas.Top="326"  Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="387" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Ville Client"/><Run Text=" : "/></TextBlock>
-            <TextBox x:Name="BoxVilleClient" Height="22" Canvas.Left="94" Canvas.Top="407" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="372" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Province Client"/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxProvinceClient" Height="22" Canvas.Left="94" Canvas.Top="392" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
 
-            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="448" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterClient"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="434" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Ville Client"/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxVilleClient" Height="22" Canvas.Left="94" Canvas.Top="454" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+
+            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="495" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterClient"/>
 
         </Canvas>
     </Grid>
