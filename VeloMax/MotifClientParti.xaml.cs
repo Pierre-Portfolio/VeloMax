@@ -81,14 +81,12 @@ namespace VeloMax
                                 {
                                     if (BoxVilleClient.Text != "" && BoxVilleClient.Text.Length != 0)
                                     {
-                                        mw.keyClient = mw.keyClient + 1;
-                                        mw.keyClientPart = mw.keyClientPart + 1;
-                                        int idfidel = -1;
 
                                         connection.Open();
                                         MySqlCommand command = connection.CreateCommand();
                                         command.CommandText = "SELECT idfidelio FROM velomax.fidelio where descfidelio = '" + BoxNomFidelio.Text.ToString() + "';";
                                         MySqlDataReader reader = command.ExecuteReader();
+                                        int idfidel = -1;
                                         while (reader.Read())// parcours ligne par ligne
                                         {
                                             idfidel = Convert.ToInt32(reader.GetValue(0));
@@ -102,14 +100,30 @@ namespace VeloMax
 
                                         connection.Open();
                                         command = connection.CreateCommand();
-                                        command.CommandText = "INSERT INTO velomax.clientele (idclient,rueclient,codepostaleclient,provinceclient,villeclient)VALUES(" + mw.keyClient.ToString() + ",'" + BoxRueClient.Text.ToString() + "','" + BoxCodePostale.Text.ToString() + "','" + BoxProvinceClient.Text.ToString() + "','" + BoxVilleClient.Text.ToString() + "');";
+                                        command.CommandText = "UPDATE velomax.clientele set rueclient= '" + BoxRueClient.Text.ToString() + "', codepostaleclient = ' " + BoxCodePostale.Text.ToString() + "', provinceclient = '" + BoxProvinceClient.Text.ToString() + "', villeclient ='" + BoxVilleClient.Text.ToString() + "' where idclient = '" + p.Idparticulier + "';";
                                         reader = command.ExecuteReader();
                                         connection.Close();
 
                                         connection.Open();
                                         command = connection.CreateCommand();
-                                        command.CommandText = "INSERT INTO velomax.particulier (idparticulier,nomclient,prenomclient,idclient,idfidelio)VALUES(" + mw.keyClientPart.ToString() + ",'" + BoxNomClient.Text.ToString() + "','" + BoxPrenomClient.Text.ToString() + "'," + mw.keyClient + "," + idfidel + ");";
+                                        command.CommandText = "UPDATE velomax.particulier set nomclient= '" + BoxNomClient.Text.ToString() + "', prenomclient = ' " + BoxPrenomClient.Text.ToString() + "',  idfidelio ='" + idfidel + "' where idclient = '" + p.Idparticulier + "';";
                                         reader = command.ExecuteReader();
+                                        connection.Close();
+
+                                        // on recupere les datas
+                                        connection.Open();
+                                        command = connection.CreateCommand();
+                                        command.CommandText = "SELECT * FROM velomax.particulier NATURAL JOIN velomax.clientele;";
+                                        reader = command.ExecuteReader();
+                                        List<Particulier> myListClientParti = new List<Particulier>();
+                                        while (reader.Read())// parcours ligne par ligne
+                                        {
+                                            myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+                                            mw.keyClient = Convert.ToInt32(reader.GetValue(0));
+                                            mw.keyClientPart = Convert.ToInt32(reader.GetValue(1));
+                                        }
+                                        mw.myGridClientParti.ItemsSource = myListClientParti;
+                                        mw.myGridClientParti.Items.Refresh();
                                         connection.Close();
 
                                         this.Close();
