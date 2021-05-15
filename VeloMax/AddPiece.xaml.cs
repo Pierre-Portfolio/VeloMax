@@ -70,23 +70,31 @@ namespace VeloMax
                                             {
                                                 if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
                                                 {
-                                                    MessageBox.Show("REUSSIE");
+                                                    int res4;
+                                                    if (int.TryParse(BoxQuantitéDispo.Text.ToString(), out res4))
+                                                    {
+                                                        DateTime dt1 = DateTime.Now;
+                                                        mw.keyPiece = mw.keyPiece + 1;
+
+                                                        PieceDetache p1 = new PieceDetache(BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece, res, dt1, res2, res3, BoxSiret.Text.ToString(), res4);
+                                                        mw.myListPiece.Add(p1);
+                                                        mw.myGridPiece.ItemsSource = mw.myListPiece;
+                                                        mw.myGridPiece.Items.Refresh();
+
+                                                        connection.Open();
+                                                        MySqlCommand command = connection.CreateCommand();
+                                                        command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES('" + BoxNumPiece.Text.ToString() + "','" + BoxDescPiece.Text.ToString() + "'," + mw.keyPiece + "," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "'," + res3 + ",'" + BoxSiret.Text.ToString() + "');";
+                                                        MySqlDataReader reader = command.ExecuteReader();
+                                                        connection.Close();
+                                                        this.Close();
                                                     
-                                                    DateTime dt1 = DateTime.Now;
-                                                    mw.keyPiece = mw.keyPiece + 1; 
-                                                    PieceDetache p1 = new PieceDetache( BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece , res, dt1, res2, res3 , BoxSiret.Text.ToString());
-                                                    mw.myListPiece.Add(p1);
-                                                    mw.myGridPiece.ItemsSource = mw.myListPiece;
-                                                    mw.myGridPiece.Items.Refresh();
-                                                
-                                                    connection.Open();
-                                                    MySqlCommand command = connection.CreateCommand();
-                                                    command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES('" + BoxNumPiece.Text.ToString() + "','" + BoxDescPiece.Text.ToString() + "'," + mw.keyPiece + "," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") +  "'," + res3 + ",'" + BoxSiret.Text.ToString() + "');";
-                                                    MySqlDataReader reader = command.ExecuteReader();
-                                                    connection.Close();
-                                                    this.Close();
-                                                
-                                            }
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Erreur le champ contenant la quantite doit contenir un chiffre !");
+                                                    }
+
+                                                }
                                             else
                                                 {
                                                     MessageBox.Show("Erreur le champ contenant le champ de numéro de siret est vide !");

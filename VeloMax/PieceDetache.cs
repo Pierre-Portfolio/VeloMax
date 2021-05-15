@@ -17,8 +17,9 @@ namespace VeloMax
         private int delaiapprovprod;
         private string siret;
         private int quantite;
+        private int quantiteDispo;
 
-        public PieceDetache(string numpiece,string descpiece,int numprodcatalogue, int prixpiece, DateTime dateintroprod, DateTime datediscontprod,int delaiapprovprod,string siret)
+        public PieceDetache(string numpiece,string descpiece,int numprodcatalogue, int prixpiece, DateTime dateintroprod, DateTime datediscontprod,int delaiapprovprod,string siret,int quantiteDispo)
         {
             this.numpiece = numpiece;
             this.descpiece = descpiece;
@@ -28,6 +29,7 @@ namespace VeloMax
             this.datediscontprod = datediscontprod;
             this.delaiapprovprod = delaiapprovprod;
             this.siret = siret;
+            this.quantiteDispo = quantiteDispo;
         }
 
         public string Numpiece
@@ -74,6 +76,12 @@ namespace VeloMax
         {
             get { return this.quantite; }
             set { this.quantite = value; }
+        }
+
+        public int QuantiteDispo
+        {
+            get { return this.quantiteDispo; }
+            set { this.quantiteDispo = value; }
         }
 
         public override string ToString()

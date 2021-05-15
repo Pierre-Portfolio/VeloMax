@@ -59,6 +59,7 @@ namespace VeloMax
             BoxDateDisc.Text = p.Datediscontprod.ToString();
             BoxDelai.Text = p.Delaiapprovprod.ToString();
             BoxSiret.Text = p.Siret;
+            BoxQuantitéDispo.Text = p.QuantiteDispo.ToString();
         }
 
         private void AjouterPiece(object sender, RoutedEventArgs e)
@@ -86,66 +87,76 @@ namespace VeloMax
                                         {
                                             if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
                                             {
-                                                connection.Open();
-                                                MySqlCommand command = connection.CreateCommand();
-                                                command.CommandText = "SELECT COUNT(*) from velomax.piecedetache where numpiece = '" + BoxNumPiece.Text + "';";
-                                                MySqlDataReader reader = command.ExecuteReader();
-                                                int nbrow = 0;
-                                                while (reader.Read())// parcours ligne par ligne
+                                                int res4;
+
+                                                if (int.TryParse(BoxQuantitéDispo.Text.ToString(), out res4))
                                                 {
-                                                    nbrow = Convert.ToInt32(reader.GetValue(0));
-                                                }
-                                                connection.Close();
-
-                                                if (nbrow == 0)
-                                                {
-
                                                     connection.Open();
-                                                    command = connection.CreateCommand();
-                                                    command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString() + "' where numpiece = '" + p.Numpiece + "';";
-                                                    reader = command.ExecuteReader();
-                                                    connection.Close();
-
-                                                    // on recupere les datas
-                                                    connection.Open();
-                                                    command = connection.CreateCommand();
-                                                    command.CommandText = "SELECT * FROM velomax.piecedetache;";
-                                                    reader = command.ExecuteReader();
-                                                    List<PieceDetache> myListPiece = new List<PieceDetache>();
+                                                    MySqlCommand command = connection.CreateCommand();
+                                                    command.CommandText = "SELECT COUNT(*) from velomax.piecedetache where numpiece = '" + BoxNumPiece.Text + "';";
+                                                    MySqlDataReader reader = command.ExecuteReader();
+                                                    int nbrow = 0;
                                                     while (reader.Read())// parcours ligne par ligne
                                                     {
-                                                        myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
-                                                        mw.keyPiece = Convert.ToInt32(reader.GetValue(2));
+                                                        nbrow = Convert.ToInt32(reader.GetValue(0));
                                                     }
-                                                    mw.myGridPiece.ItemsSource = myListPiece;
-                                                    mw.myGridPiece.Items.Refresh();
                                                     connection.Close();
 
-                                                    if(BoxNumPiece.Text.ToString() != p.Numpiece)
+                                                    if (nbrow == 0)
                                                     {
+
                                                         connection.Open();
                                                         command = connection.CreateCommand();
-                                                        command.CommandText = "UPDATE velomax.assemblage SET " + BoxDescPiece.Text + " = '" + BoxNumPiece.Text + "' WHERE " + BoxDescPiece.Text.ToLower() + " = '" + p.Numpiece + "';";
+                                                        command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString() + "' where numpiece = '" + p.Numpiece + "';";
                                                         reader = command.ExecuteReader();
                                                         connection.Close();
 
                                                         // on recupere les datas
                                                         connection.Open();
                                                         command = connection.CreateCommand();
-                                                        command.CommandText = "SELECT * FROM velomax.assemblage;";
+                                                        command.CommandText = "SELECT * FROM velomax.piecedetache;";
                                                         reader = command.ExecuteReader();
-                                                        List<Assemblage> myListAssemblage = new List<Assemblage>();
+                                                        List<PieceDetache> myListPiece = new List<PieceDetache>();
                                                         while (reader.Read())// parcours ligne par ligne
                                                         {
-                                                            myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
-
+                                                            myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString(),1));
+                                                            mw.keyPiece = Convert.ToInt32(reader.GetValue(2));
                                                         }
-                                                        mw.myGridAssemblage.ItemsSource = myListAssemblage;
-                                                        mw.myGridAssemblage.Items.Refresh();
+                                                        mw.myGridPiece.ItemsSource = myListPiece;
+                                                        mw.myGridPiece.Items.Refresh();
                                                         connection.Close();
-                                                    }
 
-                                                    this.Close();
+                                                        if(BoxNumPiece.Text.ToString() != p.Numpiece)
+                                                        {
+                                                            connection.Open();
+                                                            command = connection.CreateCommand();
+                                                            command.CommandText = "UPDATE velomax.assemblage SET " + BoxDescPiece.Text + " = '" + BoxNumPiece.Text + "' WHERE " + BoxDescPiece.Text.ToLower() + " = '" + p.Numpiece + "';";
+                                                            reader = command.ExecuteReader();
+                                                            connection.Close();
+
+                                                            // on recupere les datas
+                                                            connection.Open();
+                                                            command = connection.CreateCommand();
+                                                            command.CommandText = "SELECT * FROM velomax.assemblage;";
+                                                            reader = command.ExecuteReader();
+                                                            List<Assemblage> myListAssemblage = new List<Assemblage>();
+                                                            while (reader.Read())// parcours ligne par ligne
+                                                            {
+                                                                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+                                                            }
+                                                            mw.myGridAssemblage.ItemsSource = myListAssemblage;
+                                                            mw.myGridAssemblage.Items.Refresh();
+                                                            connection.Close();
+                                                        }
+
+                                                        this.Close();
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Erreur le champ contenant la quantite doit contenir un chiffre !");
+
+                                                    }
                                                 }
                                                 else
                                                 {

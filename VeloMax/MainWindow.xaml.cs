@@ -75,14 +75,24 @@ namespace VeloMax
         public int keyClient = 0;
         public int keyClientEntre = 0;
         public int keyClientPart = 0;
+
         Grid DynamicGridCommands = new Grid();
+        public List<commande> myListCommande = new List<commande>();
+        public DataGrid myGridCommande = new DataGrid();
+        public int keyCommande = 0;
+
         Grid DynamicGridStats = new Grid();
         public DataGrid myGridStat = new DataGrid();
         public DataGrid myGridBicyQ = new DataGrid();
         public DataGrid myGridPieceQ = new DataGrid();
         public List<Bicyclette> myListBicyQ = new List<Bicyclette>();
         public List<PieceDetache> myListPieceDetQ = new List<PieceDetache>();
+
         Grid DynamicGridFournisseur = new Grid();
+        public List<Fournisseur> myListFournisseur = new List<Fournisseur>();
+        public DataGrid myGridFournisseur = new DataGrid();
+        public int keyFournisseur = 0;
+
         Grid DynamicGridDemo = new Grid();
         //Demo
         public MediaElement meVideo = new MediaElement();
@@ -346,7 +356,7 @@ namespace VeloMax
             reader = command.ExecuteReader();
             while (reader.Read())// parcours ligne par ligne
             {
-                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString(), Convert.ToInt32(reader.GetValue(8).ToString())));
                 keyPiece = Convert.ToInt32(reader.GetValue(2));
             }
             myGridPiece.ItemsSource = myListPiece;
@@ -653,10 +663,292 @@ namespace VeloMax
 
         }
         #endregion Client
+        #region Commandes
+        public void GeneCommande()
+        {
+            /* ==== Creation partie matériel ====*/
+            // création grid dynamic
+            DynamicGridCommands.HorizontalAlignment = HorizontalAlignment.Left;
+            DynamicGridCommands.Height = 400;
+            DynamicGridCommands.Margin = new Thickness(0, 0, 0, 0);
+            DynamicGridCommands.VerticalAlignment = VerticalAlignment.Center;
+            DynamicGridCommands.Width = 780;
+
+
+            // Create Columns
+            Grid.SetRow(DynamicGridCommands, 6);
+            Grid.SetColumn(DynamicGridCommands, 0);
+            Grid.SetColumnSpan(DynamicGridCommands, 6);
+            ColumnDefinition gridColCommande1 = new ColumnDefinition();
+            DynamicGridCommands.ColumnDefinitions.Add(gridColCommande1);
+
+            // Create Rows
+            RowDefinition gridRowCommande1 = new RowDefinition();
+            gridRowCommande1.Height = new GridLength(30);
+            RowDefinition gridRowCommande2 = new RowDefinition();
+            gridRowCommande2.Height = new GridLength(100);
+            RowDefinition gridRowCommande3 = new RowDefinition();
+            gridRowCommande3.Height = new GridLength(30);
+            RowDefinition gridRowCommande4 = new RowDefinition();
+            gridRowCommande4.Height = new GridLength(100);
+            RowDefinition gridRowCommande5 = new RowDefinition();
+            gridRowCommande5.Height = new GridLength(30);
+            RowDefinition gridRowCommande6 = new RowDefinition();
+            gridRowCommande6.Height = new GridLength(100);
+            DynamicGridCommands.RowDefinitions.Add(gridRowCommande1);
+            DynamicGridCommands.RowDefinitions.Add(gridRowCommande2);
+            DynamicGridCommands.RowDefinitions.Add(gridRowCommande3);
+            DynamicGridCommands.RowDefinitions.Add(gridRowCommande4);
+            DynamicGridCommands.RowDefinitions.Add(gridRowCommande5);
+            DynamicGridCommands.RowDefinitions.Add(gridRowCommande6);
+            DynamicGridCommands.Margin = new Thickness(0, 0, 0, 0);
+
+            // titre 0
+            TextBlock txtBlock0 = new TextBlock();
+            txtBlock0.Text = "Liste des Commandes";
+            txtBlock0.FontSize = 14;
+            txtBlock0.Width = 700;
+            txtBlock0.TextAlignment = TextAlignment.Center;
+            txtBlock0.Background = new SolidColorBrush(Colors.Black);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock0.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock0, 0);
+            Grid.SetColumn(txtBlock0, 0);
+            Grid.SetColumnSpan(txtBlock0, 6);
+            DynamicGridCommands.Children.Add(txtBlock0);
+
+            //Clear
+
+            myGridCommande.Items.Clear();
+            myGridCommande.Width = 700;
+            myGridCommande.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.commande;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListCommande.Add(new commande(Convert.ToInt32(reader.GetValue(0)), Convert.ToDateTime(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToDateTime(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
+                keyCommande = Convert.ToInt32(reader.GetValue(0));
+
+            }
+            myGridCommande.ItemsSource = myListCommande;
+            connection.Close();
+
+            //on define le reste
+            myGridCommande.Foreground = new SolidColorBrush(Colors.Black);
+            myGridCommande.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridCommande.Margin = new Thickness(0, -22, 0, 0);
+            myGridCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridCommande.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridCommande.IsReadOnly = true;
+            Grid.SetRow(myGridCommande, 1);
+            Grid.SetColumn(myGridCommande, 0);
+            Grid.SetColumnSpan(myGridCommande, 6);
+            DynamicGridCommands.Children.Add(myGridCommande);
+
+            //Btn ajouter
+            Button btnAddCommande = new Button();
+            btnAddCommande.Content = "";
+            btnAddCommande.Background = Brushes.Green;
+            btnAddCommande.Height = 15;
+            btnAddCommande.Width = 15;
+            Grid.SetRow(btnAddCommande, 0);
+            Grid.SetColumn(btnAddCommande, 0);
+            Grid.SetColumnSpan(btnAddCommande, 6);
+            btnAddCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddCommande.Margin = new Thickness(175, -12, 0, 0);
+            btnAddCommande.ToolTip = "Ajouter une commande";
+            btnAddCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddCommande.Click += new RoutedEventHandler(OpenAddCommande);
+            DynamicGridCommands.Children.Add(btnAddCommande);
+
+            //Btn modifier
+            Button btnModifCommande = new Button();
+            btnModifCommande.Content = "";
+            btnModifCommande.Background = Brushes.Green;
+            btnModifCommande.Height = 15;
+            btnModifCommande.Width = 15;
+            Grid.SetRow(btnModifCommande, 0);
+            Grid.SetColumn(btnModifCommande, 0);
+            Grid.SetColumnSpan(btnModifCommande, 6);
+            btnModifCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifCommande.Margin = new Thickness(225, -12, 0, 0);
+            btnModifCommande.ToolTip = "Modifier une commande";
+            btnModifCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
+            DynamicGridCommands.Children.Add(btnModifCommande);
+
+            //Btn del
+            Button btnSuprCommande = new Button();
+            btnSuprCommande.Content = "";
+            btnSuprCommande.Background = Brushes.Red;
+            btnSuprCommande.Height = 15;
+            btnSuprCommande.Width = 15;
+            Grid.SetRow(btnSuprCommande, 0);
+            Grid.SetColumn(btnSuprCommande, 0);
+            Grid.SetColumnSpan(btnSuprCommande, 6);
+            btnSuprCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprCommande.ToolTip = "Supprimer une commande";
+            btnSuprCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprCommande.Margin = new Thickness(275, -12, 0, 0);
+            //btnSuprCommande.Click += new RoutedEventHandler(BoutonSuprCommande);
+            DynamicGridCommands.Children.Add(btnSuprCommande);
+        }
+
+
+
+        #endregion Commande
+        #region Fournisseur
+        public void GeneFournisseur()
+        {
+            /* ==== Creation partie matériel ====*/
+            // création grid dynamic
+            DynamicGridFournisseur.HorizontalAlignment = HorizontalAlignment.Left;
+            DynamicGridFournisseur.Height = 400;
+            DynamicGridFournisseur.Margin = new Thickness(0, 0, 0, 0);
+            DynamicGridFournisseur.VerticalAlignment = VerticalAlignment.Center;
+            DynamicGridFournisseur.Width = 780;
+
+
+            // Create Columns
+            Grid.SetRow(DynamicGridFournisseur, 6);
+            Grid.SetColumn(DynamicGridFournisseur, 0);
+            Grid.SetColumnSpan(DynamicGridFournisseur, 6);
+            ColumnDefinition gridColFournisseur1 = new ColumnDefinition();
+            DynamicGridFournisseur.ColumnDefinitions.Add(gridColFournisseur1);
+
+            // Create Rows
+            RowDefinition gridRowFournisseur1 = new RowDefinition();
+            gridRowFournisseur1.Height = new GridLength(30);
+            RowDefinition gridRowFournisseur2 = new RowDefinition();
+            gridRowFournisseur2.Height = new GridLength(100);
+            RowDefinition gridRowFournisseur3 = new RowDefinition();
+            gridRowFournisseur3.Height = new GridLength(30);
+            RowDefinition gridRowFournisseur4 = new RowDefinition();
+            gridRowFournisseur4.Height = new GridLength(100);
+            RowDefinition gridRowFournisseur5 = new RowDefinition();
+            gridRowFournisseur5.Height = new GridLength(30);
+            RowDefinition gridRowFournisseur6 = new RowDefinition();
+            gridRowFournisseur6.Height = new GridLength(100);
+            DynamicGridFournisseur.RowDefinitions.Add(gridRowFournisseur1);
+            DynamicGridFournisseur.RowDefinitions.Add(gridRowFournisseur2);
+            DynamicGridFournisseur.RowDefinitions.Add(gridRowFournisseur3);
+            DynamicGridFournisseur.RowDefinitions.Add(gridRowFournisseur4);
+            DynamicGridFournisseur.RowDefinitions.Add(gridRowFournisseur5);
+            DynamicGridFournisseur.RowDefinitions.Add(gridRowFournisseur6);
+            DynamicGridFournisseur.Margin = new Thickness(0, 0, 0, 0);
+
+            // titre 0
+            TextBlock txtBlock0 = new TextBlock();
+            txtBlock0.Text = "Liste des Fournisseurs";
+            txtBlock0.FontSize = 14;
+            txtBlock0.Width = 700;
+            txtBlock0.TextAlignment = TextAlignment.Center;
+            txtBlock0.Background = new SolidColorBrush(Colors.Black);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock0.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock0, 0);
+            Grid.SetColumn(txtBlock0, 0);
+            Grid.SetColumnSpan(txtBlock0, 6);
+            DynamicGridFournisseur.Children.Add(txtBlock0);
+
+            //Clear
+
+            myGridFournisseur.Items.Clear();
+            myGridFournisseur.Width = 700;
+            myGridFournisseur.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.fournisseur;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListFournisseur.Add(new Fournisseur(Convert.ToString(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToString(reader.GetValue(4))));
+
+
+            }
+            myGridFournisseur.ItemsSource = myListFournisseur;
+            connection.Close();
+
+            //on define le reste
+            myGridFournisseur.Foreground = new SolidColorBrush(Colors.Black);
+            myGridFournisseur.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridFournisseur.Margin = new Thickness(0, -22, 0, 0);
+            myGridFournisseur.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridFournisseur.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridFournisseur.IsReadOnly = true;
+            Grid.SetRow(myGridFournisseur, 1);
+            Grid.SetColumn(myGridFournisseur, 0);
+            Grid.SetColumnSpan(myGridFournisseur, 6);
+            DynamicGridFournisseur.Children.Add(myGridFournisseur);
+
+            //Btn ajouter
+            Button btnAddFournisseur = new Button();
+            btnAddFournisseur.Content = "";
+            btnAddFournisseur.Background = Brushes.Green;
+            btnAddFournisseur.Height = 15;
+            btnAddFournisseur.Width = 15;
+            Grid.SetRow(btnAddFournisseur, 0);
+            Grid.SetColumn(btnAddFournisseur, 0);
+            Grid.SetColumnSpan(btnAddFournisseur, 6);
+            btnAddFournisseur.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddFournisseur.Margin = new Thickness(175, -12, 0, 0);
+            btnAddFournisseur.ToolTip = "Ajouter un fournisseur";
+            btnAddFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddCommande.Click += new RoutedEventHandler(OpenAddCommande);
+            DynamicGridFournisseur.Children.Add(btnAddFournisseur);
+
+            //Btn modifier
+            Button btnModifFournisseur = new Button();
+            btnModifFournisseur.Content = "";
+            btnModifFournisseur.Background = Brushes.Green;
+            btnModifFournisseur.Height = 15;
+            btnModifFournisseur.Width = 15;
+            Grid.SetRow(btnModifFournisseur, 0);
+            Grid.SetColumn(btnModifFournisseur, 0);
+            Grid.SetColumnSpan(btnModifFournisseur, 6);
+            btnModifFournisseur.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifFournisseur.Margin = new Thickness(225, -12, 0, 0);
+            btnModifFournisseur.ToolTip = "Modifier un fournisseur";
+            btnModifFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
+            DynamicGridFournisseur.Children.Add(btnModifFournisseur);
+
+            //Btn del
+            Button btnSuprFournisseur = new Button();
+            btnSuprFournisseur.Content = "";
+            btnSuprFournisseur.Background = Brushes.Red;
+            btnSuprFournisseur.Height = 15;
+            btnSuprFournisseur.Width = 15;
+            Grid.SetRow(btnSuprFournisseur, 0);
+            Grid.SetColumn(btnSuprFournisseur, 0);
+            Grid.SetColumnSpan(btnSuprFournisseur, 6);
+            btnSuprFournisseur.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprFournisseur.ToolTip = "Supprimer un fournisseur";
+            btnSuprFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprFournisseur.Margin = new Thickness(275, -12, 0, 0);
+            //btnSuprFournisseur.Click += new RoutedEventHandler(BoutonSuprFournisseur);
+            DynamicGridFournisseur.Children.Add(btnSuprFournisseur);
+        }
+        #endregion
         #region Stats
+        /*
         public void GeneStat()
         {
-            /* ==== Creation partie Stat ====*/
+            /* ==== Creation partie Stat ====
             // création grid dynamic
             DynamicGridStats.HorizontalAlignment = HorizontalAlignment.Left;
             DynamicGridStats.Height = 400;
@@ -790,7 +1082,7 @@ namespace VeloMax
             Grid.SetColumn(myGridBicyQ, 0);
             Grid.SetColumnSpan(myGridBicyQ, 6);
             DynamicGridStats.Children.Add(myGridBicyQ);
-        }
+        }*/
         #endregion
         #region Demo
         public void GeneDemo()
@@ -909,6 +1201,7 @@ namespace VeloMax
             meVideo.Play();
             btnPause.Click += new RoutedEventHandler(ButtonPauseVideo);
             btnPlay.Click += new RoutedEventHandler(ButtonPlayVideo);
+            meVideo.Pause();
             //myGrid.ColumnDefinitions.Add(meVideo);
             DynamicGridDemo.Children.Add(meVideo);
             DynamicGridDemo.Children.Add(btnPause);
@@ -965,7 +1258,9 @@ namespace VeloMax
             //generation des 6 sous menu
             GeneMateriel();
             GeneClient();
-            GeneStat();
+            GeneCommande();
+            GeneFournisseur();
+            //GeneStat();
             GeneDemo();
             //requeteSQL(connection);
         }
@@ -1096,7 +1391,7 @@ namespace VeloMax
         {
             Refresh();
             CommandesBtn.Background = new SolidColorBrush(Colors.White);
-            MessageBox.Show("En cour de dev par Amine");
+            MainGrid.Children.Add(DynamicGridCommands);
         }
         #endregion Evenement Commandes
 
@@ -1105,7 +1400,7 @@ namespace VeloMax
         {
             Refresh();
             StatistiqueBtn.Background = new SolidColorBrush(Colors.White);
-            MessageBox.Show("En cour de dev par Amine");
+            MainGrid.Children.Add(DynamicGridStats);
         }
         #endregion Evenement Commandes
 
@@ -1114,7 +1409,7 @@ namespace VeloMax
         {
             Refresh();
             FournisseurBtn.Background = new SolidColorBrush(Colors.White);
-            MessageBox.Show("En cour de dev par Yanis");
+            MainGrid.Children.Add(DynamicGridFournisseur);
         }
         #endregion Evenement Fournisseur
 
