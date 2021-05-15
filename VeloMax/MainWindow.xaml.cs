@@ -666,23 +666,29 @@ namespace VeloMax
 
             // Create Rows
             RowDefinition gridRowDemo1 = new RowDefinition();
-            gridRowDemo1.Height = new GridLength(30);
+            gridRowDemo1.Height = new GridLength(50);
             RowDefinition gridRowDemo2 = new RowDefinition();
-            gridRowDemo2.Height = new GridLength(100);
+            gridRowDemo2.Height = new GridLength(50);
             RowDefinition gridRowDemo3 = new RowDefinition();
-            gridRowDemo3.Height = new GridLength(30);
+            gridRowDemo3.Height = new GridLength(50);
             RowDefinition gridRowDemo4 = new RowDefinition();
-            gridRowDemo4.Height = new GridLength(100);
+            gridRowDemo4.Height = new GridLength(50);
             RowDefinition gridRowDemo5 = new RowDefinition();
-            gridRowDemo5.Height = new GridLength(30);
+            gridRowDemo5.Height = new GridLength(50);
             RowDefinition gridRowDemo6 = new RowDefinition();
-            gridRowDemo6.Height = new GridLength(100);
+            gridRowDemo6.Height = new GridLength(50);
+            RowDefinition gridRowDemo7 = new RowDefinition();
+            gridRowDemo5.Height = new GridLength(50);
+            RowDefinition gridRowDemo8 = new RowDefinition();
+            gridRowDemo6.Height = new GridLength(50);
             DynamicGridDemo.RowDefinitions.Add(gridRowDemo1);
             DynamicGridDemo.RowDefinitions.Add(gridRowDemo2);
             DynamicGridDemo.RowDefinitions.Add(gridRowDemo3);
             DynamicGridDemo.RowDefinitions.Add(gridRowDemo4);
             DynamicGridDemo.RowDefinitions.Add(gridRowDemo5);
             DynamicGridDemo.RowDefinitions.Add(gridRowDemo6);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo7);
+            DynamicGridDemo.RowDefinitions.Add(gridRowDemo8);
             DynamicGridDemo.Margin = new Thickness(0, 0, 0, 0);
 
             // titre 0
@@ -705,18 +711,20 @@ namespace VeloMax
             
             //meVideo.Source = new Uri("C:\\Users\\petil\\OneDrive\\Documents\\GitHub\\VeloMax\\VeloMax\\demoVideo.mp4");
             Uri test = new Uri("http://pierre-petillion.fr/musique/musique.mp4");
-            MessageBox.Show(test.AbsoluteUri);
             meVideo.Source = test;
             //MessageBox.Show(meVideo.Source.PathAndQuery);
             meVideo.Height = 800;
             meVideo.Width = 800;
             Grid.SetRow(meVideo, 1);
-            Grid.SetRowSpan(meVideo, 5);
+            Grid.SetRowSpan(meVideo, 8);
             Grid.SetColumn(meVideo, 0);
             Grid.SetColumnSpan(meVideo, 2);
             meVideo.Opacity = 100;
             meVideo.Visibility = Visibility.Visible;
             meVideo.LoadedBehavior = MediaState.Manual;
+            meVideo.Stretch = Stretch.Uniform;
+            meVideo.StretchDirection = StretchDirection.DownOnly;
+
 
             //Bouton Pause
 
@@ -726,9 +734,9 @@ namespace VeloMax
             btnPause.Height = 45;
             btnPause.Width = 45;
             btnPause.Background = new ImageBrush(new BitmapImage(new Uri(@"https://svgsilh.com/png-1024/888513.png")));
-            Grid.SetRow(btnPause, 3);
-            Grid.SetColumn(btnPause, 0);
-            Grid.SetColumnSpan(btnPause, 2);
+            Grid.SetRow(btnPause, 6);
+            Grid.SetColumn(btnPause, 1);
+            Grid.SetColumnSpan(btnPause, 1);
 
             //Bouton Play
 
@@ -738,7 +746,7 @@ namespace VeloMax
             btnPlay.Height = 45;
             btnPlay.Width = 45;
             btnPlay.Background = new ImageBrush(new BitmapImage(new Uri(@"http://assets.stickpng.com/images/580b57fcd9996e24bc43c4f7.png")));
-            Grid.SetRow(btnPlay, 3);
+            Grid.SetRow(btnPlay, 6);
             Grid.SetColumn(btnPlay, 0);
             Grid.SetColumnSpan(btnPlay, 1);
 
