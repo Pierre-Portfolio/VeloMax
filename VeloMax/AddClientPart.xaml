@@ -12,14 +12,14 @@
     <Grid Margin="0,-300,418.2,-257.2">
         <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,322,-338,328">
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom Entreprise :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxNomEntre" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Nom Client :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxNomClient" Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="115" Text="Remise Entreprise :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxRemiseEntre" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="115" Text="Prenom Client :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxPrenomClient" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="192" Text="Rue client : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
-            <TextBox Name="BoxRueClient" Height="22" Canvas.Left="94" Canvas.Top="212" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="192" Text="Programme Fidelio: " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxIdFidelio" Height="22" Canvas.Left="94" Canvas.Top="212" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
 
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="259" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Code Postale"/><Run Text=" : "/></TextBlock>
             <TextBox Name="BoxCodePostale" Height="22" Canvas.Left="94" Canvas.Top="279"  Width="150" AutomationProperties.Name="Tel"/>

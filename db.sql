@@ -165,6 +165,7 @@ INSERT INTO assemblage (nom, grandeur, cadre, guidon,freins,selle,derailleuravan
 
  INSERT INTO fidelio (descfidelio ,cout ,duree ,rabais)
  VALUES
+('None', 0, 0, 0),
 ('Fidélio', 15, 1,5),
 ('Fidélio Or', 25, 1,8),
 ('Fidélio Platine', 60, 1,10),
