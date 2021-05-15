@@ -107,7 +107,7 @@ namespace VeloMax
 
                                                         connection.Open();
                                                         command = connection.CreateCommand();
-                                                        command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString() + "' where numpiece = '" + p.Numpiece + "';";
+                                                        command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString() + "', quantiteDispo = '" + BoxQuantitéDispo.Text + "' where numpiece = '" + p.Numpiece + "';";
                                                         reader = command.ExecuteReader();
                                                         connection.Close();
 

@@ -213,7 +213,7 @@ namespace VeloMax
         {
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE velomax.assemblage SET cadre = '" + BoxCadre.SelectedItem + "',guidon = '" + BoxGuidon.SelectedItem + "', freins = '" + BoxFrein.SelectedItem + "', selle = '" + BoxSelle.SelectedItem + "' , derailleuravant = '" + BoxDeraillieurA.SelectedItem + "' , derailleurarriere = '" + BoxDeraillieurB.SelectedItem + "' , roueavant = '" + BoxRoueAvant.SelectedItem + "' , rouearriere = '" + BoxRoueArriere.SelectedItem.ToString() + "' , reflecteur = '" + BoxReflecteur.SelectedItem + "' , pedalleur = '" + BoxPedalleur.SelectedItem + "' , ordinateur = '" + BoxOrdinateur.SelectedItem + "' , panier = '" + BoxPanier.SelectedItem + "' WHERE nom = '" + BoxNom.Text + "' AND grandeur = '" + BoxGrandeur.SelectedItem + "'";
+            command.CommandText = "UPDATE velomax.assemblage SET cadre = '" + BoxCadre.SelectedItem + "',guidon = '" + BoxGuidon.SelectedItem + "', freins = '" + BoxFrein.SelectedItem + "', selle = '" + BoxSelle.SelectedItem + "' , derailleuravant = '" + BoxDeraillieurA.SelectedItem + "' , derailleurarriere = '" + BoxDeraillieurB.SelectedItem + "' , roueavant = '" + BoxRoueAvant.SelectedItem + "' , rouearriere = '" + BoxRoueArriere.SelectedItem + "' , reflecteur = '" + BoxReflecteur.SelectedItem + "' , pedalleur = '" + BoxPedalleur.SelectedItem + "' , ordinateur = '" + BoxOrdinateur.SelectedItem + "' , panier = '" + BoxPanier.SelectedItem + "' WHERE nom = '" + BoxNom.Text + "' AND grandeur = '" + BoxGrandeur.SelectedItem + "'";
             MySqlDataReader reader = command.ExecuteReader();
             connection.Close();
 
