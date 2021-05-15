@@ -12,7 +12,7 @@ namespace VeloMax
         private string nomentre;
         private float remiseentre;
 
-        public Entreprise(string identre, string nomentre, float remiseentre, int idclient, string rueclient, int codepostaleclient, string provinceclient, string villeclient) : base ( idclient,  rueclient,  codepostaleclient,  provinceclient,  villeclient)
+        public Entreprise(int idclient, string identre, string nomentre, float remiseentre, string rueclient, int codepostaleclient, string provinceclient, string villeclient) : base ( idclient,  rueclient,  codepostaleclient,  provinceclient,  villeclient)
         {
             this.identre = identre;
             this.nomentre = nomentre;
