@@ -139,20 +139,7 @@ namespace VeloMax
                                     reader = command.ExecuteReader();
                                     connection.Close();
 
-                                    // on recupere les datas
-                                    connection.Open();
-                                    command = connection.CreateCommand();
-                                    command.CommandText = "SELECT * FROM velomax.bicyclette;";
-                                    reader = command.ExecuteReader();
-                                    List<Bicyclette> myListBicy = new List<Bicyclette>();
-                                    while (reader.Read())// parcours ligne par ligne
-                                    {
-                                        myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                                        mw.keyBicy = Convert.ToInt32(reader.GetValue(0));
-                                    }
-                                    mw.myGridBicy.ItemsSource = myListBicy;
-                                    mw.myGridBicy.Items.Refresh();
-                                    connection.Close();
+                                    mw.RefreshBicyClette();
 
                                     this.Close();
                                 }

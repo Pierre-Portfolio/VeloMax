@@ -130,6 +130,9 @@ namespace VeloMax
                                         command.CommandText = "INSERT INTO velomax.bicyclette (idbicy,nom,grandeur,prixbicy,ligneproduit,dateintrobicy,datediscontinuationbicy)VALUES(" + mw.keyBicy.ToString() + ",'" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "'," + BoxPrix.Text + ",'" + BoxligneProd.Text.ToString() + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "');";
                                         MySqlDataReader reader = command.ExecuteReader();
                                         connection.Close();
+
+                                        mw.RefreshBicyClette();
+
                                         this.Close();
                                     }
                                     else

@@ -70,6 +70,8 @@ namespace VeloMax
                                             reader = command.ExecuteReader();
                                             connection.Close();
 
+                                            
+
                                             this.Close();
                                         }
                                         else

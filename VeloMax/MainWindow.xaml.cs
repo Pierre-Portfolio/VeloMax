@@ -151,6 +151,7 @@ namespace VeloMax
             command.CommandText = "SELECT * FROM velomax.assemblage;";
             MySqlDataReader reader;
             reader = command.ExecuteReader();
+            myListAssemblage.Clear();
             while (reader.Read())// parcours ligne par ligne
             {
                 myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
@@ -158,6 +159,7 @@ namespace VeloMax
             }
             myGridAssemblage.ItemsSource = myListAssemblage;
             myGridAssemblage.Items.Refresh();
+
             connection.Close();
         }
 
@@ -168,7 +170,7 @@ namespace VeloMax
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM velomax.bicyclette;";
             MySqlDataReader reader = command.ExecuteReader();
-
+            myListBicy.Clear();
             while (reader.Read())// parcours ligne par ligne
             {
                 myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
@@ -186,6 +188,7 @@ namespace VeloMax
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM velomax.piecedetache;";
             MySqlDataReader reader = command.ExecuteReader();
+            myListPiece.Clear();
             while (reader.Read())// parcours ligne par ligne
             {
                 myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));

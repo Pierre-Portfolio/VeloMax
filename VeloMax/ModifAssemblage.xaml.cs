@@ -218,35 +218,7 @@ namespace VeloMax
             MySqlDataReader reader = command.ExecuteReader();
             connection.Close();
 
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.assemblage;";
-            reader = command.ExecuteReader();
-            List<Assemblage> myListAssemblage = new List<Assemblage>();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
-
-            }
-            mw.myGridAssemblage.ItemsSource = myListAssemblage;
-            mw.myGridAssemblage.Items.Refresh();
-            connection.Close();
-
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.bicyclette;";
-            reader = command.ExecuteReader();
-            List<Bicyclette> myListBicy = new List<Bicyclette>();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                mw.keyBicy = Convert.ToInt32(reader.GetValue(0));
-            }
-            mw.myGridBicy.ItemsSource = myListBicy;
-            mw.myGridBicy.Items.Refresh();
-            connection.Close();
+            mw.RefreshAll();
 
             this.Close();
         }
