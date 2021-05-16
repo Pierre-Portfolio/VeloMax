@@ -414,7 +414,7 @@ namespace VeloMax
             btnSuprBicy.ToolTip = "Supprimer une Bicyclette";
             btnSuprBicy.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprBicy.Margin = new Thickness(275, -141, 0, 0);
-            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
+            btnSuprBicy.Click += new RoutedEventHandler(ButtonSupBicy);
             DynamicGridMateriel.Children.Add(btnSuprBicy);
 
             // titre 2
@@ -1376,6 +1376,26 @@ namespace VeloMax
             {
                 MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridBicy.SelectedItems.Count);
             }
+        }
+
+        private void ButtonSupBicy(object sender, RoutedEventArgs e)
+        {
+            if (myGridBicy.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridBicy.SelectedItems)
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.bicyclette WHERE idbicy =" + ((Bicyclette)o).Idbicy + ";UPDATE velomax.itemstock SET idbicy =null where idbicy =" + ((Bicyclette)o).Idbicy + "; SET foreign_key_checks = 1;";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
+            }
+            RefreshAll();
         }
 
         private void OpenAddPiece(object sender, RoutedEventArgs e)
