@@ -1427,23 +1427,18 @@ namespace VeloMax
             {
                 foreach (Object o in myGridPiece.SelectedItems)
                 {
-                    MessageBox.Show("COUCOU");
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
-                    MessageBox.Show("DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'");
-                    command.CommandText = "DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'";
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "';UPDATE velomax.itemstock SET numpiece = null where numpiece = '" + ((PieceDetache)o).Numpiece + "'; SET foreign_key_checks = 1; ";;
                     MySqlDataReader reader = command.ExecuteReader();
                     connection.Close();
-
-                    RefreshAll();
-
                 }
             }
             else
             {
                 MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
             }
-
+            RefreshAll();
         }
 
         #endregion Evenement Matériel
