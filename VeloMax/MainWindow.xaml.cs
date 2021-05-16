@@ -246,7 +246,7 @@ namespace VeloMax
             command.CommandText = "SELECT * FROM velomax.commande;";
             MySqlDataReader reader;
             reader = command.ExecuteReader();
-
+            myListCommande.Clear();
             while (reader.Read())// parcours ligne par ligne
             {
                 myListCommande.Add(new commande(Convert.ToInt32(reader.GetValue(0)), Convert.ToDateTime(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToDateTime(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
