@@ -1341,18 +1341,16 @@ namespace VeloMax
                 {
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'";
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.assemblage WHERE nom ='" + ((Assemblage)o).Nom + "' AND grandeur ='" + ((Assemblage)o).Grandeur + "';UPDATE velomax.bicyclette SET nom = '', grandeur = '' WHERE nom = '" + ((Assemblage)o).Nom + "' AND grandeur = '" + ((Assemblage)o).Grandeur + "'; SET foreign_key_checks = 1;";
                     MySqlDataReader reader = command.ExecuteReader();
                     connection.Close();
-
-                    RefreshAssemblage();
                 }
             }
             else
             {
                 MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
             }
-
+            RefreshAll();
         }
 
         private void OpenAddBicy(object sender, RoutedEventArgs e)
