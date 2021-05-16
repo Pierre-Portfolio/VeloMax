@@ -238,6 +238,25 @@ namespace VeloMax
             connection.Close();
         }
 
+        public void RefreshCommandes()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.commande;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListCommande.Add(new commande(Convert.ToInt32(reader.GetValue(0)), Convert.ToDateTime(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToDateTime(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
+                keyCommande = Convert.ToInt32(reader.GetValue(0));
+            }
+
+            myGridCommande.ItemsSource = myListCommande;
+            connection.Close();
+        }
+
         public void RefreshAll()
         {
             RefreshAssemblage();
@@ -245,6 +264,7 @@ namespace VeloMax
             RefreshPiece();
             RefreshClientParti();
             RefreshClientEntre();
+            RefreshCommandes();
         }
 
         #endregion Refresh
@@ -768,7 +788,7 @@ namespace VeloMax
             // Create Columns
             Grid.SetRow(DynamicGridCommands, 6);
             Grid.SetColumn(DynamicGridCommands, 0);
-            Grid.SetColumnSpan(DynamicGridCommands, 6);
+            Grid.SetColumnSpan(DynamicGridCommands, 7);
             ColumnDefinition gridColCommande1 = new ColumnDefinition();
             DynamicGridCommands.ColumnDefinitions.Add(gridColCommande1);
 
@@ -809,27 +829,11 @@ namespace VeloMax
             Grid.SetColumnSpan(txtBlock0, 6);
             DynamicGridCommands.Children.Add(txtBlock0);
 
-            //Clear
-
             myGridCommande.Items.Clear();
             myGridCommande.Width = 700;
             myGridCommande.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.commande;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListCommande.Add(new commande(Convert.ToInt32(reader.GetValue(0)), Convert.ToDateTime(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToDateTime(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
-                keyCommande = Convert.ToInt32(reader.GetValue(0));
-
-            }
-            myGridCommande.ItemsSource = myListCommande;
-            connection.Close();
+            RefreshCommandes();
 
             //on define le reste
             myGridCommande.Foreground = new SolidColorBrush(Colors.Black);
