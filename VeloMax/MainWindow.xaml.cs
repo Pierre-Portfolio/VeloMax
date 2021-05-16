@@ -199,11 +199,52 @@ namespace VeloMax
             connection.Close();
         }
 
+        public void RefreshClientParti()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.particulier NATURAL JOIN velomax.clientele;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            myListClientParti.Clear();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+                keyClient = Convert.ToInt32(reader.GetValue(0));
+                keyClientPart = Convert.ToInt32(reader.GetValue(1));
+            }
+            myGridClientParti.ItemsSource = myListClientParti;
+            myGridClientParti.Items.Refresh();
+            connection.Close();
+        }
+
+        public void RefreshClientEntre()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.entreprise NATURAL JOIN velomax.clientele;";
+            MySqlDataReader reader = command.ExecuteReader();
+            myListClientEntre.Clear();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListClientEntre.Add(new Entreprise(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), (float)(reader.GetValue(3)), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString()));
+                keyClient = Convert.ToInt32(reader.GetValue(0));
+                keyClientEntre = Convert.ToInt32(reader.GetValue(1));
+            }
+            myGridClientEntre.ItemsSource = myListClientEntre;
+            myGridClientEntre.Items.Refresh();
+            connection.Close();
+        }
+
         public void RefreshAll()
         {
             RefreshAssemblage();
             RefreshBicyClette();
             RefreshPiece();
+            RefreshClientParti();
+            RefreshClientEntre();
         }
 
         #endregion Refresh
@@ -561,21 +602,7 @@ namespace VeloMax
             myGridClientParti.Width = 700;
             myGridClientParti.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.particulier NATURAL JOIN velomax.clientele;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
-                keyClient = Convert.ToInt32(reader.GetValue(0));
-                keyClientPart = Convert.ToInt32(reader.GetValue(1));
-            }
-            myGridClientParti.ItemsSource = myListClientParti;
-            connection.Close();
+            RefreshClientParti();
 
             //on define le reste
             myGridClientParti.Foreground = new SolidColorBrush(Colors.Black);
@@ -588,8 +615,6 @@ namespace VeloMax
             Grid.SetColumn(myGridClientParti, 0);
             Grid.SetColumnSpan(myGridClientParti, 6);
             DynamicGridClient.Children.Add(myGridClientParti);
-
-
 
             //Btn ajouter
             Button btnAddClientParti = new Button();
@@ -636,7 +661,7 @@ namespace VeloMax
             btnSuprClientParti.ToolTip = "Supprimer un Client Particulier";
             btnSuprClientParti.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprClientParti.Margin = new Thickness(325, -12, 0, 0);
-            //btnSuprClientParti.Click += new RoutedEventHandler(ButtonSupClient);
+            btnSuprClientParti.Click += new RoutedEventHandler(ButtonSupClientParti);
             DynamicGridClient.Children.Add(btnSuprClientParti);
 
 
@@ -663,20 +688,7 @@ namespace VeloMax
             myGridClientEntre.Width = 700;
             myGridClientEntre.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.entreprise NATURAL JOIN velomax.clientele;";
-            reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListClientEntre.Add(new Entreprise(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), (float)(reader.GetValue(3)), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString()));
-                keyClient = Convert.ToInt32(reader.GetValue(0));
-                keyClientEntre = Convert.ToInt32(reader.GetValue(1));
-            }
-            myGridClientEntre.ItemsSource = myListClientEntre;
-            connection.Close();
+            RefreshClientEntre();
 
             //on define le reste
             myGridClientEntre.Foreground = new SolidColorBrush(Colors.Black);
@@ -720,7 +732,7 @@ namespace VeloMax
             btnModifClientEntre.Margin = new Thickness(275, -141, 0, 0);
             btnModifClientEntre.ToolTip = "Modifier un Client Particulier";
             btnModifClientEntre.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifClientEntre.Click += new RoutedEventHandler(ButtonModifClient);
+            btnModifClientEntre.Click += new RoutedEventHandler(ModifClientEntre);
             DynamicGridClient.Children.Add(btnModifClientEntre);
 
             //Btn del
@@ -1474,10 +1486,47 @@ namespace VeloMax
 
         }
 
+        private void ButtonSupClientParti(object sender, RoutedEventArgs e)
+        {
+            if (myGridClientParti.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridClientParti.SelectedItems)
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.particulier WHERE idclient =" + ((clientele)o).Idclient + ";DELETE FROM velomax.clientele WHERE idclient =" + ((clientele)o).Idclient + "; SET foreign_key_checks = 1;";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
+            }
+            RefreshAll();
+        }
+
         private void OpenAddClientEntreprise(object sender, RoutedEventArgs e)
         {
             var WindowAddClient = new AddClientEntre(connection, this);
             WindowAddClient.Show();
+        }
+
+        private void ModifClientEntre(object sender, RoutedEventArgs e)
+        {
+            if (myGridClientEntre.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridClientEntre.SelectedItems)
+                {
+                    modifClientEntre w = new modifClientEntre(connection, ((Entreprise)o), this);
+                    w.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridAssemblage.SelectedItems.Count);
+            }
+
         }
         #endregion Evenement Client
 

@@ -130,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="modifClientEntre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModifPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +149,9 @@
     </Compile>
     <Compile Include="ModifBicy.xaml.cs">
       <DependentUpon>ModifBicy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="modifClientEntre.xaml.cs">
+      <DependentUpon>modifClientEntre.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModifPiece.xaml.cs">
       <DependentUpon>ModifPiece.xaml</DependentUpon>

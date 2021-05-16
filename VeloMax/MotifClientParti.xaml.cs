@@ -111,21 +111,7 @@ namespace VeloMax
                                         reader = command.ExecuteReader();
                                         connection.Close();
 
-                                        // on recupere les datas
-                                        connection.Open();
-                                        command = connection.CreateCommand();
-                                        command.CommandText = "SELECT * FROM velomax.particulier NATURAL JOIN velomax.clientele;";
-                                        reader = command.ExecuteReader();
-                                        List<Particulier> myListClientParti = new List<Particulier>();
-                                        while (reader.Read())// parcours ligne par ligne
-                                        {
-                                            myListClientParti.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
-                                            mw.keyClient = Convert.ToInt32(reader.GetValue(0));
-                                            mw.keyClientPart = Convert.ToInt32(reader.GetValue(1));
-                                        }
-                                        mw.myGridClientParti.ItemsSource = myListClientParti;
-                                        mw.myGridClientParti.Items.Refresh();
-                                        connection.Close();
+                                        mw.RefreshClientParti();
 
                                         this.Close();
                                     }
