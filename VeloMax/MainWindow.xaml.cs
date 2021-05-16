@@ -748,7 +748,7 @@ namespace VeloMax
             btnSuprClientEntre.ToolTip = "Supprimer un Client Particulier";
             btnSuprClientEntre.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprClientEntre.Margin = new Thickness(325, -141, 0, 0);
-            //btnSuprFidelio.Click += new RoutedEventHandler(ButtonSupClient);
+            btnSuprClientEntre.Click += new RoutedEventHandler(ButtonSupClientEntre);
             DynamicGridClient.Children.Add(btnSuprClientEntre);
 
         }
@@ -1527,6 +1527,26 @@ namespace VeloMax
                 MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridAssemblage.SelectedItems.Count);
             }
 
+        }
+
+        private void ButtonSupClientEntre(object sender, RoutedEventArgs e)
+        {
+            if (myGridClientEntre.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridClientEntre.SelectedItems)
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.entreprise WHERE idclient =" + ((clientele)o).Idclient + ";DELETE FROM velomax.clientele WHERE idclient =" + ((clientele)o).Idclient + "; SET foreign_key_checks = 1;";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
+            }
+            RefreshAll();
         }
         #endregion Evenement Client
 
