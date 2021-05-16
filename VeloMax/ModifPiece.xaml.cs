@@ -134,14 +134,14 @@ namespace VeloMax
                                                             command = connection.CreateCommand();
                                                             command.CommandText = "SELECT * FROM velomax.assemblage;";
                                                             reader = command.ExecuteReader();
-                                                            List<Assemblage> myListAssemblage = new List<Assemblage>();
+                                                            List<PieceDetache> myListPiece2 = new List<PieceDetache>();
                                                             while (reader.Read())// parcours ligne par ligne
                                                             {
-                                                                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
-
+                                                                myListPiece2.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                                                                mw.keyPiece = Convert.ToInt32(reader.GetValue(2));
                                                             }
-                                                            mw.myGridAssemblage.ItemsSource = myListAssemblage;
-                                                            mw.myGridAssemblage.Items.Refresh();
+                                                            mw.myGridPiece.ItemsSource = myListPiece2;
+                                                            mw.myGridPiece.Items.Refresh();
                                                             connection.Close();
                                                         }
 

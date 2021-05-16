@@ -93,6 +93,8 @@ namespace VeloMax
         public DataGrid myGridFournisseur = new DataGrid();
         public int keyFournisseur = 0;
 
+        Grid DynamicGridStock = new Grid();
+
         Grid DynamicGridDemo = new Grid();
         //Demo
         public MediaElement meVideo = new MediaElement();
@@ -113,7 +115,7 @@ namespace VeloMax
             // Create Columns
             Grid.SetRow(DynamicGridMateriel, 6);
             Grid.SetColumn(DynamicGridMateriel, 0);
-            Grid.SetColumnSpan(DynamicGridMateriel, 6);
+            Grid.SetColumnSpan(DynamicGridMateriel, 7);
             ColumnDefinition gridColMatos1 = new ColumnDefinition();
             DynamicGridMateriel.ColumnDefinitions.Add(gridColMatos1);
 
@@ -130,12 +132,15 @@ namespace VeloMax
             gridRowMatos5.Height = new GridLength(30);
             RowDefinition gridRowMatos6 = new RowDefinition();
             gridRowMatos6.Height = new GridLength(100);
+            RowDefinition gridRowMatos7 = new RowDefinition();
+            gridRowMatos7.Height = new GridLength(100);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos1);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos2);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos3);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos4);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos5);
             DynamicGridMateriel.RowDefinitions.Add(gridRowMatos6);
+            DynamicGridMateriel.RowDefinitions.Add(gridRowMatos7);
             DynamicGridMateriel.Margin = new Thickness(0, 0, 0, 0);
 
             // titre 0
@@ -151,27 +156,15 @@ namespace VeloMax
             txtBlock0.FontWeight = FontWeights.Bold;
             Grid.SetRow(txtBlock0, 0);
             Grid.SetColumn(txtBlock0, 0);
-            Grid.SetColumnSpan(txtBlock0, 6);
+            Grid.SetColumnSpan(txtBlock0, 7);
             DynamicGridMateriel.Children.Add(txtBlock0);
 
-            // tableau des bicyclette
+            // tableau des assemblage
             myGridAssemblage.Items.Clear();
             myGridAssemblage.Width = 700;
             myGridAssemblage.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.assemblage;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
-
-            }
-            myGridAssemblage.ItemsSource = myListAssemblage;
-            connection.Close();
+            RefreshAssemblage();
 
             //on define le reste
             myGridAssemblage.Foreground = new SolidColorBrush(Colors.Black);
@@ -182,7 +175,7 @@ namespace VeloMax
             myGridAssemblage.IsReadOnly = true;
             Grid.SetRow(myGridAssemblage, 1);
             Grid.SetColumn(myGridAssemblage, 0);
-            Grid.SetColumnSpan(myGridAssemblage, 6);
+            Grid.SetColumnSpan(myGridAssemblage, 7);
             DynamicGridMateriel.Children.Add(myGridAssemblage);
 
             //Btn ajouter
@@ -193,7 +186,7 @@ namespace VeloMax
             btnAddAssemblage.Width = 15;
             Grid.SetRow(btnAddAssemblage, 0);
             Grid.SetColumn(btnAddAssemblage, 0);
-            Grid.SetColumnSpan(btnAddAssemblage, 6);
+            Grid.SetColumnSpan(btnAddAssemblage, 7);
             btnAddAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
             btnAddAssemblage.Margin = new Thickness(175, -12, 0, 0);
             btnAddAssemblage.ToolTip = "Ajouter un Assemblage";
@@ -209,7 +202,7 @@ namespace VeloMax
             btnModifAssemblage.Width = 15;
             Grid.SetRow(btnModifAssemblage, 0);
             Grid.SetColumn(btnModifAssemblage, 0);
-            Grid.SetColumnSpan(btnModifAssemblage, 6);
+            Grid.SetColumnSpan(btnModifAssemblage, 7);
             btnModifAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
             btnModifAssemblage.Margin = new Thickness(225, -12, 0, 0);
             btnModifAssemblage.ToolTip = "Modifier un Assemblage";
@@ -225,12 +218,12 @@ namespace VeloMax
             btnSuprAssemblage.Width = 15;
             Grid.SetRow(btnSuprAssemblage, 0);
             Grid.SetColumn(btnSuprAssemblage, 0);
-            Grid.SetColumnSpan(btnSuprAssemblage, 6);
+            Grid.SetColumnSpan(btnSuprAssemblage, 7);
             btnSuprAssemblage.BorderThickness = new Thickness(0, 0, 0, 0);
             btnSuprAssemblage.ToolTip = "Supprimer un Assemblage";
             btnSuprAssemblage.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprAssemblage.Margin = new Thickness(275, -12, 0, 0);
-            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
+            btnSuprAssemblage.Click += new RoutedEventHandler(ButtonSupAssemblage);
             DynamicGridMateriel.Children.Add(btnSuprAssemblage);
 
             // titre 1
@@ -246,7 +239,7 @@ namespace VeloMax
             txtBlock1.FontWeight = FontWeights.Bold;
             Grid.SetRow(txtBlock1, 2);
             Grid.SetColumn(txtBlock1, 0);
-            Grid.SetColumnSpan(txtBlock1, 6);
+            Grid.SetColumnSpan(txtBlock1, 7);
             DynamicGridMateriel.Children.Add(txtBlock1);
 
             // tableau des bicyclette
@@ -254,19 +247,7 @@ namespace VeloMax
             myGridBicy.Width = 700;
             myGridBicy.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.bicyclette;";
-            reader = command.ExecuteReader();
-            
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                keyBicy = Convert.ToInt32(reader.GetValue(0));
-            }
-            myGridBicy.ItemsSource = myListBicy;
-            connection.Close();
+            RefreshBicyClette();
 
             //on define le reste
             myGridBicy.Foreground = new SolidColorBrush(Colors.Black);
@@ -277,7 +258,7 @@ namespace VeloMax
             myGridBicy.IsReadOnly = true;
             Grid.SetRow(myGridBicy, 3);
             Grid.SetColumn(myGridBicy, 0);
-            Grid.SetColumnSpan(myGridBicy, 6);
+            Grid.SetColumnSpan(myGridBicy, 7);
             DynamicGridMateriel.Children.Add(myGridBicy);
 
             //Btn ajouter
@@ -349,18 +330,7 @@ namespace VeloMax
             myGridPiece.Width = 700;
             myGridPiece.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.piecedetache;";
-            reader = command.ExecuteReader();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
-                keyPiece = Convert.ToInt32(reader.GetValue(2));
-            }
-            myGridPiece.ItemsSource = myListPiece;
-            connection.Close();
+            RefreshPiece();
 
             //on define le reste
             myGridPiece.Foreground = new SolidColorBrush(Colors.Black);
@@ -419,7 +389,7 @@ namespace VeloMax
             btnSuprPiece.ToolTip = "Supprimer une Piece";
             btnSuprPiece.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprPiece.Margin = new Thickness(275, -141, 0, 0);
-            //btnSuprClient.Click += new RoutedEventHandler(ButtonSupClient);
+            btnSuprPiece.Click += new RoutedEventHandler(ButtonSupPiece);
             DynamicGridMateriel.Children.Add(btnSuprPiece);
         }
         #endregion Generation Materiel
@@ -437,7 +407,7 @@ namespace VeloMax
             // Create Columns
             Grid.SetRow(DynamicGridClient, 6);
             Grid.SetColumn(DynamicGridClient, 0);
-            Grid.SetColumnSpan(DynamicGridClient, 6);
+            Grid.SetColumnSpan(DynamicGridClient, 7);
             ColumnDefinition gridColClient1 = new ColumnDefinition();
             DynamicGridClient.ColumnDefinitions.Add(gridColClient1);
 
@@ -1221,7 +1191,9 @@ namespace VeloMax
             CommandesBtn.Background = new SolidColorBrush(Colors.Green);
             StatistiqueBtn.Background = new SolidColorBrush(Colors.Green);
             FournisseurBtn.Background = new SolidColorBrush(Colors.Green);
+            StockBtn.Background = new SolidColorBrush(Colors.Green);
             DemoBtn.Background = new SolidColorBrush(Colors.Green);
+
 
             // On refresh les dynamicGrid
             if (MainGrid.Children.Contains(DynamicGridMateriel))
@@ -1244,11 +1216,66 @@ namespace VeloMax
             {
                 MainGrid.Children.Remove(DynamicGridFournisseur);
             }
+            else if (MainGrid.Children.Contains(DynamicGridStock))
+            {
+                MainGrid.Children.Remove(DynamicGridStock);
+            }
             else if (MainGrid.Children.Contains(DynamicGridDemo))
             {
                 MainGrid.Children.Remove(DynamicGridDemo);
             }
         }
+
+        public void RefreshAssemblage() 
+        {
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.assemblage;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+            }
+            myGridAssemblage.ItemsSource = myListAssemblage;
+            connection.Close();
+        }
+
+        public void RefreshBicyClette()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.bicyclette;";
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                keyBicy = Convert.ToInt32(reader.GetValue(0));
+            }
+            myGridBicy.ItemsSource = myListBicy;
+            connection.Close();
+        }
+
+        public void RefreshPiece()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.piecedetache;";
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                keyPiece = Convert.ToInt32(reader.GetValue(2));
+            }
+            myGridPiece.ItemsSource = myListPiece;
+            connection.Close();
+        }
+
+
 
         #endregion Refresh
 
@@ -1298,11 +1325,32 @@ namespace VeloMax
             
         }
 
+        private void ButtonSupAssemblage(object sender, RoutedEventArgs e)
+        {
+            if (myGridPiece.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridPiece.SelectedItems)
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+
+                    RefreshAssemblage();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
+            }
+
+        }
+
         private void OpenAddBicy(object sender, RoutedEventArgs e)
         {
             var WindowAddClient = new AddBicy(connection, this);
             WindowAddClient.Show();
-            
         }
 
         private void ButtonModifBicy(object sender, RoutedEventArgs e)
@@ -1319,7 +1367,6 @@ namespace VeloMax
             {
                 MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridBicy.SelectedItems.Count);
             }
-
         }
 
         private void OpenAddPiece(object sender, RoutedEventArgs e)
@@ -1343,9 +1390,32 @@ namespace VeloMax
             {
                 MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridBicy.SelectedItems.Count);
             }
+        }
+
+        private void ButtonSupPiece(object sender, RoutedEventArgs e)
+        {
+            if (myGridPiece.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridPiece.SelectedItems)
+                {
+                    MessageBox.Show("COUCOU");
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+
+                    RefreshPiece();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vous devez avoir au moin 1 ligne selectionnées");
+            }
 
         }
-        
+
         #endregion Evenement Matériel
 
         #region Evenement Client
@@ -1412,6 +1482,15 @@ namespace VeloMax
             MainGrid.Children.Add(DynamicGridFournisseur);
         }
         #endregion Evenement Fournisseur
+
+        #region Stock
+        private void StockBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+            StockBtn.Background = new SolidColorBrush(Colors.White);
+            MainGrid.Children.Add(DynamicGridStock);
+        }
+        #endregion Stock
 
         #region Evenement Demo
         private void DemoBtn_Click(object sender, RoutedEventArgs e)
