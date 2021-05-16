@@ -68,33 +68,41 @@ namespace VeloMax
                                         {
                                             if (res3 >= 0)
                                             {
-                                                if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
+                                            if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
+                                            {
+                                                DateTime dt1 = DateTime.Now;
+                                                mw.keyPiece = mw.keyPiece + 1;
+
+                                                PieceDetache p1 = new PieceDetache(BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece, res, dt1, res2, res3, BoxSiret.Text.ToString());
+                                                mw.myListPiece.Add(p1);
+                                                mw.myGridPiece.ItemsSource = mw.myListPiece;
+                                                mw.myGridPiece.Items.Refresh();
+
+                                                connection.Open();
+                                                MySqlCommand command = connection.CreateCommand();
+                                                command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES('" + BoxNumPiece.Text.ToString() + "','" + BoxDescPiece.Text.ToString() + "'," + mw.keyPiece + "," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "'," + res3 + ",'" + BoxSiret.Text.ToString() + "');";
+                                                MySqlDataReader reader = command.ExecuteReader();
+                                                connection.Close();
+
+                                                // on recupere les datas
+                                                connection.Open();
+                                                command = connection.CreateCommand();
+                                                command.CommandText = "SELECT * FROM velomax.piecedetache;";
+                                                reader = command.ExecuteReader();
+                                                List<PieceDetache> myListPiece = new List<PieceDetache>();
+                                                while (reader.Read())// parcours ligne par ligne
                                                 {
-                                                    int res4;
-                                                    if (int.TryParse(BoxQuantitéDispo.Text.ToString(), out res4))
-                                                    {
-                                                        DateTime dt1 = DateTime.Now;
-                                                        mw.keyPiece = mw.keyPiece + 1;
-
-                                                        PieceDetache p1 = new PieceDetache(BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece, res, dt1, res2, res3, BoxSiret.Text.ToString(), res4);
-                                                        mw.myListPiece.Add(p1);
-                                                        mw.myGridPiece.ItemsSource = mw.myListPiece;
-                                                        mw.myGridPiece.Items.Refresh();
-
-                                                        connection.Open();
-                                                        MySqlCommand command = connection.CreateCommand();
-                                                        command.CommandText = "INSERT INTO velomax.piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)VALUES('" + BoxNumPiece.Text.ToString() + "','" + BoxDescPiece.Text.ToString() + "'," + mw.keyPiece + "," + res + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "'," + res3 + ",'" + BoxSiret.Text.ToString() + "');";
-                                                        MySqlDataReader reader = command.ExecuteReader();
-                                                        connection.Close();
-                                                        this.Close();
-                                                    
-                                                    }
-                                                    else
-                                                    {
-                                                        MessageBox.Show("Erreur le champ contenant la quantite doit contenir un chiffre !");
-                                                    }
-
+                                                    myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                                                    mw.keyPiece = Convert.ToInt32(reader.GetValue(2));
                                                 }
+                                                mw.myGridPiece.ItemsSource = myListPiece;
+                                                mw.myGridPiece.Items.Refresh();
+                                                connection.Close();
+
+                                                this.Close();
+
+                                            }    
+                                            
                                             else
                                                 {
                                                     MessageBox.Show("Erreur le champ contenant le champ de numéro de siret est vide !");

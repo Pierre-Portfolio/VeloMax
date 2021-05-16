@@ -59,7 +59,6 @@ namespace VeloMax
             BoxDateDisc.Text = p.Datediscontprod.ToString();
             BoxDelai.Text = p.Delaiapprovprod.ToString();
             BoxSiret.Text = p.Siret;
-            BoxQuantitéDispo.Text = p.QuantiteDispo.ToString();
         }
 
         private void AjouterPiece(object sender, RoutedEventArgs e)
@@ -87,10 +86,6 @@ namespace VeloMax
                                         {
                                             if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
                                             {
-                                                int res4;
-
-                                                if (int.TryParse(BoxQuantitéDispo.Text.ToString(), out res4))
-                                                {
                                                     connection.Open();
                                                     MySqlCommand command = connection.CreateCommand();
                                                     command.CommandText = "SELECT COUNT(*) from velomax.piecedetache where numpiece = '" + BoxNumPiece.Text + "';";
@@ -102,12 +97,12 @@ namespace VeloMax
                                                     }
                                                     connection.Close();
 
-                                                    if (nbrow == 0)
+                                                    if (nbrow == 0 || BoxNumPiece.Text == p.Numpiece)
                                                     {
 
                                                         connection.Open();
                                                         command = connection.CreateCommand();
-                                                        command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString() + "', quantiteDispo = '" + BoxQuantitéDispo.Text + "' where numpiece = '" + p.Numpiece + "';";
+                                                        command.CommandText = "UPDATE velomax.piecedetache SET numpiece = '" + BoxNumPiece.Text.ToString() + "', descpiece = '" + BoxDescPiece.Text.ToString() + "', numprodcatalogue = " + mw.keyPiece + ", prixpiece = " + res + ", datediscontprod = '" + res2.ToString("yyyy-MM-dd HH:mm:ss") + "', delaiapprovprod = " + res3 + ", siret = '" + BoxSiret.Text.ToString()  + "' where numpiece = '" + p.Numpiece + "';";
                                                         reader = command.ExecuteReader();
                                                         connection.Close();
 
@@ -119,7 +114,7 @@ namespace VeloMax
                                                         List<PieceDetache> myListPiece = new List<PieceDetache>();
                                                         while (reader.Read())// parcours ligne par ligne
                                                         {
-                                                            myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString(),1));
+                                                            myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
                                                             mw.keyPiece = Convert.ToInt32(reader.GetValue(2));
                                                         }
                                                         mw.myGridPiece.ItemsSource = myListPiece;
@@ -151,17 +146,12 @@ namespace VeloMax
                                                         }
 
                                                         this.Close();
+                                                    
                                                     }
                                                     else
                                                     {
-                                                        MessageBox.Show("Erreur le champ contenant la quantite doit contenir un chiffre !");
-
+                                                        MessageBox.Show("Erreur, une piece porte deja ce nom !");
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    MessageBox.Show("Erreur, une piece porte deja ce nom !");
-                                                }
                                             }
                                             else
                                             {

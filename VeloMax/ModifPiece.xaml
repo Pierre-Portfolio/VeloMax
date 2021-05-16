@@ -30,9 +30,6 @@
             <TextBlock Height="20" Canvas.Left="94" Canvas.Top="373" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Numero de Siret"/><Run Text=" : "/></TextBlock>
             <ComboBox x:Name="BoxSiret" Height="22" Canvas.Left="94" Canvas.Top="393" Width="150" AutomationProperties.Name="Tel"/>
 
-            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="423" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Quantité Dispo"/><Run Text=" : "/></TextBlock>
-            <TextBox x:Name="BoxQuantitéDispo" Height="22" Canvas.Left="94" Canvas.Top="443" Width="150" AutomationProperties.Name="Tel"/>
-
             <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="470" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterPiece"/>
 
         </Canvas>
