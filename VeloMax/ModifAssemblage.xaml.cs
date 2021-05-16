@@ -193,8 +193,8 @@ namespace VeloMax
 
             BoxNom.Text = a.Nom;
             BoxGrandeur.SelectedItem = a.Grandeur;
-            BoxNom.IsEnabled = false;
-            BoxGrandeur.IsEnabled = false;
+            //BoxNom.IsEnabled = false;
+            //BoxGrandeur.IsEnabled = false;
             BoxCadre.SelectedItem = a.Cadre;
             BoxGuidon.SelectedItem = a.Guidon;
             BoxFrein.SelectedItem = a.Freins;
@@ -213,11 +213,11 @@ namespace VeloMax
         {
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE velomax.assemblage SET cadre = '" + BoxCadre.SelectedItem + "',guidon = '" + BoxGuidon.SelectedItem + "', freins = '" + BoxFrein.SelectedItem + "', selle = '" + BoxSelle.SelectedItem + "' , derailleuravant = '" + BoxDeraillieurA.SelectedItem + "' , derailleurarriere = '" + BoxDeraillieurB.SelectedItem + "' , roueavant = '" + BoxRoueAvant.SelectedItem + "' , rouearriere = '" + BoxRoueArriere.SelectedItem + "' , reflecteur = '" + BoxReflecteur.SelectedItem + "' , pedalleur = '" + BoxPedalleur.SelectedItem + "' , ordinateur = '" + BoxOrdinateur.SelectedItem + "' , panier = '" + BoxPanier.SelectedItem + "' WHERE nom = '" + BoxNom.Text + "' AND grandeur = '" + BoxGrandeur.SelectedItem + "'";
+            command.CommandText = "SET foreign_key_checks = 0;UPDATE velomax.assemblage SET nom  = '" + BoxNom.Text + "', grandeur = '" +BoxGrandeur.SelectedItem + "',cadre = '" + BoxCadre.SelectedItem + "',guidon = '" + BoxGuidon.SelectedItem + "', freins = '" + BoxFrein.SelectedItem + "', selle = '" + BoxSelle.SelectedItem + "' , derailleuravant = '" + BoxDeraillieurA.SelectedItem + "' , derailleurarriere = '" + BoxDeraillieurB.SelectedItem + "' , roueavant = '" + BoxRoueAvant.SelectedItem + "' , rouearriere = '" + BoxRoueArriere.SelectedItem + "' , reflecteur = '" + BoxReflecteur.SelectedItem + "' , pedalleur = '" + BoxPedalleur.SelectedItem + "' , ordinateur = '" + BoxOrdinateur.SelectedItem + "' , panier = '" + BoxPanier.SelectedItem + "' WHERE nom = '" + a.Nom + "' AND grandeur = '" + a.Grandeur + "';UPDATE velomax.bicyclette SET nom = '" + BoxNom.Text + "', grandeur = '" + BoxGrandeur.SelectedItem + "' WHERE nom = '" + a.Nom + "' AND grandeur = '" + a.Grandeur + "';SET foreign_key_checks = 1;";
+            
             MySqlDataReader reader = command.ExecuteReader();
             connection.Close();
 
-            
             // on recupere les datas
             connection.Open();
             command = connection.CreateCommand();
@@ -232,7 +232,22 @@ namespace VeloMax
             mw.myGridAssemblage.ItemsSource = myListAssemblage;
             mw.myGridAssemblage.Items.Refresh();
             connection.Close();
-            
+
+            // on recupere les datas
+            connection.Open();
+            command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.bicyclette;";
+            reader = command.ExecuteReader();
+            List<Bicyclette> myListBicy = new List<Bicyclette>();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                mw.keyBicy = Convert.ToInt32(reader.GetValue(0));
+            }
+            mw.myGridBicy.ItemsSource = myListBicy;
+            mw.myGridBicy.Items.Refresh();
+            connection.Close();
+
             this.Close();
         }
     }

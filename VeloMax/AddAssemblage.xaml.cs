@@ -202,6 +202,8 @@ namespace VeloMax
                     command.CommandText = "INSERT INTO velomax.assemblage (nom,grandeur,cadre,guidon,freins,selle,derailleuravant,derailleurarriere,roueavant,rouearriere,reflecteur,pedalleur,ordinateur,panier)VALUES('" + BoxNom.Text.ToString() + "','" + BoxGrandeur.Text.ToString() + "','" + BoxCadre.Text.ToString() + "','" + BoxGuidon.Text.ToString() + "','" + BoxFrein.Text.ToString() + "','" + BoxSelle.Text.ToString() + "','" + BoxDeraillieurA.Text.ToString() + "','" + BoxDeraillieurB.Text.ToString() + "','" + BoxRoueAvant.Text.ToString() + "','" + BoxRoueArriere.Text.ToString() + "','" + BoxReflecteur.Text.ToString() + "','" + BoxPedalleur.Text.ToString() + "','" + BoxOrdinateur.Text.ToString() + "','" + BoxPanier.Text.ToString() + "');";
                     MySqlDataReader reader = command.ExecuteReader();
                     connection.Close();
+
+                    mw.RefreshAssemblage();
                     this.Close();
                 }
                 else

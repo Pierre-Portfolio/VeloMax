@@ -100,6 +100,111 @@ namespace VeloMax
         public MediaElement meVideo = new MediaElement();
         #endregion
 
+        #region Refresh
+        public void Refresh()
+        {
+            // on refresh les couleurs des bouttons
+            MaterielBtn.Background = new SolidColorBrush(Colors.Green);
+            ClientsBtn.Background = new SolidColorBrush(Colors.Green);
+            CommandesBtn.Background = new SolidColorBrush(Colors.Green);
+            StatistiqueBtn.Background = new SolidColorBrush(Colors.Green);
+            FournisseurBtn.Background = new SolidColorBrush(Colors.Green);
+            StockBtn.Background = new SolidColorBrush(Colors.Green);
+            DemoBtn.Background = new SolidColorBrush(Colors.Green);
+
+
+            // On refresh les dynamicGrid
+            if (MainGrid.Children.Contains(DynamicGridMateriel))
+            {
+                MainGrid.Children.Remove(DynamicGridMateriel);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridClient))
+            {
+                MainGrid.Children.Remove(DynamicGridClient);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridCommands))
+            {
+                MainGrid.Children.Remove(DynamicGridCommands);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridStats))
+            {
+                MainGrid.Children.Remove(DynamicGridStats);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridFournisseur))
+            {
+                MainGrid.Children.Remove(DynamicGridFournisseur);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridStock))
+            {
+                MainGrid.Children.Remove(DynamicGridStock);
+            }
+            else if (MainGrid.Children.Contains(DynamicGridDemo))
+            {
+                MainGrid.Children.Remove(DynamicGridDemo);
+            }
+        }
+
+        public void RefreshAssemblage()
+        {
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.assemblage;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+            }
+            myGridAssemblage.ItemsSource = myListAssemblage;
+            myGridAssemblage.Items.Refresh();
+            connection.Close();
+        }
+
+        public void RefreshBicyClette()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.bicyclette;";
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
+                keyBicy = Convert.ToInt32(reader.GetValue(0));
+            }
+            myGridBicy.ItemsSource = myListBicy;
+            myGridBicy.Items.Refresh();
+            connection.Close();
+        }
+
+        public void RefreshPiece()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.piecedetache;";
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
+                keyPiece = Convert.ToInt32(reader.GetValue(2));
+            }
+            myGridPiece.ItemsSource = myListPiece;
+            myGridPiece.Items.Refresh();
+            connection.Close();
+        }
+
+        public void RefreshAll()
+        {
+            RefreshAssemblage();
+            RefreshBicyClette();
+            RefreshPiece();
+        }
+
+        #endregion Refresh
+
         #region Génération
         #region Generation Materiel
         public void GeneMateriel()
@@ -1182,105 +1287,8 @@ namespace VeloMax
         #endregion Demo
         #endregion Generation
 
-        #region Refresh
-        public void Refresh()
-        {
-            // on refresh les couleurs des bouttons
-            MaterielBtn.Background = new SolidColorBrush(Colors.Green);
-            ClientsBtn.Background = new SolidColorBrush(Colors.Green);
-            CommandesBtn.Background = new SolidColorBrush(Colors.Green);
-            StatistiqueBtn.Background = new SolidColorBrush(Colors.Green);
-            FournisseurBtn.Background = new SolidColorBrush(Colors.Green);
-            StockBtn.Background = new SolidColorBrush(Colors.Green);
-            DemoBtn.Background = new SolidColorBrush(Colors.Green);
-
-
-            // On refresh les dynamicGrid
-            if (MainGrid.Children.Contains(DynamicGridMateriel))
-            {
-                MainGrid.Children.Remove(DynamicGridMateriel);
-            }
-            else if (MainGrid.Children.Contains(DynamicGridClient))
-            {
-                MainGrid.Children.Remove(DynamicGridClient);
-            }
-            else if (MainGrid.Children.Contains(DynamicGridCommands))
-            {
-                MainGrid.Children.Remove(DynamicGridCommands);
-            }
-            else if (MainGrid.Children.Contains(DynamicGridStats))
-            {
-                MainGrid.Children.Remove(DynamicGridStats);
-            }
-            else if (MainGrid.Children.Contains(DynamicGridFournisseur))
-            {
-                MainGrid.Children.Remove(DynamicGridFournisseur);
-            }
-            else if (MainGrid.Children.Contains(DynamicGridStock))
-            {
-                MainGrid.Children.Remove(DynamicGridStock);
-            }
-            else if (MainGrid.Children.Contains(DynamicGridDemo))
-            {
-                MainGrid.Children.Remove(DynamicGridDemo);
-            }
-        }
-
-        public void RefreshAssemblage() 
-        {
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.assemblage;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListAssemblage.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
-
-            }
-            myGridAssemblage.ItemsSource = myListAssemblage;
-            connection.Close();
-        }
-
-        public void RefreshBicyClette()
-        {
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.bicyclette;";
-            MySqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListBicy.Add(new Bicyclette(Convert.ToInt32(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3).ToString()), reader.GetValue(4).ToString(), Convert.ToDateTime(reader.GetValue(5)), Convert.ToDateTime(reader.GetValue(6))));
-                keyBicy = Convert.ToInt32(reader.GetValue(0));
-            }
-            myGridBicy.ItemsSource = myListBicy;
-            connection.Close();
-        }
-
-        public void RefreshPiece()
-        {
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.piecedetache;";
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListPiece.Add(new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), Convert.ToInt32(reader.GetValue(2).ToString()), Convert.ToInt32(reader.GetValue(3).ToString()), Convert.ToDateTime(reader.GetValue(4).ToString()), Convert.ToDateTime(reader.GetValue(5).ToString()), Convert.ToInt32(reader.GetValue(6).ToString()), reader.GetValue(7).ToString()));
-                keyPiece = Convert.ToInt32(reader.GetValue(2));
-            }
-            myGridPiece.ItemsSource = myListPiece;
-            connection.Close();
-        }
-
-
-
-        #endregion Refresh
-
         #region main
-        public MainWindow()
+            public MainWindow()
         {
             //generation des 6 sous menu
             GeneMateriel();
@@ -1327,9 +1335,9 @@ namespace VeloMax
 
         private void ButtonSupAssemblage(object sender, RoutedEventArgs e)
         {
-            if (myGridPiece.SelectedItems.Count != 0)
+            if (myGridAssemblage.SelectedItems.Count != 0)
             {
-                foreach (Object o in myGridPiece.SelectedItems)
+                foreach (Object o in myGridAssemblage.SelectedItems)
                 {
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
@@ -1401,11 +1409,12 @@ namespace VeloMax
                     MessageBox.Show("COUCOU");
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
+                    MessageBox.Show("DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'");
                     command.CommandText = "DELETE FROM velomax.piecedetache WHERE numpiece ='" + ((PieceDetache)o).Numpiece + "'";
                     MySqlDataReader reader = command.ExecuteReader();
                     connection.Close();
 
-                    RefreshPiece();
+                    RefreshAll();
 
                 }
             }
