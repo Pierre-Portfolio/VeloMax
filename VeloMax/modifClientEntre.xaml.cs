@@ -22,17 +22,20 @@ namespace VeloMax
     {
         public MySqlConnection connection;
         public MainWindow mw;
-        public Entreprise e;
-        public modifClientEntre(MySqlConnection connection, Entreprise e, MainWindow mw)
+        public Entreprise e1;
+        public modifClientEntre(MySqlConnection connection, Entreprise e1, MainWindow mw)
         {
             InitializeComponent();
+            this.connection = connection;
+            this.e1 = e1;
+            this.mw = mw;
 
-            BoxNomEntre.Text = e.Nomentre;
-            BoxRemiseEntre.Text = e.Remiseentre.ToString();
-            BoxRueClient.Text = e.Rueclient;
-            BoxCodePostale.Text = e.Codepostaleclient;
-            BoxProvinceClient.Text = e.Provinceclient;
-            BoxVilleClient.Text = e.Villeclient;
+            BoxNomEntre.Text = e1.Nomentre;
+            BoxRemiseEntre.Text = e1.Remiseentre.ToString();
+            BoxRueClient.Text = e1.Rueclient;
+            BoxCodePostale.Text = e1.Codepostaleclient;
+            BoxProvinceClient.Text = e1.Provinceclient;
+            BoxVilleClient.Text = e1.Villeclient;
 
         }
 
@@ -57,15 +60,17 @@ namespace VeloMax
                                         {
                                             connection.Open();
                                             MySqlCommand command = connection.CreateCommand();
-                                            command.CommandText = "INSERT INTO velomax.clientele (idclient,rueclient,codepostaleclient,provinceclient,villeclient)VALUES(" + mw.keyClient.ToString() + ",'" + BoxRueClient.Text.ToString() + "','" + BoxCodePostale.Text.ToString() + "','" + BoxProvinceClient.Text.ToString() + "','" + BoxVilleClient.Text.ToString() + "');";
+                                            command.CommandText = "UPDATE velomax.clientele set rueclient= '" + BoxRueClient.Text.ToString() + "', codepostaleclient = '" + BoxCodePostale.Text.ToString() + "', provinceclient = '" + BoxProvinceClient.Text.ToString() + "', villeclient ='" + BoxVilleClient.Text.ToString() + "' where idclient = '" + e1.Idclient + "';";
                                             MySqlDataReader reader = command.ExecuteReader();
                                             connection.Close();
 
                                             connection.Open();
                                             command = connection.CreateCommand();
-                                            command.CommandText = "INSERT INTO velomax.entreprise (identre,nomentre,remiseentre,idclient)VALUES(" + mw.keyClientEntre.ToString() + ",'" + BoxNomEntre.Text.ToString() + "'," + res + ", " + mw.keyClient + ");";
+                                            command.CommandText = "UPDATE velomax.particulier set nomentre= '" + BoxNomEntre.Text.ToString() + "', remisenetre = '" + BoxRemiseEntre.Text.ToString() + "' where idclient = '" + e1.Idclient + "';";
                                             reader = command.ExecuteReader();
                                             connection.Close();
+
+                                            mw.RefreshClientEntre();
 
 
 

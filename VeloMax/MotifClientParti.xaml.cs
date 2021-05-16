@@ -93,11 +93,6 @@ namespace VeloMax
                                         }
                                         connection.Close();
 
-                                        Particulier p1 = new Particulier(mw.keyClient, mw.keyClientPart, BoxNomClient.Text.ToString(), BoxPrenomClient.Text.ToString(), idfidel, BoxRueClient.Text.ToString(), BoxCodePostale.Text.ToString(), BoxProvinceClient.Text.ToString(), BoxVilleClient.Text.ToString());
-                                        mw.myListClientParti.Add(p1);
-                                        mw.myGridClientParti.ItemsSource = mw.myListClientParti;
-                                        mw.myGridClientParti.Items.Refresh();
-
                                         connection.Open();
                                         command = connection.CreateCommand();
                                         command.CommandText = "UPDATE velomax.clientele set rueclient= '" + BoxRueClient.Text.ToString() + "', codepostaleclient = '" + BoxCodePostale.Text.ToString() + "', provinceclient = '" + BoxProvinceClient.Text.ToString() + "', villeclient ='" + BoxVilleClient.Text.ToString() + "' where idclient = '" + p.Idparticulier + "';";
@@ -106,7 +101,6 @@ namespace VeloMax
 
                                         connection.Open();
                                         command = connection.CreateCommand();
-                                        command.CommandText = "UPDATE velomax.particulier set nomclient= '" + BoxNomClient.Text.ToString() + "', prenomclient = '" + BoxPrenomClient.Text.ToString() + "',  idfidelio ='" + idfidel + "' where idclient = '" + p.Idparticulier + "';";
                                         command.CommandText = "UPDATE velomax.particulier set nomclient= '" + BoxNomClient.Text.ToString() + "', prenomclient = '" + BoxPrenomClient.Text.ToString() + "',  idfidelio ='" + idfidel + "' where idclient = '" + p.Idparticulier + "';";
                                         reader = command.ExecuteReader();
                                         connection.Close();
