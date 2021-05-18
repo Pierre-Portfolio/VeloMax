@@ -78,9 +78,11 @@ namespace VeloMax
 
         Grid DynamicGridCommands = new Grid();
         public List<commande> myListCommande = new List<commande>();
+        public List<Itemcmd> myListItemCommande = new List<Itemcmd>();
         public DataGrid myGridCommande = new DataGrid();
         public DataGrid myGridItemCommande = new DataGrid();
         public int keyCommande = 0;
+        public int keyidItemCommande = 0;
 
         Grid DynamicGridStats = new Grid();
         public DataGrid myGridStat = new DataGrid();
@@ -253,8 +255,28 @@ namespace VeloMax
                 myListCommande.Add(new commande(Convert.ToInt32(reader.GetValue(0)), Convert.ToDateTime(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToDateTime(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
                 keyCommande = Convert.ToInt32(reader.GetValue(0));
             }
-
             myGridCommande.ItemsSource = myListCommande;
+            myGridCommande.Items.Refresh();
+            connection.Close();
+        }
+
+        public void RefreshItemsCommandes()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.itemcmd;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            myListItemCommande.Clear();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListItemCommande.Add(new Itemcmd(reader.GetValue(0).ToString(), Convert.ToInt32(reader.GetValue(1)), Convert.ToInt32(reader.GetValue(2)), Convert.ToInt32(reader.GetValue(2))));
+                keyidItemCommande = Convert.ToInt32(reader.GetValue(0));
+            }
+
+            myGridItemCommande.ItemsSource = myListItemCommande;
+            myGridItemCommande.Items.Refresh();
             connection.Close();
         }
 
@@ -895,7 +917,6 @@ namespace VeloMax
             //btnSuprCommande.Click += new RoutedEventHandler(BoutonSuprCommande);
             DynamicGridCommands.Children.Add(btnSuprCommande);
 
-
             // titre 1
             TextBlock txtBlock1 = new TextBlock();
             txtBlock1.Text = "Liste des Items commandés";
@@ -916,7 +937,7 @@ namespace VeloMax
             myGridItemCommande.Width = 700;
             myGridItemCommande.Height = 100;
 
-            RefreshCommandes();
+            RefreshItemsCommandes();
 
             //on define le reste
             myGridItemCommande.Foreground = new SolidColorBrush(Colors.Black);
@@ -995,7 +1016,7 @@ namespace VeloMax
             // Create Columns
             Grid.SetRow(DynamicGridFournisseur, 6);
             Grid.SetColumn(DynamicGridFournisseur, 0);
-            Grid.SetColumnSpan(DynamicGridFournisseur, 6);
+            Grid.SetColumnSpan(DynamicGridFournisseur, 7);
             ColumnDefinition gridColFournisseur1 = new ColumnDefinition();
             DynamicGridFournisseur.ColumnDefinitions.Add(gridColFournisseur1);
 
@@ -1273,7 +1294,7 @@ namespace VeloMax
             // Create Columns
             Grid.SetRow(DynamicGridDemo, 6);
             Grid.SetColumn(DynamicGridDemo, 0);
-            Grid.SetColumnSpan(DynamicGridDemo, 6);
+            Grid.SetColumnSpan(DynamicGridDemo, 7);
             ColumnDefinition gridColDemo1 = new ColumnDefinition();
             DynamicGridDemo.ColumnDefinitions.Add(gridColDemo1);
             ColumnDefinition gridColDemo2 = new ColumnDefinition();

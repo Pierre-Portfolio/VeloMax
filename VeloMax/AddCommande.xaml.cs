@@ -57,7 +57,7 @@ namespace VeloMax
             List<string> listBicyCmd = new List<string>();
             while (reader.Read())// parcours ligne par ligne
             {
-                listBicyCmd.Add($"{reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} | {reader.GetValue(3)} $");
+                listBicyCmd.Add($"Bicyclette : {reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} | {reader.GetValue(3)} $");
             }
             connection.Close();
 
@@ -67,7 +67,7 @@ namespace VeloMax
             reader = command.ExecuteReader();
             while (reader.Read())// parcours ligne par ligne
             {
-                listBicyCmd.Add($"{reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} $");
+                listBicyCmd.Add($"Piece : {reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} $");
             }
             connection.Close();
             BoxAddItems.ItemsSource = listBicyCmd;
@@ -75,7 +75,6 @@ namespace VeloMax
 
         private void BoxAddItems_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(BoxAddItems.SelectedItem.ToString());
             ClientCmd.Add(BoxAddItems.SelectedItem.ToString());
             listCmdClient.ItemsSource = ClientCmd;
             listCmdClient.Items.Refresh();
@@ -106,7 +105,6 @@ namespace VeloMax
                     }
                     else
                     {
-                        MessageBox.Show("Entre");
                         connection.Open();
                         command = connection.CreateCommand();
                         command.CommandText = "SELECT idclient FROM velomax.entreprise where nomentre = '" + recupnomClient[2] + "';";
@@ -115,19 +113,33 @@ namespace VeloMax
                         {
                             residclient = reader.GetValue(0).ToString();
                         }
-                        MessageBox.Show(residclient);
                     }
                     connection.Close();
                     MessageBox.Show("Delai de livraison estimé : 3 jours");
-                    
+
+                    mw.keyCommande++;
                     connection.Open();
                     command = connection.CreateCommand();
-                    MessageBox.Show("INSERT INTO velomax.commande (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "','" + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "'," + residclient + ");");
-                    command.CommandText = "INSERT INTO velomax.commande (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "','" + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "'," + residclient + ");";
+                    command.CommandText = "INSERT INTO velomax.commande (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "','" + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "'," + residclient + ");";
                     reader = command.ExecuteReader();
                     connection.Close();
 
                     mw.RefreshCommandes();
+
+                    foreach (string MyItem in listCmdClient.Items)
+                    {
+                        //MessageBox.Show(MyItem.ToString());
+                        string[] ItemsRecup = MyItem.ToString().Split();
+                        if(ItemsRecup[0] == "Bicyclette")
+                        {
+                            
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
 
                     /*
                     connection.Open();
@@ -137,7 +149,9 @@ namespace VeloMax
                     reader = command.ExecuteReader();
                     connection.Close();
                     */
-                    //this.Close();
+
+
+                    this.Close();
                 }
                 else
                 {
