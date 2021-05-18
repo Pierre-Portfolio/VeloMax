@@ -51,27 +51,27 @@ namespace VeloMax
             {
                 if (BoxDescPiece.Text != "" && BoxDescPiece.Text.Length != 0)
                 { 
-                        int res;
-                        if (int.TryParse(BoxPrix.Text.ToString(), out res))
+                        
+                        if (int.TryParse(BoxPrix.Text.ToString(), out int res))
                         {
                             if (res > 0)
                             {
                                 if (BoxDateDisc.Text != "" && BoxDateDisc.Text.Length != 0)
                                 {
 
-                                    DateTime res2;
-                                    if (DateTime.TryParse(BoxDateDisc.Text.ToString(), out res2))
+                                    
+                                    if (DateTime.TryParse(BoxDateDisc.Text.ToString(), out DateTime res2))
                                     {
 
-                                        int res3;
-                                        if (int.TryParse(BoxDelai.Text.ToString(), out res3))
+                                        
+                                        if (int.TryParse(BoxDelai.Text.ToString(), out int res3))
                                         {
                                             if (res3 >= 0)
                                             {
                                             if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
                                             {
                                                 DateTime dt1 = DateTime.Now;
-                                                mw.keyPiece = mw.keyPiece + 1;
+                                                mw.keyPiece++;
 
                                                 PieceDetache p1 = new PieceDetache(BoxNumPiece.Text.ToString(), BoxDescPiece.Text.ToString(), mw.keyPiece, res, dt1, res2, res3, BoxSiret.Text.ToString());
                                                 mw.myListPiece.Add(p1);

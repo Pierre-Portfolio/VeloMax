@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 
 namespace VeloMax
 {
@@ -20,9 +21,47 @@ namespace VeloMax
     /// </summary>
     public partial class AddFournisseur : Window
     {
-        public AddFournisseur()
+        public MySqlConnection connection;
+        public MainWindow mw;
+        public AddFournisseur(MySqlConnection connection, MainWindow mw)
         {
             InitializeComponent();
+            this.connection = connection;
+            this.mw = mw;
+        }
+
+        private void AjouterFournisseur(object sender, RoutedEventArgs e)
+        {
+            if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
+            {
+                if (BoxNomEntreprise.Text != "" && BoxNomEntreprise.Text.Length != 0)
+                {
+                    if (BoxSiret.Text.ToString().Length == 15)
+                    {
+                        connection.Open();
+                        MySqlCommand command = connection.CreateCommand();
+                        command.CommandText = "INSERT INTO velomax.fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)VALUES('" + BoxSiret.Text.ToString() + "','" + BoxNomEntreprise.Text.ToString() + "','" + BoxContact.Text.ToString() + "','" + BoxAddresse.Text.ToString() + "','" + BoxLibelle.Text.ToString() + "');";
+                        MySqlDataReader reader = command.ExecuteReader();
+                        connection.Close();
+
+                        //mw.RefreshFournisseur();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur , Le numéro de siret doit faire 15 caracteres , il y en a actuellement " + BoxSiret.Text.Length + " !");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Erreur , Le champ comprenant le nom de l'entreprise est vide !");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Erreur , Le champ comprenant le numéro de siret est vide !");
+            }
+            
         }
     }
 }

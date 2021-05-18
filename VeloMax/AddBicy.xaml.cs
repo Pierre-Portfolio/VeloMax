@@ -107,19 +107,19 @@ namespace VeloMax
                 {
                     if (BoxPrix.Text != "" && BoxPrix.Text.Length != 0)
                     {
-                        int res;
-                        if (int.TryParse(BoxPrix.Text.ToString(), out res))
+                        
+                        if (int.TryParse(BoxPrix.Text.ToString(), out int res))
                         {
                             if (res >= 0)
                             {
                                 if(BoxligneProd.Text != "" && BoxGrandeur.Text.Length != 0)
                                 {
                                     
-                                    DateTime res2;
-                                    if (DateTime.TryParse(BoxDateDisc.Text.ToString(), out res2))
+                                    
+                                    if (DateTime.TryParse(BoxDateDisc.Text.ToString(), out DateTime res2))
                                     {
                                         DateTime dt1 = DateTime.Now;
-                                        mw.keyBicy = mw.keyBicy + 1;
+                                        mw.keyBicy ++;
                                         Bicyclette b1 = new Bicyclette(mw.keyBicy, BoxNom.Text.ToString(), BoxGrandeur.Text.ToString(), res, BoxligneProd.Text.ToString(), dt1, res2);
                                         mw.myListBicy.Add(b1);
                                         mw.myGridBicy.ItemsSource = mw.myListBicy;

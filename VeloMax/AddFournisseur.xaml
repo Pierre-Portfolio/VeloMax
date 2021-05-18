@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="AddFournisseur" Height="450" Width="800">
-    <Grid>
-        
+        Title="Ajouter une Bicyclette" Height="454.8" Width="342.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="background.jpg"/>
+    </Window.Background>
+    <Grid Margin="0,-300,418.2,-257.2">
+        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,288,-338,262.8">
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="37" Text="Numero de Siret :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Foreground="Black" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxSiret"  Height="22" Canvas.Left="94" Canvas.Top="57" Width="150" AutomationProperties.Name="Nom" />
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="115" Text="Nom Entreprise :" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxNomEntreprise" Height="22" Canvas.Left="94" Canvas.Top="135"  Width="150" AutomationProperties.Name="Grandeur" />
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="192" Text="Contact : " TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxContact" Height="22" Canvas.Left="94" Canvas.Top="212" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Prix"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="259" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Adresse"/><Run Text=" : "/></TextBlock>
+            <TextBox Name="BoxAddresse" Height="22" Canvas.Left="94" Canvas.Top="279"  Width="150" AutomationProperties.Name="Tel"/>
+
+            <TextBlock Height="20" Canvas.Left="94" Canvas.Top="325" TextWrapping="Wrap" Width="150" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"><Run Language="fr-fr" Text="Libelle"/><Run Text=" : "/></TextBlock>
+            <TextBox x:Name="BoxLibelle" Height="22" Canvas.Left="94" Canvas.Top="345" TextWrapping="Wrap" Width="150" AutomationProperties.Name="Tel"/>
+
+            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="390" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterFournisseur"/>
+
+        </Canvas>
     </Grid>
 </Window>

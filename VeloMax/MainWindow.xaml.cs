@@ -29,7 +29,7 @@ namespace VeloMax
     {
 
         #region Gestion DB
-        public static MySqlConnection createDB()
+        public static MySqlConnection CreateDB()
         {
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=velomax;UID=root;PASSWORD=root;SSLMODE=none;";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -53,11 +53,11 @@ namespace VeloMax
 
         #region Variable Globale
         //Creation de l'objet mysql
-        MySqlConnection connection = createDB();
+        public MySqlConnection connection = CreateDB();
 
         // permet de savoir la fenetre actuel
         // On crée toutes les pages dynamique
-        Grid DynamicGridMateriel = new Grid();
+        public Grid DynamicGridMateriel = new Grid();
         public DataGrid myGridAssemblage = new DataGrid();
         public DataGrid myGridBicy = new DataGrid();
         public DataGrid myGridPiece = new DataGrid();
@@ -67,7 +67,7 @@ namespace VeloMax
         public List<Bicyclette> myListBicy = new List<Bicyclette>();
         public List<PieceDetache> myListPiece = new List<PieceDetache>();
 
-        Grid DynamicGridClient = new Grid();
+        public Grid DynamicGridClient = new Grid();
         public DataGrid myGridClientParti = new DataGrid();
         public DataGrid myGridClientEntre = new DataGrid();
         public List<Particulier> myListClientParti = new List<Particulier>();
@@ -76,7 +76,7 @@ namespace VeloMax
         public int keyClientEntre = 0;
         public int keyClientPart = 0;
 
-        Grid DynamicGridCommands = new Grid();
+        public Grid DynamicGridCommands = new Grid();
         public List<commande> myListCommande = new List<commande>();
         public List<Itemcmd> myListItemCommande = new List<Itemcmd>();
         public DataGrid myGridCommande = new DataGrid();
@@ -84,26 +84,26 @@ namespace VeloMax
         public int keyCommande = 0;
         public int keyidItemCommande = 0;
 
-        Grid DynamicGridStats = new Grid();
+        public Grid DynamicGridStats = new Grid();
         public DataGrid myGridStat = new DataGrid();
         public DataGrid myGridBicyQ = new DataGrid();
         public DataGrid myGridPieceQ = new DataGrid();
         public List<Bicyclette> myListBicyQ = new List<Bicyclette>();
         public List<PieceDetache> myListPieceDetQ = new List<PieceDetache>();
 
-        Grid DynamicGridFournisseur = new Grid();
+        public Grid DynamicGridFournisseur = new Grid();
         public List<Fournisseur> myListFournisseur = new List<Fournisseur>();
         public DataGrid myGridFournisseur = new DataGrid();
         public int keyFournisseur = 0;
 
-        Grid DynamicGridStock = new Grid();
+        public Grid DynamicGridStock = new Grid();
         public List<ItemStock> myListStock = new List<ItemStock>();
         public DataGrid myGridStock = new DataGrid();
         public int keyStock = 0;
 
-        
 
-        Grid DynamicGridDemo = new Grid();
+
+        public Grid DynamicGridDemo = new Grid();
         //Demo
         public MediaElement meVideo = new MediaElement();
         #endregion
@@ -282,6 +282,24 @@ namespace VeloMax
 
             myGridItemCommande.ItemsSource = myListItemCommande;
             myGridItemCommande.Items.Refresh();
+            connection.Close();
+        }
+
+        public void RefreshFournisseur()
+        {
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.fournisseur;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            myListFournisseur.Clear();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListFournisseur.Add(new Fournisseur(Convert.ToString(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToString(reader.GetValue(4))));
+            }
+            myGridFournisseur.ItemsSource = myListFournisseur;
+            myGridFournisseur.Items.Refresh();
             connection.Close();
         }
 
@@ -1068,21 +1086,7 @@ namespace VeloMax
             myGridFournisseur.Width = 700;
             myGridFournisseur.Height = 100;
 
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.fournisseur;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListFournisseur.Add(new Fournisseur(Convert.ToString(reader.GetValue(0)), Convert.ToString(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(3)), Convert.ToString(reader.GetValue(4))));
-
-
-            }
-            myGridFournisseur.ItemsSource = myListFournisseur;
-            connection.Close();
+            RefreshFournisseur();
 
             //on define le reste
             myGridFournisseur.Foreground = new SolidColorBrush(Colors.Black);
@@ -1109,7 +1113,7 @@ namespace VeloMax
             btnAddFournisseur.Margin = new Thickness(175, -12, 0, 0);
             btnAddFournisseur.ToolTip = "Ajouter un fournisseur";
             btnAddFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddCommande.Click += new RoutedEventHandler(OpenAddCommande);
+            btnAddFournisseur.Click += new RoutedEventHandler(OpenAddFournisseur);
             DynamicGridFournisseur.Children.Add(btnAddFournisseur);
 
             //Btn modifier
@@ -1125,7 +1129,7 @@ namespace VeloMax
             btnModifFournisseur.Margin = new Thickness(225, -12, 0, 0);
             btnModifFournisseur.ToolTip = "Modifier un fournisseur";
             btnModifFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
+            //btnModifFournisseur.Click += new RoutedEventHandler(ButtonModifCommande);
             DynamicGridFournisseur.Children.Add(btnModifFournisseur);
 
             //Btn del
@@ -1576,8 +1580,7 @@ namespace VeloMax
         }
         #endregion Stock
         
-
-            #region main
+        #region main
             public MainWindow()
         {
             //generation des 6 sous menu
@@ -1859,6 +1862,13 @@ namespace VeloMax
             FournisseurBtn.Background = new SolidColorBrush(Colors.White);
             MainGrid.Children.Add(DynamicGridFournisseur);
         }
+
+        private void OpenAddFournisseur(object sender, RoutedEventArgs e)
+        {
+            var w = new AddFournisseur(connection, this);
+            w.Show();
+        }
+
         #endregion Evenement Fournisseur
 
         #region Evenement Stock
