@@ -88,36 +88,48 @@ namespace VeloMax
                 if (BoxNomClient.Text != "" && BoxNomClient.Text.Length != 0)
                 {
                     DateTime dt1 = DateTime.Now;
-
+                    string residclient = "";
+                    MySqlCommand command;
+                    MySqlDataReader reader;
                     string[] recupnomClient = BoxNomClient.Text.ToString().Split();
                     if(recupnomClient[0] == "Particulier")
                     {
-                        MessageBox.Show("Particulier");
                         connection.Open();
-                        MySqlCommand command = connection.CreateCommand();
+                        command = connection.CreateCommand();
                         command.CommandText = "SELECT idclient FROM velomax.particulier where nomclient = '" + recupnomClient[2] + "' AND prenomclient='" + recupnomClient[3] + "';";
-                        MySqlDataReader reader;
                         reader = command.ExecuteReader();
-                        string residclient = "";
+
+                        while (reader.Read())// parcours ligne par ligne
+                        {
+                            residclient = reader.GetValue(0).ToString();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Entre");
+                        connection.Open();
+                        command = connection.CreateCommand();
+                        command.CommandText = "SELECT idclient FROM velomax.entreprise where nomentre = '" + recupnomClient[2] + "';";
+                        reader = command.ExecuteReader();
                         while (reader.Read())// parcours ligne par ligne
                         {
                             residclient = reader.GetValue(0).ToString();
                         }
                         MessageBox.Show(residclient);
                     }
-                    else
-                    {
-                        MessageBox.Show("Entre");
-                    }
-                    /*
+                    connection.Close();
+                    MessageBox.Show("Delai de livraison estimé : 3 jours");
+                    
                     connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO velomax.bicyclette (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "'," + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + idclient + "');";
-                    MySqlDataReader reader;
+                    command = connection.CreateCommand();
+                    MessageBox.Show("INSERT INTO velomax.commande (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "','" + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "'," + residclient + ");");
+                    command.CommandText = "INSERT INTO velomax.commande (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "','" + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "'," + residclient + ");";
                     reader = command.ExecuteReader();
                     connection.Close();
 
+                    mw.RefreshCommandes();
 
+                    /*
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
                     command.CommandText = "INSERT INTO velomax.bicyclette (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "'," + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + idclient + "');";
