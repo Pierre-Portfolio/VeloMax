@@ -99,8 +99,6 @@ C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.cspro
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.exe.config
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddAssemblage.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddBicy.g.cs
-C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClient.g.cs
-C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddFidelio.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddFournisseur.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddPiece.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MainWindow.g.cs
@@ -113,8 +111,6 @@ C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax_Marku
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax_MarkupCompile.lref
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddAssemblage.baml
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddBicy.baml
-C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClient.baml
-C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddFidelio.baml
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddFournisseur.baml
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddPiece.baml
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MainWindow.baml
@@ -139,3 +135,13 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifClientEn
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifClientEntre.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddCommande.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddCommande.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientEntre.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientPart.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddCommande.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifClientEntre.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MotifClientParti.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientEntre.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddClientPart.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddCommande.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifClientEntre.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MotifClientParti.baml

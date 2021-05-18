@@ -97,6 +97,11 @@ namespace VeloMax
         public int keyFournisseur = 0;
 
         Grid DynamicGridStock = new Grid();
+        public List<ItemStock> myListStock = new List<ItemStock>();
+        public DataGrid myGridStock = new DataGrid();
+        public int keyStock = 0;
+
+        
 
         Grid DynamicGridDemo = new Grid();
         //Demo
@@ -1408,7 +1413,171 @@ namespace VeloMax
         #endregion Demo
         #endregion Generation
 
-        #region main
+        #region Stock
+
+        public void GeneStock()
+        {
+            /* ==== Creation partie matériel ====*/
+            // création grid dynamic
+            DynamicGridStock.HorizontalAlignment = HorizontalAlignment.Left;
+            DynamicGridStock.Height = 400;
+            DynamicGridStock.Margin = new Thickness(0, 0, 0, 0);
+            DynamicGridStock.VerticalAlignment = VerticalAlignment.Center;
+            DynamicGridStock.Width = 780;
+
+
+            // Create Columns
+            Grid.SetRow(DynamicGridStock, 6);
+            Grid.SetColumn(DynamicGridStock, 0);
+            Grid.SetColumnSpan(DynamicGridStock, 7);
+            ColumnDefinition gridColStock1 = new ColumnDefinition();
+            DynamicGridStock.ColumnDefinitions.Add(gridColStock1);
+
+            // Create Rows
+            RowDefinition gridRowStock1 = new RowDefinition();
+            gridRowStock1.Height = new GridLength(30);
+            RowDefinition gridRowStock2 = new RowDefinition();
+            gridRowStock2.Height = new GridLength(100);
+            RowDefinition gridRowStock3 = new RowDefinition();
+            gridRowStock3.Height = new GridLength(30);
+            RowDefinition gridRowStock4 = new RowDefinition();
+            gridRowStock4.Height = new GridLength(100);
+            RowDefinition gridRowStock5 = new RowDefinition();
+            gridRowStock5.Height = new GridLength(30);
+            RowDefinition gridRowStock6 = new RowDefinition();
+            gridRowStock6.Height = new GridLength(100);
+            DynamicGridStock.RowDefinitions.Add(gridRowStock1);
+            DynamicGridStock.RowDefinitions.Add(gridRowStock2);
+            DynamicGridStock.RowDefinitions.Add(gridRowStock3);
+            DynamicGridStock.RowDefinitions.Add(gridRowStock4);
+            DynamicGridStock.RowDefinitions.Add(gridRowStock5);
+            DynamicGridStock.RowDefinitions.Add(gridRowStock6);
+            DynamicGridStock.Margin = new Thickness(0, 0, 0, 0);
+
+            // titre 0
+            TextBlock txtBlock0 = new TextBlock();
+            txtBlock0.Text = "Inventaire des stocks";
+            txtBlock0.FontSize = 14;
+            txtBlock0.Width = 700;
+            txtBlock0.TextAlignment = TextAlignment.Center;
+            txtBlock0.Background = new SolidColorBrush(Colors.Black);
+            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock0.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock0, 0);
+            Grid.SetColumn(txtBlock0, 0);
+            Grid.SetColumnSpan(txtBlock0, 6);
+            DynamicGridStock.Children.Add(txtBlock0);
+
+            //Clear
+
+            myGridStock.Items.Clear();
+            myGridStock.Width = 700;
+            myGridStock.Height = 100;
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.itemstock";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+
+            while (reader.Read())// parcours ligne par ligne
+            {
+                if (reader.GetValue(1) == null)
+                {
+
+                    myListStock.Add(new ItemStock(Convert.ToInt32(reader.GetValue(0)), 0, Convert.ToString(reader.GetValue(2))));
+                }
+                else if (reader.GetValue(2)==null)
+                {
+                    myListStock.Add(new ItemStock(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), " "));
+                }
+
+
+            }
+
+            //MySqlCommand commande = connection.CreateCommand();
+            //command.CommandText = "SELECT * FROM velomax.piecedetache NATURAL JOIN velomax.itemstock;";
+            //MySqlDataReader readere;
+            //readere = commande.ExecuteReader();
+
+            //while (reader.Read())// parcours ligne par ligne
+            //{
+            //    myListStock.Add(new ItemStock(Convert.ToInt32(reader.GetValue(0)), 0, Convert.ToString(reader.GetValue(2))));
+
+
+            //}
+
+            myGridStock.ItemsSource = myListStock;
+            connection.Close();
+
+            //on define le reste
+            myGridStock.Foreground = new SolidColorBrush(Colors.Black);
+            myGridStock.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridStock.Margin = new Thickness(0, -22, 0, 0);
+            myGridStock.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridStock.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridStock.IsReadOnly = true;
+            Grid.SetRow(myGridStock, 1);
+            Grid.SetColumn(myGridStock, 0);
+            Grid.SetColumnSpan(myGridStock, 6);
+            DynamicGridStock.Children.Add(myGridStock);
+
+            //Btn ajouter
+            Button btnAddStock = new Button();
+            btnAddStock.Content = "";
+            btnAddStock.Background = Brushes.Green;
+            btnAddStock.Height = 15;
+            btnAddStock.Width = 15;
+            Grid.SetRow(btnAddStock, 0);
+            Grid.SetColumn(btnAddStock, 0);
+            Grid.SetColumnSpan(btnAddStock, 6);
+            btnAddStock.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddStock.Margin = new Thickness(175, -12, 0, 0);
+            btnAddStock.ToolTip = "Ajouter un item";
+            btnAddStock.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddCommande.Click += new RoutedEventHandler(OpenAddCommande);
+            DynamicGridStock.Children.Add(btnAddStock);
+
+            //Btn modifier
+            Button btnModifStock = new Button();
+            btnModifStock.Content = "";
+            btnModifStock.Background = Brushes.Green;
+            btnModifStock.Height = 15;
+            btnModifStock.Width = 15;
+            Grid.SetRow(btnModifStock, 0);
+            Grid.SetColumn(btnModifStock, 0);
+            Grid.SetColumnSpan(btnModifStock, 6);
+            btnModifStock.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifStock.Margin = new Thickness(225, -12, 0, 0);
+            btnModifStock.ToolTip = "Modifier un item";
+            btnModifStock.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
+            DynamicGridStock.Children.Add(btnModifStock);
+
+            //Btn del
+            Button btnSupprStock = new Button();
+            btnSupprStock.Content = "";
+            btnSupprStock.Background = Brushes.Red;
+            btnSupprStock.Height = 15;
+            btnSupprStock.Width = 15;
+            Grid.SetRow(btnSupprStock, 0);
+            Grid.SetColumn(btnSupprStock, 0);
+            Grid.SetColumnSpan(btnSupprStock, 6);
+            btnSupprStock.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSupprStock.ToolTip = "Supprimer un item";
+            btnSupprStock.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSupprStock.Margin = new Thickness(275, -12, 0, 0);
+            //btnSuprFournisseur.Click += new RoutedEventHandler(BoutonSuprFournisseur);
+            DynamicGridStock.Children.Add(btnSupprStock);
+
+        }
+        #endregion Stock
+        
+
+            #region main
             public MainWindow()
         {
             //generation des 6 sous menu
@@ -1418,6 +1587,7 @@ namespace VeloMax
             GeneFournisseur();
             //GeneStat();
             GeneDemo();
+            GeneStock();
             //requeteSQL(connection);
         }
         #endregion
@@ -1690,6 +1860,10 @@ namespace VeloMax
             MainGrid.Children.Add(DynamicGridFournisseur);
         }
         #endregion Evenement Fournisseur
+
+        #region Evenement Stock
+
+        #endregion Evenement Stock
 
         #region Stock
         private void StockBtn_Click(object sender, RoutedEventArgs e)
