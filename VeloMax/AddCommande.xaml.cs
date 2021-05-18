@@ -39,12 +39,12 @@ namespace VeloMax
             {
                 if(reader.GetValue(0).ToString() == "")
                 {
-                    string nomPrenom = reader.GetValue(1).ToString() + " " + reader.GetValue(2).ToString();
+                    string nomPrenom = "Particulier : " + reader.GetValue(1).ToString() + " " + reader.GetValue(2).ToString();
                     listNom.Add(nomPrenom);
                 }
                 else
                 {
-                    listNom.Add(reader.GetValue(0).ToString());
+                    listNom.Add("Entreprise : " + reader.GetValue(0).ToString());
                 }
             }
             BoxNomClient.ItemsSource = listNom;
@@ -52,22 +52,22 @@ namespace VeloMax
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "select nom, grandeur, ligneproduit from velomax.bicyclette";
+            command.CommandText = "select nom, grandeur, ligneproduit, prixbicy from velomax.bicyclette";
             reader = command.ExecuteReader();
             List<string> listBicyCmd = new List<string>();
             while (reader.Read())// parcours ligne par ligne
             {
-                listBicyCmd.Add($"{reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} ");
+                listBicyCmd.Add($"{reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} | {reader.GetValue(3)} $");
             }
             connection.Close();
 
             connection.Open();
             command = connection.CreateCommand();
-            command.CommandText = "select numpiece,descpiece from velomax.piecedetache";
+            command.CommandText = "select numpiece,descpiece,prixpiece from velomax.piecedetache";
             reader = command.ExecuteReader();
             while (reader.Read())// parcours ligne par ligne
             {
-                listBicyCmd.Add($"{reader.GetValue(0)} | {reader.GetValue(1)}");
+                listBicyCmd.Add($"{reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} $");
             }
             connection.Close();
             BoxAddItems.ItemsSource = listBicyCmd;
@@ -79,20 +79,6 @@ namespace VeloMax
             ClientCmd.Add(BoxAddItems.SelectedItem.ToString());
             listCmdClient.ItemsSource = ClientCmd;
             listCmdClient.Items.Refresh();
-            /*
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT grandeur FROM velomax.assemblage where nom='" + BoxNom.SelectedItem.ToString() + "';";
-            MySqlDataReader reader = command.ExecuteReader();
-            List<string> listNom = new List<string>();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                listNom.Add(reader.GetValue(0).ToString());
-            }
-            connection.Close();
-            BoxGrandeur.Items.Refresh();
-            BoxGrandeur.ItemsSource = listNom;
-            */
         }
 
         private void AjouterCmd(object sender, RoutedEventArgs e)
@@ -101,8 +87,44 @@ namespace VeloMax
             {
                 if (BoxNomClient.Text != "" && BoxNomClient.Text.Length != 0)
                 {
-                    
-                    
+                    DateTime dt1 = DateTime.Now;
+
+                    string[] recupnomClient = BoxNomClient.Text.ToString().Split();
+                    if(recupnomClient[0] == "Particulier")
+                    {
+                        MessageBox.Show("Particulier");
+                        connection.Open();
+                        MySqlCommand command = connection.CreateCommand();
+                        command.CommandText = "SELECT idclient FROM velomax.particulier where nomclient = '" + recupnomClient[2] + "' AND prenomclient='" + recupnomClient[3] + "';";
+                        MySqlDataReader reader;
+                        reader = command.ExecuteReader();
+                        string residclient = "";
+                        while (reader.Read())// parcours ligne par ligne
+                        {
+                            residclient = reader.GetValue(0).ToString();
+                        }
+                        MessageBox.Show(residclient);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Entre");
+                    }
+                    /*
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "INSERT INTO velomax.bicyclette (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "'," + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + idclient + "');";
+                    MySqlDataReader reader;
+                    reader = command.ExecuteReader();
+                    connection.Close();
+
+
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "INSERT INTO velomax.bicyclette (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "'," + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + idclient + "');";
+                    MySqlDataReader reader;
+                    reader = command.ExecuteReader();
+                    connection.Close();
+                    */
                     //this.Close();
                 }
                 else
