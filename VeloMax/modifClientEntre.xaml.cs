@@ -67,7 +67,6 @@ namespace VeloMax
                                             connection.Open();
                                             command = connection.CreateCommand();
                                             command.CommandText = "UPDATE velomax.entreprise set nomentre= '" + BoxNomEntre.Text.ToString() + "', remiseentre = '" + BoxRemiseEntre.Text.ToString() + "' where idclient = '" + e1.Idclient + "';";
-                                            command.CommandText = "UPDATE velomax.entreprise set nomentre= '" + BoxNomEntre.Text.ToString() + "', remiseentre = '" + BoxRemiseEntre.Text.ToString() + "' where idclient = '" + e1.Idclient + "';";
                                             reader = command.ExecuteReader();
                                             connection.Close();
 

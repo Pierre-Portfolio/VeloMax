@@ -1129,7 +1129,7 @@ namespace VeloMax
             btnModifFournisseur.Margin = new Thickness(225, -12, 0, 0);
             btnModifFournisseur.ToolTip = "Modifier un fournisseur";
             btnModifFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifFournisseur.Click += new RoutedEventHandler(ButtonModifCommande);
+            btnModifFournisseur.Click += new RoutedEventHandler(OpenModifFournisseur);
             DynamicGridFournisseur.Children.Add(btnModifFournisseur);
 
             //Btn del
@@ -1145,7 +1145,7 @@ namespace VeloMax
             btnSuprFournisseur.ToolTip = "Supprimer un fournisseur";
             btnSuprFournisseur.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSuprFournisseur.Margin = new Thickness(275, -12, 0, 0);
-            //btnSuprFournisseur.Click += new RoutedEventHandler(BoutonSuprFournisseur);
+            btnSuprFournisseur.Click += new RoutedEventHandler(DelFournisseur);
             DynamicGridFournisseur.Children.Add(btnSuprFournisseur);
         }
         #endregion
@@ -1760,7 +1760,7 @@ namespace VeloMax
             }
             else
             {
-                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridAssemblage.SelectedItems.Count);
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridClientParti.SelectedItems.Count);
             }
 
         }
@@ -1803,7 +1803,7 @@ namespace VeloMax
             }
             else
             {
-                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridAssemblage.SelectedItems.Count);
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridClientEntre.SelectedItems.Count);
             }
 
         }
@@ -1867,6 +1867,43 @@ namespace VeloMax
         {
             var w = new AddFournisseur(connection, this);
             w.Show();
+        }
+
+        private void OpenModifFournisseur(object sender, RoutedEventArgs e)
+        {
+            if (myGridFournisseur.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridFournisseur.SelectedItems)
+                {
+                    modifFournisseur w = new modifFournisseur(connection, ((Fournisseur)o), this);
+                    w.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridFournisseur.SelectedItems.Count);
+            }
+
+        }
+
+        private void DelFournisseur(object sender, RoutedEventArgs e)
+        {
+            if (myGridFournisseur.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridFournisseur.SelectedItems)
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.fournisseur WHERE siret =" + ((Fournisseur)o).Siret + ";UPDATE velomax.piecedetache SET siret = null WHERE siret = " + ((Fournisseur)o).Siret + "; SET foreign_key_checks = 1;";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect! vous en avez actuellement selectionné " + myGridFournisseur.SelectedItems.Count);
+            }
+            RefreshFournisseur();
         }
 
         #endregion Evenement Fournisseur

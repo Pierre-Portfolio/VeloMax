@@ -157,3 +157,5 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\K4os.Compress
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\K4os.Hash.xxHash.dll
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\MySql.Data.xml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax.exe.config
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifFournisseur.g.cs
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifFournisseur.baml

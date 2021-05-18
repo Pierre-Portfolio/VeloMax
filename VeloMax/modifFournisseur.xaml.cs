@@ -12,25 +12,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-using MySql.Data.MySqlClient;
 
 namespace VeloMax
 {
     /// <summary>
-    /// Logique d'interaction pour AddFournisseur.xaml
-    /// </summary>
-    public partial class AddFournisseur : Window
+    /// Logique d'interaction pour modifFournisseur.xaml
+    public partial class modifFournisseur : Window
     {
         public MySqlConnection connection;
         public MainWindow mw;
-        public AddFournisseur(MySqlConnection connection, MainWindow mw)
+        public Fournisseur f1;
+        public modifFournisseur(MySqlConnection connection, Fournisseur f1,MainWindow mw)
         {
             InitializeComponent();
             this.connection = connection;
+            this.f1 = f1;
             this.mw = mw;
+
+            BoxSiret.Text = f1.Siret;
+            BoxNomEntreprise.Text = f1.Nomentreprise;
+            BoxContact.Text = f1.Contact;
+            BoxLibelle.Text = f1.Libellefourniseur;
+            BoxAddresse.Text = f1.Adrfour;
         }
 
-        private void AjouterFournisseur(object sender, RoutedEventArgs e)
+        private void ModifFournisseur(object sender, RoutedEventArgs e)
         {
             if (BoxSiret.Text != "" && BoxSiret.Text.Length != 0)
             {
@@ -40,7 +46,7 @@ namespace VeloMax
                     {
                         connection.Open();
                         MySqlCommand command = connection.CreateCommand();
-                        command.CommandText = "INSERT INTO velomax.fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)VALUES('" + BoxSiret.Text.ToString() + "','" + BoxNomEntreprise.Text.ToString() + "','" + BoxContact.Text.ToString() + "','" + BoxAddresse.Text.ToString() + "','" + BoxLibelle.Text.ToString() + "');";
+                        command.CommandText = "UPDATE velomax.fournisseur set siret = " + BoxSiret.Text.ToString() + ", nomentreprise = '" + BoxNomEntreprise.Text.ToString() + "', contact = '" + BoxContact.Text.ToString() + "', adrfour = '" + BoxAddresse.Text.ToString() + "', libellefourniseur = '" + BoxLibelle.Text.ToString() + "' where libellefourniseur = '" + BoxLibelle.Text.ToString() + "';";
                         MySqlDataReader reader = command.ExecuteReader();
                         connection.Close();
 
@@ -61,7 +67,7 @@ namespace VeloMax
             {
                 MessageBox.Show("Erreur , Le champ comprenant le numéro de siret est vide !");
             }
-            
+
         }
     }
 }
