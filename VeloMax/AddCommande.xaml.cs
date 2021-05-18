@@ -73,7 +73,7 @@ namespace VeloMax
             BoxAddItems.ItemsSource = listBicyCmd;
         }
 
-        private void BoxAddItems_SelectionChanged(object sender, RoutedEventArgs e)
+        private void AjouterItem(object sender, RoutedEventArgs e)
         {
             ClientCmd.Add(BoxAddItems.SelectedItem.ToString());
             listCmdClient.ItemsSource = ClientCmd;
