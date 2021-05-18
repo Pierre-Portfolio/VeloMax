@@ -137,3 +137,5 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MotifClientPa
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\MotifClientParti.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifClientEntre.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifClientEntre.baml
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddCommande.g.cs
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddCommande.baml

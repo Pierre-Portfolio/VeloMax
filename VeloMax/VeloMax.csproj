@@ -75,6 +75,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddCommande.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddFournisseur.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +102,9 @@
     </Compile>
     <Compile Include="AddClientPart.xaml.cs">
       <DependentUpon>AddClientPart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddCommande.xaml.cs">
+      <DependentUpon>AddCommande.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddFournisseur.xaml.cs">
       <DependentUpon>AddFournisseur.xaml</DependentUpon>

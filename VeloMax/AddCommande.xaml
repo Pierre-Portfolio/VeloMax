@@ -1,0 +1,35 @@
+﻿<Window x:Class="VeloMax.AddCommande"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeloMax"
+        mc:Ignorable="d"
+        Title="Ajouter une Commande" Height="415.5" Width="342.4" Icon="velo_logo.jpeg" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="background.jpg"/>
+    </Window.Background>
+    <Grid Margin="0,-300,418.2,-257.2">
+        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,288,-338,262.8">
+
+            <TextBlock Height="20" Canvas.Left="30" Canvas.Top="66" Text="Nom du client : " TextWrapping="Wrap" Width="280" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxNomClient" Height="22" Canvas.Left="30" Canvas.Top="86" Width="280" AutomationProperties.Name="nom"/>
+
+            <TextBlock Height="20" Canvas.Left="30" Canvas.Top="143" Text="Adresse livraison :" TextWrapping="Wrap" Width="280" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <TextBox Name="BoxAddrLivraison" Height="22" Canvas.Left="30" Canvas.Top="163"  Width="280" AutomationProperties.Name="adr" />
+
+            <TextBlock Height="20" Canvas.Left="30" Canvas.Top="215" Text="Items à ajouter :" TextWrapping="Wrap" Width="280" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
+            <ComboBox Name="BoxAddItems" SelectionChanged="BoxAddItems_SelectionChanged" Height="22" Canvas.Left="30" Canvas.Top="235"  Width="280" AutomationProperties.Name="Items" />
+
+            <Button Content="Valider" Height="25" Canvas.Left="106" Canvas.Top="374" Width="126" Cursor="Hand" Background="#FF34B104" Click="AjouterCmd"/>
+            <ListView Name="listCmdClient" Height="77" Canvas.Left="30" Canvas.Top="278" Width="280">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Canvas>
+    </Grid>
+</Window>

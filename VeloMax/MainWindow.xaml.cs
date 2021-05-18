@@ -79,6 +79,7 @@ namespace VeloMax
         Grid DynamicGridCommands = new Grid();
         public List<commande> myListCommande = new List<commande>();
         public DataGrid myGridCommande = new DataGrid();
+        public DataGrid myGridItemCommande = new DataGrid();
         public int keyCommande = 0;
 
         Grid DynamicGridStats = new Grid();
@@ -784,7 +785,6 @@ namespace VeloMax
             DynamicGridCommands.VerticalAlignment = VerticalAlignment.Center;
             DynamicGridCommands.Width = 780;
 
-
             // Create Columns
             Grid.SetRow(DynamicGridCommands, 6);
             Grid.SetColumn(DynamicGridCommands, 0);
@@ -857,10 +857,10 @@ namespace VeloMax
             Grid.SetColumn(btnAddCommande, 0);
             Grid.SetColumnSpan(btnAddCommande, 6);
             btnAddCommande.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnAddCommande.Margin = new Thickness(175, -12, 0, 0);
+            btnAddCommande.Margin = new Thickness(225, -12, 0, 0);
             btnAddCommande.ToolTip = "Ajouter une commande";
             btnAddCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddCommande.Click += new RoutedEventHandler(OpenAddCommande);
+            btnAddCommande.Click += new RoutedEventHandler(OpenAddCommandes);
             DynamicGridCommands.Children.Add(btnAddCommande);
 
             //Btn modifier
@@ -873,7 +873,7 @@ namespace VeloMax
             Grid.SetColumn(btnModifCommande, 0);
             Grid.SetColumnSpan(btnModifCommande, 6);
             btnModifCommande.BorderThickness = new Thickness(0, 0, 0, 0);
-            btnModifCommande.Margin = new Thickness(225, -12, 0, 0);
+            btnModifCommande.Margin = new Thickness(275, -12, 0, 0);
             btnModifCommande.ToolTip = "Modifier une commande";
             btnModifCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
             //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
@@ -891,12 +891,93 @@ namespace VeloMax
             btnSuprCommande.BorderThickness = new Thickness(0, 0, 0, 0);
             btnSuprCommande.ToolTip = "Supprimer une commande";
             btnSuprCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
-            btnSuprCommande.Margin = new Thickness(275, -12, 0, 0);
+            btnSuprCommande.Margin = new Thickness(325, -12, 0, 0);
             //btnSuprCommande.Click += new RoutedEventHandler(BoutonSuprCommande);
             DynamicGridCommands.Children.Add(btnSuprCommande);
+
+
+            // titre 1
+            TextBlock txtBlock1 = new TextBlock();
+            txtBlock1.Text = "Liste des Items commandés";
+            txtBlock1.FontSize = 14;
+            txtBlock1.Width = 700;
+            txtBlock1.TextAlignment = TextAlignment.Center;
+            txtBlock1.Background = new SolidColorBrush(Colors.Black);
+            txtBlock1.Foreground = new SolidColorBrush(Colors.White);
+            txtBlock1.VerticalAlignment = VerticalAlignment.Top;
+            txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
+            txtBlock1.FontWeight = FontWeights.Bold;
+            Grid.SetRow(txtBlock1, 2);
+            Grid.SetColumn(txtBlock1, 0);
+            Grid.SetColumnSpan(txtBlock1, 6);
+            DynamicGridCommands.Children.Add(txtBlock1);
+
+            myGridItemCommande.Items.Clear();
+            myGridItemCommande.Width = 700;
+            myGridItemCommande.Height = 100;
+
+            RefreshCommandes();
+
+            //on define le reste
+            myGridItemCommande.Foreground = new SolidColorBrush(Colors.Black);
+            myGridItemCommande.GridLinesVisibility = DataGridGridLinesVisibility.None;
+            myGridItemCommande.Margin = new Thickness(0, -22, 0, 0);
+            myGridItemCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridItemCommande.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            myGridItemCommande.IsReadOnly = true;
+            Grid.SetRow(myGridItemCommande, 3);
+            Grid.SetColumn(myGridItemCommande, 0);
+            Grid.SetColumnSpan(myGridItemCommande, 6);
+            DynamicGridCommands.Children.Add(myGridItemCommande);
+            
+            //Btn ajouter
+            Button btnAddItemCommande = new Button();
+            btnAddItemCommande.Content = "";
+            btnAddItemCommande.Background = Brushes.Green;
+            btnAddItemCommande.Height = 15;
+            btnAddItemCommande.Width = 15;
+            Grid.SetRow(btnAddItemCommande, 2);
+            Grid.SetColumn(btnAddItemCommande, 0);
+            Grid.SetColumnSpan(btnAddItemCommande, 6);
+            btnAddItemCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddItemCommande.Margin = new Thickness(225, -12, 0, 0);
+            btnAddItemCommande.ToolTip = "Ajouter un item";
+            btnAddItemCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
+            //btnAddItemCommande.Click += new RoutedEventHandler(OpenAddCommandes);
+            DynamicGridCommands.Children.Add(btnAddItemCommande);
+
+            //Btn modifier
+            Button btnModifItemCommande = new Button();
+            btnModifItemCommande.Content = "";
+            btnModifItemCommande.Background = Brushes.Green;
+            btnModifItemCommande.Height = 15;
+            btnModifItemCommande.Width = 15;
+            Grid.SetRow(btnModifItemCommande, 2);
+            Grid.SetColumn(btnModifItemCommande, 0);
+            Grid.SetColumnSpan(btnModifItemCommande, 6);
+            btnModifItemCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnModifItemCommande.Margin = new Thickness(275, -12, 0, 0);
+            btnModifItemCommande.ToolTip = "Modifier un item";
+            btnModifItemCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
+            //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
+            DynamicGridCommands.Children.Add(btnModifItemCommande);
+
+            //Btn del
+            Button btnSuprItemCommande = new Button();
+            btnSuprItemCommande.Content = "";
+            btnSuprItemCommande.Background = Brushes.Red;
+            btnSuprItemCommande.Height = 15;
+            btnSuprItemCommande.Width = 15;
+            Grid.SetRow(btnSuprItemCommande, 2);
+            Grid.SetColumn(btnSuprItemCommande, 0);
+            Grid.SetColumnSpan(btnSuprItemCommande, 6);
+            btnSuprItemCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnSuprItemCommande.ToolTip = "Supprimer un item";
+            btnSuprItemCommande.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
+            btnSuprItemCommande.Margin = new Thickness(325, -12, 0, 0);
+            //btnSuprCommande.Click += new RoutedEventHandler(BoutonSuprCommande);
+            DynamicGridCommands.Children.Add(btnSuprItemCommande);
         }
-
-
 
         #endregion Commande
         #region Fournisseur
@@ -1561,6 +1642,14 @@ namespace VeloMax
             CommandesBtn.Background = new SolidColorBrush(Colors.White);
             MainGrid.Children.Add(DynamicGridCommands);
         }
+
+        private void OpenAddCommandes(object sender, RoutedEventArgs e)
+        {
+            var WindowAddClient = new AddCommande(connection, this);
+            WindowAddClient.Show();
+        }
+
+
         #endregion Evenement Commandes
 
         #region Evenement Statistique
