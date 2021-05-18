@@ -71,6 +71,8 @@ namespace VeloMax
             }
             connection.Close();
             BoxAddItems.ItemsSource = listBicyCmd;
+
+            boxQuantiteProd.ItemsSource = "1 2 3 4 5 6 7 8 9".Split();
         }
 
         private void AjouterItem(object sender, RoutedEventArgs e)

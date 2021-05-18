@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="background.jpg"/>
     </Window.Background>
     <Grid Margin="0,-300,418.2,-257.2">
-        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="0,261,-338,419">
+        <Canvas HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="338" Margin="-4,238,-334,396.8">
 
             <TextBlock Height="20" Canvas.Left="30" Canvas.Top="100" Text="Nom du client : " TextWrapping="Wrap" Width="280" IsEnabled="False" FontWeight="Bold" Background="#CCFFFFFF"/>
             <ComboBox Name="BoxNomClient" Height="22" Canvas.Left="30" Canvas.Top="120" Width="280" AutomationProperties.Name="nom"/>
