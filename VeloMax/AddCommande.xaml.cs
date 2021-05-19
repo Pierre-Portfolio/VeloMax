@@ -57,7 +57,7 @@ namespace VeloMax
             List<string> listBicyCmd = new List<string>();
             while (reader.Read())// parcours ligne par ligne
             {
-                listBicyCmd.Add($"Bicyclette : {reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} | {reader.GetValue(3)} $");
+                listBicyCmd.Add($"Bicyclette : {reader.GetValue(0)} : {reader.GetValue(1)} : {reader.GetValue(2)} : {reader.GetValue(3)} $");
             }
             connection.Close();
 
@@ -67,7 +67,7 @@ namespace VeloMax
             reader = command.ExecuteReader();
             while (reader.Read())// parcours ligne par ligne
             {
-                listBicyCmd.Add($"Piece : {reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)} $");
+                listBicyCmd.Add($"Piece : {reader.GetValue(0)} : {reader.GetValue(1)} : {reader.GetValue(2)} $");
             }
             connection.Close();
             BoxAddItems.ItemsSource = listBicyCmd;
@@ -77,7 +77,7 @@ namespace VeloMax
 
         private void AjouterItem(object sender, RoutedEventArgs e)
         {
-            ClientCmd.Add(BoxAddItems.SelectedItem.ToString());
+            ClientCmd.Add(BoxAddItems.SelectedItem.ToString() + " : " + boxQuantiteProd.SelectedItem.ToString());
             listCmdClient.ItemsSource = ClientCmd;
             listCmdClient.Items.Refresh();
         }
@@ -134,13 +134,12 @@ namespace VeloMax
                         string[] ItemsRecup = MyItem.ToString().Split();
                         if(ItemsRecup[0] == "Bicyclette")
                         {
-                            
+                            MessageBox.Show("1");
                         }
                         else
                         {
-
+                            MessageBox.Show("2");
                         }
-
                     }
 
                     /*
