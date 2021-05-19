@@ -156,6 +156,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="modifStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MotifClientParti.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +180,9 @@
     </Compile>
     <Compile Include="ModifPiece.xaml.cs">
       <DependentUpon>ModifPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="modifStock.xaml.cs">
+      <DependentUpon>modifStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="MotifClientParti.xaml.cs">
       <DependentUpon>MotifClientParti.xaml</DependentUpon>

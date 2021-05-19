@@ -23,6 +23,7 @@ namespace VeloMax
         public MySqlConnection connection;
         public MainWindow mw;
         public ItemStock i1;
+        public string affichagedebut = "";
         public modifStock(MySqlConnection connection, ItemStock i1 , MainWindow mw)
         {
             InitializeComponent();
@@ -45,54 +46,88 @@ namespace VeloMax
             command = connection.CreateCommand();
             command.CommandText = "select numpiece,descpiece from velomax.piecedetache";
             reader = command.ExecuteReader();
-            while (reader.Read())// parcours ligne par ligne
+            while (reader.Read())
             {
                 listItems.Add($"Piece : {reader.GetValue(0)} | {reader.GetValue(1)}");
             }
             connection.Close();
             BoxItemStock.ItemsSource = listItems;
 
-            //BoxItemStock.SelectedItem = i1.
+            if (i1.Idbicy != 0)
+            {
+                connection.Open();
+                command = connection.CreateCommand();
+                command.CommandText = "select nom, grandeur, ligneproduit from velomax.bicyclette where idbicy = " + i1.Idbicy + ";";
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    BoxItemStock.SelectedItem = $"Bicyclette : {reader.GetValue(0)} | {reader.GetValue(1)} | {reader.GetValue(2)}";
+                }
+                connection.Close();
+            }
+            else
+            {
+                connection.Open();
+                command = connection.CreateCommand();
+                command.CommandText = "select numpiece,descpiece from velomax.piecedetache where numpiece = '" + i1.Numpiece + "';";
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    BoxItemStock.SelectedItem = $"Piece : {reader.GetValue(0)} | {reader.GetValue(1)}";
+                }
+                connection.Close();
+            }
+            affichagedebut = BoxItemStock.SelectedItem.ToString();
         }
 
         private void ModifStock(object sender, RoutedEventArgs e)
         {
             if (BoxItemStock.Text != "" && BoxItemStock.Text.Length != 0)
             {
-                string[] recupItems = BoxItemStock.Text.ToString().Split();
-
-                if (recupItems[0] == "Bicyclette")
+                if (affichagedebut != BoxItemStock.SelectedItem.ToString())
                 {
-                    /*
-                    // on recupere les datas
-                    connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT idbicy FROM velomax.bicyclette where nom = '" + recupItems[2] + "' AND grandeur = '" + recupItems[4] + "';";
-                    MySqlDataReader reader;
-                    reader = command.ExecuteReader();
-                    string res = "";
-                    while (reader.Read())// parcours ligne par ligne
+                    
+                    string[] recupItems = BoxItemStock.Text.ToString().Split();
+
+                    if (recupItems[0] == "Bicyclette")
                     {
-                        res = reader.GetValue(0).ToString();
+
+                        // on recupere les datas
+                        connection.Open();
+                        MySqlCommand command = connection.CreateCommand();
+                        command.CommandText = "SELECT idbicy FROM velomax.bicyclette where nom = '" + recupItems[2] + "' AND grandeur = '" + recupItems[4] + "';";
+                        MySqlDataReader reader;
+                        reader = command.ExecuteReader();
+                        string res = "";
+                        while (reader.Read())// parcours ligne par ligne
+                        {
+                            res = reader.GetValue(0).ToString();
+                        }
+                        connection.Close();
+
+                        
+                        connection.Open();
+                        command = connection.CreateCommand();
+                        command.CommandText = "UPDATE velomax.itemstock SET idbicy = " + res + "' WHERE idbicy = " + i1.Idbicy + " AND iditemstock = " + i1.Iditemstock + ";";
+                        reader = command.ExecuteReader();
+                        connection.Close();
                     }
-                    connection.Close();
-
-
-                    connection.Open();
-                    command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES ('" + res + "',null);";
-                    reader = command.ExecuteReader();
-                    connection.Close();
+                    else
+                    {
+                        
+                        connection.Open();
+                        MySqlCommand command = connection.CreateCommand();
+                        command.CommandText = "UPDATE velomax.itemstock SET numpiece = " + recupItems[2] + "' WHERE idbicy = " + i1.Numpiece + " AND iditemstock = " + i1.Iditemstock + ";";
+                        MySqlDataReader reader = command.ExecuteReader();
+                        connection.Close();
+                        
+                     }
                 }
                 else
                 {
-                    connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES (null, '" + recupItems[2] + "');";
-                    MySqlDataReader reader = command.ExecuteReader();
-                    connection.Close();
-                    */
+                    MessageBox.Show("Aucune modification effectué !");
                 }
+
 
                 mw.RefreshItemStock();
                 this.Close();

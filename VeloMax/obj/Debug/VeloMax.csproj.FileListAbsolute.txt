@@ -161,3 +161,5 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifFourniss
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifFournisseur.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddStock.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddStock.baml
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifStock.g.cs
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifStock.baml
