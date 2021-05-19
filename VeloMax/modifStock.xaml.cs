@@ -108,7 +108,8 @@ namespace VeloMax
                         
                         connection.Open();
                         command = connection.CreateCommand();
-                        command.CommandText = "UPDATE velomax.itemstock SET idbicy = " + res + "' WHERE idbicy = " + i1.Idbicy + " AND iditemstock = " + i1.Iditemstock + ";";
+                        MessageBox.Show("UPDATE velomax.itemstock SET idbicy = '" + res + "' and numpiece = null WHERE idbicy = '" + i1.Idbicy + "' AND iditemstock = " + i1.Iditemstock + "; ");
+                        command.CommandText = "UPDATE velomax.itemstock SET idbicy = '" + res + "' and numpiece = null WHERE idbicy = '" + i1.Idbicy + "' AND iditemstock = " + i1.Iditemstock + ";";
                         reader = command.ExecuteReader();
                         connection.Close();
                     }
@@ -117,7 +118,8 @@ namespace VeloMax
                         
                         connection.Open();
                         MySqlCommand command = connection.CreateCommand();
-                        command.CommandText = "UPDATE velomax.itemstock SET numpiece = " + recupItems[2] + "' WHERE idbicy = " + i1.Numpiece + " AND iditemstock = " + i1.Iditemstock + ";";
+                        MessageBox.Show("UPDATE velomax.itemstock SET numpiece = '" + recupItems[2] + "' and idbicy = null WHERE idbicy = '" + i1.Numpiece + "'AND iditemstock = " + i1.Iditemstock + ";");
+                        command.CommandText = "UPDATE velomax.itemstock SET numpiece = '" + recupItems[2] + "' and idbicy = null WHERE idbicy = '" + i1.Numpiece + "'AND iditemstock = " + i1.Iditemstock + ";";
                         MySqlDataReader reader = command.ExecuteReader();
                         connection.Close();
                         
