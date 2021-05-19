@@ -1405,7 +1405,7 @@ namespace VeloMax
             btnAddStock.Margin = new Thickness(175, -12, 0, 0);
             btnAddStock.ToolTip = "Ajouter un item";
             btnAddStock.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2014/04/02/10/41/button-304224_640.png")));
-            //btnAddCommande.Click += new RoutedEventHandler(OpenAddCommande);
+            btnAddStock.Click += new RoutedEventHandler(OpenAddStock);
             DynamicGridStock.Children.Add(btnAddStock);
 
             //Btn modifier
@@ -1581,7 +1581,6 @@ namespace VeloMax
             //GeneStat();
             GeneDemo();
             GeneStock();
-            //requeteSQL(connection);
         }
         #endregion
 
@@ -1899,17 +1898,19 @@ namespace VeloMax
         #endregion Evenement Fournisseur
 
         #region Evenement Stock
-
-        #endregion Evenement Stock
-
-        #region Stock
         private void StockBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();
             StockBtn.Background = new SolidColorBrush(Colors.White);
             MainGrid.Children.Add(DynamicGridStock);
         }
-        #endregion Stock
+        
+        private void OpenAddStock(object sender, RoutedEventArgs e)
+        {
+            var w = new AddStock(connection, this);
+            w.Show();
+        }
+        #endregion Evenement Stock
 
         #region Evenement Demo
         private void DemoBtn_Click(object sender, RoutedEventArgs e)
