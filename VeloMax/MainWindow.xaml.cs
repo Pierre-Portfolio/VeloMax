@@ -1421,7 +1421,7 @@ namespace VeloMax
             btnModifStock.Margin = new Thickness(225, -12, 0, 0);
             btnModifStock.ToolTip = "Modifier un item";
             btnModifStock.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2016/03/29/06/22/edit-1287617_1280.png")));
-            //btnModifCommande.Click += new RoutedEventHandler(ButtonModifCommande);
+            btnModifStock.Click += new RoutedEventHandler(ModifStock);
             DynamicGridStock.Children.Add(btnModifStock);
 
             //Btn del
@@ -1909,6 +1909,23 @@ namespace VeloMax
         {
             var w = new AddStock(connection, this);
             w.Show();
+        }
+
+        private void ModifStock(object sender, RoutedEventArgs e)
+        {
+            if (myGridStock.SelectedItems.Count == 1)
+            {
+                foreach (Object o in myGridStock.SelectedItems)
+                {
+                    modifStock w = new modifStock(connection, ((ItemStock)o), this);
+                    w.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridFournisseur.SelectedItems.Count);
+            }
+
         }
         #endregion Evenement Stock
 

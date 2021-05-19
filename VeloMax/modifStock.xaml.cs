@@ -16,18 +16,19 @@ using MySql.Data.MySqlClient;
 namespace VeloMax
 {
     /// <summary>
-    /// Logique d'interaction pour AddStock.xaml
+    /// Logique d'interaction pour modifStock.xaml
     /// </summary>
-    public partial class AddStock : Window
+    public partial class modifStock : Window
     {
         public MySqlConnection connection;
         public MainWindow mw;
-
-        public AddStock(MySqlConnection connection, MainWindow mw)
+        public ItemStock i1;
+        public modifStock(MySqlConnection connection, ItemStock i1 , MainWindow mw)
         {
             InitializeComponent();
             this.connection = connection;
             this.mw = mw;
+            this.i1 = i1;
 
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
@@ -50,9 +51,11 @@ namespace VeloMax
             }
             connection.Close();
             BoxItemStock.ItemsSource = listItems;
+
+            //BoxItemStock.SelectedItem = i1.
         }
 
-        private void AjouterStock(object sender, RoutedEventArgs e)
+        private void ModifStock(object sender, RoutedEventArgs e)
         {
             if (BoxItemStock.Text != "" && BoxItemStock.Text.Length != 0)
             {
@@ -60,6 +63,7 @@ namespace VeloMax
 
                 if (recupItems[0] == "Bicyclette")
                 {
+                    /*
                     // on recupere les datas
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
@@ -76,7 +80,7 @@ namespace VeloMax
 
                     connection.Open();
                     command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES ('" + res  + "',null);";
+                    command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES ('" + res + "',null);";
                     reader = command.ExecuteReader();
                     connection.Close();
                 }
@@ -84,9 +88,10 @@ namespace VeloMax
                 {
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES (null, '"+recupItems[2]+"');";
+                    command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES (null, '" + recupItems[2] + "');";
                     MySqlDataReader reader = command.ExecuteReader();
                     connection.Close();
+                    */
                 }
 
                 mw.RefreshItemStock();
@@ -98,6 +103,5 @@ namespace VeloMax
                 MessageBox.Show("Erreur le champ de choix d'item est vide !");
             }
         }
-
     }
 }
