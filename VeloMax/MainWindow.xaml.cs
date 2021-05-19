@@ -1110,18 +1110,20 @@ namespace VeloMax
 
             myGridFournisseur.Items.Clear();
             myGridFournisseur.Width = 700;
-            myGridFournisseur.Height = 100;
+            myGridFournisseur.Height = 500;
 
             RefreshFournisseur();
 
             //on define le reste
             myGridFournisseur.Foreground = new SolidColorBrush(Colors.Black);
             myGridFournisseur.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridFournisseur.Margin = new Thickness(0, -22, 0, 0);
-            myGridFournisseur.BorderThickness = new Thickness(0, 0, 0, 0);
+            myGridFournisseur.Margin = new Thickness(0, -12, 0, 0);
+            //myGridFournisseur.BorderThickness = new Thickness(0, 20, 0, 0);
+            //myGridFournisseur.Background = Brushes.Transparent;
             myGridFournisseur.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             myGridFournisseur.IsReadOnly = true;
             Grid.SetRow(myGridFournisseur, 1);
+            Grid.SetRowSpan(myGridFournisseur, 5);
             Grid.SetColumn(myGridFournisseur, 0);
             Grid.SetColumnSpan(myGridFournisseur, 6);
             DynamicGridFournisseur.Children.Add(myGridFournisseur);
@@ -1376,18 +1378,19 @@ namespace VeloMax
 
             myGridStock.Items.Clear();
             myGridStock.Width = 700;
-            myGridStock.Height = 100;
+            myGridStock.Height = 400;
 
             RefreshItemStock();
 
             //on define le reste
             myGridStock.Foreground = new SolidColorBrush(Colors.Black);
             myGridStock.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridStock.Margin = new Thickness(0, -22, 0, 0);
+            myGridStock.Margin = new Thickness(0, -11, 0, 0);
             myGridStock.BorderThickness = new Thickness(0, 0, 0, 0);
             myGridStock.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             myGridStock.IsReadOnly = true;
             Grid.SetRow(myGridStock, 1);
+            Grid.SetRowSpan(myGridStock, 5);
             Grid.SetColumn(myGridStock, 0);
             Grid.SetColumnSpan(myGridStock, 6);
             DynamicGridStock.Children.Add(myGridStock);
@@ -1437,7 +1440,7 @@ namespace VeloMax
             btnSupprStock.ToolTip = "Supprimer un item";
             btnSupprStock.Background = new ImageBrush(new BitmapImage(new Uri(@"https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png")));
             btnSupprStock.Margin = new Thickness(275, -12, 0, 0);
-            //btnSuprFournisseur.Click += new RoutedEventHandler(BoutonSuprFournisseur);
+            btnSupprStock.Click += new RoutedEventHandler(BtnSuprStock);
             DynamicGridStock.Children.Add(btnSupprStock);
 
         }
@@ -1926,6 +1929,27 @@ namespace VeloMax
                 MessageBox.Show("Le nombre de ligne selectionné est incorrect ! vous en avez actuellement selectionné " + myGridFournisseur.SelectedItems.Count);
             }
 
+        }
+
+        private void BtnSuprStock(object sender, RoutedEventArgs e)
+        {
+            if (myGridStock.SelectedItems.Count != 0)
+            {
+                foreach (Object o in myGridStock.SelectedItems)
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SET foreign_key_checks = 0;DELETE FROM velomax.itemstock WHERE iditemstock =" + ((ItemStock)o).Iditemstock + ";UPDATE velomax.itemcmd SET iditemstock = -1 WHERE iditemstock = " + ((ItemStock)o).Iditemstock + "; SET foreign_key_checks = 1;";
+                    MySqlDataReader reader = command.ExecuteReader();
+                    connection.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nombre de ligne selectionné est incorrect! vous en avez actuellement selectionné " + myGridStock.SelectedItems.Count);
+            }
+            RefreshItemStock();
+            RefreshCommandes();
         }
         #endregion Evenement Stock
 

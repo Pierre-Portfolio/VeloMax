@@ -10,6 +10,7 @@ GRANDE PARTIE :
 Crée un Triggers qui gere les dates de continuité
 SUPPRIMER LES CLIENTS , PIECE ASSEMBLAGE ET BICYCLETTE
 AJOUTER UN TRIGGERS SUR LES COMMANDES ( date de livraison )
+FAIRE UNE REQUETE SYNCHRONISER
 
 CONTRAINTE GROUPE DE 3 => les triggers, les procédures et que vous faîtes preuve de créativité 
 // je propose donc un systeme de connection pour les vendeur permettant ducoup de savoir qui effectue la commande des client ( pratique ) // ducoup création du vendeur du mois par exemple
