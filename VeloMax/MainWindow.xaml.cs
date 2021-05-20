@@ -1391,8 +1391,8 @@ namespace VeloMax
             Uri test = new Uri("http://pierre-petillion.fr/musique/demo.mp4");
             meVideo.Source = test;
             //MessageBox.Show(meVideo.Source.PathAndQuery);
-            meVideo.Height = 800;
-            meVideo.Width = 800;
+            meVideo.Height = 600;
+            meVideo.Width = 600;
             Grid.SetRow(meVideo, 1);
             Grid.SetRowSpan(meVideo, 8);
             Grid.SetColumn(meVideo, 0);
@@ -1400,8 +1400,8 @@ namespace VeloMax
             meVideo.Opacity = 100;
             meVideo.Visibility = Visibility.Visible;
             meVideo.LoadedBehavior = MediaState.Manual;
-            meVideo.Stretch = Stretch.Uniform;
-            meVideo.StretchDirection = StretchDirection.DownOnly;
+            //meVideo.Stretch = Stretch.Uniform;
+            //meVideo.StretchDirection = StretchDirection.UpOnly;
 
 
             //Bouton Pause
