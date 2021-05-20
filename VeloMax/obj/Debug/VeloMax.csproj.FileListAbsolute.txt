@@ -77,7 +77,6 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifBicy.g.c
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifBicy.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifPiece.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifPiece.baml
-C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax_Content.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddFournisseur.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddFournisseur.baml
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\VeloMax.exe.config

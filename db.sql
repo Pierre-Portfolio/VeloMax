@@ -3,7 +3,7 @@ CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL
 DROP TABLE IF EXISTS bicyclette;
 CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
 DROP TABLE IF EXISTS itemstock;
-CREATE TABLE itemstock (iditemstock INT PRIMARY KEY NOT NULL AUTO_INCREMENT, idbicy int, numpiece VARCHAR(255),);
+CREATE TABLE itemstock (iditemstock INT PRIMARY KEY NOT NULL AUTO_INCREMENT, idbicy int, numpiece VARCHAR(255));
 DROP TABLE IF EXISTS piecedetache;
 CREATE TABLE piecedetache (numpiece varchar(255)  NOT NULL, descpiece varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod int, siret varchar(255));
 DROP TABLE IF EXISTS fournisseur;
@@ -40,11 +40,6 @@ create trigger ajout_fournisseur
 before insert on fournisseur
 for each ROW
 set new.nomentreprise = upper(new.nomentreprise);
-
-create trigger ajout_bicyclette
-before insert on bicyclette
-for each ROW
-set new.nom = upper(new.nom);
 
 create trigger ajout_clientele
 before insert on clientele
@@ -261,7 +256,6 @@ INSERT INTO commande (datecommande,adrlivraison,datelivraison,idclient)
 ('2010-04-01 15:30:22','6 rue du coca','2010-04-02 15:28:22',5),
 ('2010-04-01 15:31:22','14 rue du pepsi','2010-04-02 15:28:22',8),
 ('2010-04-01 15:32:22','26 rue du but','2010-04-02 15:28:22',7);
-
 
 INSERT INTO itemcmd (quantite,iditemstock,numcommande)
  VALUES

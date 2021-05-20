@@ -226,8 +226,5 @@
   <ItemGroup>
     <Resource Include="background.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="demoVideo.mp4" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
