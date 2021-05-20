@@ -658,7 +658,7 @@ namespace VeloMax
 
             // titre 0
             TextBlock txtBlock0 = new TextBlock();
-            txtBlock0.Text = "Liste des Clients Particulier";
+            txtBlock0.Text = "Liste des Clients Particuliers";
             txtBlock0.FontSize = 14;
             txtBlock0.Width = 700;
             txtBlock0.TextAlignment = TextAlignment.Center;
@@ -744,7 +744,7 @@ namespace VeloMax
             // Client entreprise
             // titre 1
             TextBlock txtBlock1 = new TextBlock();
-            txtBlock1.Text = "Liste des Client Entreprise";
+            txtBlock1.Text = "Liste des Clients Entreprise";
             txtBlock1.FontSize = 14;
             txtBlock1.Width = 700;
             txtBlock1.TextAlignment = TextAlignment.Center;
