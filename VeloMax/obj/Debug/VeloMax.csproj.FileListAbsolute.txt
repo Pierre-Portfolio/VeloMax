@@ -163,3 +163,5 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddStock.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddStock.baml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifStock.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifStock.baml
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\Newtonsoft.Json.dll
+C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\Newtonsoft.Json.xml

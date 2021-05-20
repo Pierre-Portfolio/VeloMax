@@ -5,7 +5,7 @@ CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL
 DROP TABLE IF EXISTS bicyclette;
 CREATE TABLE bicyclette (idbicy  INT NOT NULL, nom varchar(255), grandeur varchar(255), prixbicy float, ligneproduit varchar(255), dateintrobicy datetime, datediscontinuationbicy datetime); 
 DROP TABLE IF EXISTS itemstock;
-CREATE TABLE itemstock (iditemstock INT PRIMARY KEY NOT NULL AUTO_INCREMENT, idbicy int, numpiece VARCHAR(255));
+CREATE TABLE itemstock (iditemstock INT PRIMARY KEY NOT NULL AUTO_INCREMENT, idbicy int, numpiece VARCHAR(255),);
 DROP TABLE IF EXISTS piecedetache;
 CREATE TABLE piecedetache (numpiece varchar(255)  NOT NULL, descpiece varchar(255), numprodcatalogue int, prixpiece float, dateintroprod datetime, datediscontprod datetime, delaiapprovprod int, siret varchar(255));
 DROP TABLE IF EXISTS fournisseur;
@@ -38,14 +38,34 @@ ALTER TABLE entreprise ADD CONSTRAINT FK_entreprise_idclient FOREIGN KEY (idclie
 ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idclient FOREIGN KEY (idclient) REFERENCES clientele (idclient) ON DELETE CASCADE;  
 ALTER TABLE particulier ADD CONSTRAINT FK_particulier_idfidelio FOREIGN KEY (idfidelio) REFERENCES fidelio (idfidelio) ON DELETE CASCADE;
 
+create trigger ajout_fournisseur
+before insert on fournisseur
+for each ROW
+set new.nomentreprise = upper(new.nomentreprise);
+
+create trigger ajout_bicyclette
+before insert on bicyclette
+for each ROW
+set new.nom = upper(new.nom);
+
+create trigger ajout_clientele
+before insert on clientele
+for each ROW
+set new.villeclient = upper(new.villeclient);
+
+create trigger ajout_particulier
+before insert on particulier
+for each ROW
+set new.nomclient = upper(new.nomclient);
+
 INSERT INTO fournisseur (siret,nomentreprise,contact,adrfour,libellefourniseur)
  VALUES
-(123456789124834,'Babel',"Babel@gmail.com",'12 rue du general','fournisseur de guidon'),
-(837038217323928,'Sony',"Sony@gmail.com",'18 impasse du concombre','fournisseur de selle'),
-(082136183927173,'Nintendo',"Nintendo@gmail.com",'78 rue du la bouteille','fournisseur de pedale'),
-(523456789124834,'Real',"Real@gmail.com",'24 rue du lion','fournisseur de panier'),
-(237038217323927,'Kroos',"Kroos@gmail.com",'18 impasse du concombre','fournisseur d ordinateur'),
-(837038217323865,'Javel',"Javel@gmail.com",'17 impasse du concombre','fournisseur d ordinateur');
+(123456789124834,'Babel',"Babel@gmail.com",'12 rue du general','très bon'),
+(837038217323928,'Sony',"Sony@gmail.com",'18 impasse du concombre','très bon'),
+(082136183927173,'Nintendo',"Nintendo@gmail.com",'78 rue du la bouteille','très bon'),
+(523456789124834,'Real',"Real@gmail.com",'24 rue du lion','très bon'),
+(237038217323927,'Kroos',"Kroos@gmail.com",'18 impasse du concombre','très bon'),
+(837038217323865,'Javel',"Javel@gmail.com",'17 impasse du concombre','très bon');
 
 INSERT INTO piecedetache (numpiece,descpiece,numprodcatalogue,prixpiece,dateintroprod,datediscontprod,delaiapprovprod,siret)
  VALUES

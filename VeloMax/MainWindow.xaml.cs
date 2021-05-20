@@ -19,6 +19,8 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using Newtonsoft.Json;
+//using Newtonsoft.Json.Linq;
 
 namespace VeloMax
 {
@@ -78,9 +80,7 @@ namespace VeloMax
 
         public Grid DynamicGridCommands = new Grid();
         public List<commande> myListCommande = new List<commande>();
-        public List<Itemcmd> myListItemCommande = new List<Itemcmd>();
         public DataGrid myGridCommande = new DataGrid();
-        public DataGrid myGridItemCommande = new DataGrid();
         public int keyCommande = 0;
         public int keyidItemCommande = 0;
 
@@ -253,33 +253,15 @@ namespace VeloMax
             MySqlDataReader reader;
             reader = command.ExecuteReader();
             myListCommande.Clear();
+            List<int> idItems = new List<int>(); 
             while (reader.Read())// parcours ligne par ligne
             {
                 myListCommande.Add(new commande(Convert.ToInt32(reader.GetValue(0)), Convert.ToDateTime(reader.GetValue(1)), Convert.ToString(reader.GetValue(2)), Convert.ToDateTime(reader.GetValue(3)), Convert.ToInt32(reader.GetValue(4))));
                 keyCommande = Convert.ToInt32(reader.GetValue(0));
             }
             myGridCommande.ItemsSource = myListCommande;
+
             myGridCommande.Items.Refresh();
-            connection.Close();
-        }
-
-        public void RefreshItemsCommandes()
-        {
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM velomax.itemcmd;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
-            myListItemCommande.Clear();
-            while (reader.Read())// parcours ligne par ligne
-            {
-                myListItemCommande.Add(new Itemcmd(reader.GetValue(0).ToString(), Convert.ToInt32(reader.GetValue(1)), Convert.ToInt32(reader.GetValue(2)), Convert.ToInt32(reader.GetValue(2))));
-                keyidItemCommande = Convert.ToInt32(reader.GetValue(0));
-            }
-
-            myGridItemCommande.ItemsSource = myListItemCommande;
-            myGridItemCommande.Items.Refresh();
             connection.Close();
         }
 
@@ -1095,10 +1077,10 @@ namespace VeloMax
         }
         #endregion
         #region Stats
-        /*
+
         public void GeneStat()
         {
-            /* ==== Creation partie Stat ====
+            //==== Creation partie Stat ====
             // création grid dynamic
             DynamicGridStats.HorizontalAlignment = HorizontalAlignment.Left;
             DynamicGridStats.Height = 400;
@@ -1109,23 +1091,23 @@ namespace VeloMax
             // Create Columns
             Grid.SetRow(DynamicGridStats, 6);
             Grid.SetColumn(DynamicGridStats, 0);
-            Grid.SetColumnSpan(DynamicGridStats, 6);
+            Grid.SetColumnSpan(DynamicGridStats, 7);
             ColumnDefinition gridColStat1 = new ColumnDefinition();
             DynamicGridStats.ColumnDefinitions.Add(gridColStat1);
 
             // Create Rows
             RowDefinition gridRowitem1 = new RowDefinition();
-            gridRowitem1.Height = new GridLength(30);
+            gridRowitem1.Height = new GridLength(60);
             RowDefinition gridRowitem2 = new RowDefinition();
-            gridRowitem2.Height = new GridLength(100);
+            gridRowitem2.Height = new GridLength(60);
             RowDefinition gridRowitem3 = new RowDefinition();
-            gridRowitem3.Height = new GridLength(30);
+            gridRowitem3.Height = new GridLength(60);
             RowDefinition gridRowitem4 = new RowDefinition();
-            gridRowitem4.Height = new GridLength(100);
+            gridRowitem4.Height = new GridLength(60);
             RowDefinition gridRowitem5 = new RowDefinition();
-            gridRowitem5.Height = new GridLength(30);
+            gridRowitem5.Height = new GridLength(60);
             RowDefinition gridRowitem6 = new RowDefinition();
-            gridRowitem6.Height = new GridLength(100);
+            gridRowitem6.Height = new GridLength(60);
             DynamicGridStats.RowDefinitions.Add(gridRowitem1);
             DynamicGridStats.RowDefinitions.Add(gridRowitem2);
             DynamicGridStats.RowDefinitions.Add(gridRowitem3);
@@ -1134,105 +1116,67 @@ namespace VeloMax
             DynamicGridStats.RowDefinitions.Add(gridRowitem6);
             DynamicGridStats.Margin = new Thickness(0, 0, 0, 0);
 
-            // titre 0
-            TextBlock txtBlock0 = new TextBlock();
-            txtBlock0.Text = "Liste des Pieces Det Vendus";
-            txtBlock0.FontSize = 14;
-            txtBlock0.Width = 700;
-            txtBlock0.TextAlignment = TextAlignment.Center;
-            txtBlock0.Background = new SolidColorBrush(Colors.Black);
-            txtBlock0.Foreground = new SolidColorBrush(Colors.White);
-            txtBlock0.VerticalAlignment = VerticalAlignment.Top;
-            txtBlock0.HorizontalAlignment = HorizontalAlignment.Center;
-            txtBlock0.FontWeight = FontWeights.Bold;
-            Grid.SetRow(txtBlock0, 0);
-            Grid.SetColumn(txtBlock0, 0);
-            Grid.SetColumnSpan(txtBlock0, 6);
-            DynamicGridStats.Children.Add(txtBlock0);
+            //Btn ajouter
+            Button btnAddCommande = new Button();
+            btnAddCommande.Content = "";
+            btnAddCommande.Foreground = Brushes.Black;
+            btnAddCommande.Height = 50;
+            btnAddCommande.Width = 300;
+            Grid.SetRow(btnAddCommande, 1);
+            Grid.SetColumn(btnAddCommande, 0);
+            Grid.SetColumnSpan(btnAddCommande, 6);
+            btnAddCommande.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddCommande.Content = "Générer liste client fidelio level 1";
+            btnAddCommande.Background = Brushes.Green;
+            btnAddCommande.Click += new RoutedEventHandler(JsonFidelio);
+            DynamicGridStats.Children.Add(btnAddCommande);
 
-            // tableau des Pieces détachées vendues
-            myGridPieceQ.Items.Clear();
-            myGridPieceQ.Width = 700;
-            myGridPieceQ.Height = 100;
+            //Btn ajouter
+            Button btnAddCommande2 = new Button();
+            btnAddCommande2.Content = "";
+            btnAddCommande2.Foreground = Brushes.Black;
+            btnAddCommande2.Height = 50;
+            btnAddCommande2.Width = 300;
+            Grid.SetRow(btnAddCommande2, 2);
+            Grid.SetColumn(btnAddCommande2, 0);
+            Grid.SetColumnSpan(btnAddCommande2, 6);
+            btnAddCommande2.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddCommande2.Content = "Générer liste client fidelio level 2";
+            btnAddCommande2.Background = Brushes.Green;
+            btnAddCommande2.Click += new RoutedEventHandler(JsonFidelio2);
+            DynamicGridStats.Children.Add(btnAddCommande2);
 
-            // on recupere les datas
-            connection.Open();
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT piecedetache.numpiece, descpiece, prixpiece, quantite FROM velomax.itemstock natural join velomax.piecedetache natural join velomax.itemcmd where idbicy is Null;";
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
+            //Btn ajouter
+            Button btnAddCommande3 = new Button();
+            btnAddCommande3.Content = "";
+            btnAddCommande3.Foreground = Brushes.Black;
+            btnAddCommande3.Height = 50;
+            btnAddCommande3.Width = 300;
+            Grid.SetRow(btnAddCommande3, 3);
+            Grid.SetColumn(btnAddCommande3, 0);
+            Grid.SetColumnSpan(btnAddCommande3, 6);
+            btnAddCommande3.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddCommande3.Content = "Générer liste client fidelio level 2";
+            btnAddCommande3.Background = Brushes.Green;
+            btnAddCommande3.Click += new RoutedEventHandler(JsonFidelio3);
+            DynamicGridStats.Children.Add(btnAddCommande3);
 
-            while (reader.Read())// parcours ligne par ligne
-            {
-                PieceDetache temp_piece = new PieceDetache(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), 0, Convert.ToInt32(reader.GetValue(2)), new DateTime(), new DateTime(), 0, null);
-                temp_piece.Quantite = Convert.ToInt32(reader.GetValue(3));
-                myListPieceDetQ.Add(temp_piece);
-            }
-            myGridPieceQ.ItemsSource = myListPieceDetQ;
-            //myGridPieceQ.Columns[0].Visibility = Visibility.Hidden;
-            connection.Close();
+            //Btn ajouter
+            Button btnAddCommande4 = new Button();
+            btnAddCommande4.Content = "";
+            btnAddCommande4.Foreground = Brushes.Black;
+            btnAddCommande4.Height = 50;
+            btnAddCommande4.Width = 300;
+            Grid.SetRow(btnAddCommande4, 4);
+            Grid.SetColumn(btnAddCommande4, 0);
+            Grid.SetColumnSpan(btnAddCommande4, 6);
+            btnAddCommande4.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddCommande4.Content = "Générer liste client fidelio level 3";
+            btnAddCommande4.Background = Brushes.Green;
+            btnAddCommande4.Click += new RoutedEventHandler(JsonFidelio4);
+            DynamicGridStats.Children.Add(btnAddCommande4);
 
-            //on define le reste
-            myGridPieceQ.Foreground = new SolidColorBrush(Colors.Black);
-            myGridPieceQ.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridPieceQ.Margin = new Thickness(0, -22, 0, 0);
-            myGridPieceQ.BorderThickness = new Thickness(0, 0, 0, 0);
-            myGridPieceQ.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            myGridPieceQ.IsReadOnly = true;
-            Grid.SetRow(myGridPieceQ, 1);
-            Grid.SetColumn(myGridPieceQ, 0);
-            Grid.SetColumnSpan(myGridPieceQ, 6);
-            DynamicGridStats.Children.Add(myGridPieceQ);
-
-            // titre 1
-            TextBlock txtBlock1 = new TextBlock();
-            txtBlock1.Text = "Liste des Bicyclettes Vendues";
-            txtBlock1.FontSize = 14;
-            txtBlock1.Width = 700;
-            txtBlock1.TextAlignment = TextAlignment.Center;
-            txtBlock1.Background = new SolidColorBrush(Colors.Black);
-            txtBlock1.Foreground = new SolidColorBrush(Colors.White);
-            txtBlock1.VerticalAlignment = VerticalAlignment.Top;
-            txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
-            txtBlock1.FontWeight = FontWeights.Bold;
-            Grid.SetRow(txtBlock1, 0);
-            Grid.SetColumn(txtBlock1, 0);
-            Grid.SetColumnSpan(txtBlock1, 6);
-            DynamicGridStats.Children.Add(txtBlock1);
-
-            // tableau des Pieces détachées vendues
-            myGridBicyQ.Items.Clear();
-            myGridBicyQ.Width = 700;
-            myGridBicyQ.Height = 100;
-
-            // on recupere les datas
-            connection.Open();
-            command = connection.CreateCommand();
-            command.CommandText = "SELECT bicyclette.idbicy, nom, grandeur, prixbicy, quantite FROM velomax.itemstock natural join velomax.bicyclette natural join velomax.itemcmd where numpiece is Null; ; ";
-            reader = command.ExecuteReader();
-
-            while (reader.Read())// parcours ligne par ligne
-            {
-                //int idbicy, string nom, string grandeur, int prixbicy, string ligneproduit, DateTime dateintrobicy, DateTime datediscontinuationbicy
-                Bicyclette temp_bicy = new Bicyclette(Convert.ToInt32(reader.GetValue(0)), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), Convert.ToInt32(reader.GetValue(3)), null, new DateTime(), new DateTime());
-                temp_bicy.Quantite = Convert.ToInt32(reader.GetValue(4));
-                myListBicyQ.Add(temp_bicy);
-            }
-            myGridBicyQ.ItemsSource = myListBicyQ;
-            connection.Close();
-
-            //on define le reste
-            myGridBicyQ.Foreground = new SolidColorBrush(Colors.Black);
-            myGridBicyQ.GridLinesVisibility = DataGridGridLinesVisibility.None;
-            myGridBicyQ.Margin = new Thickness(0, -22, 0, 0);
-            myGridBicyQ.BorderThickness = new Thickness(0, 0, 0, 0);
-            myGridBicyQ.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            myGridBicyQ.IsReadOnly = true;
-            Grid.SetRow(myGridBicyQ, 1);
-            Grid.SetColumn(myGridBicyQ, 0);
-            Grid.SetColumnSpan(myGridBicyQ, 6);
-            DynamicGridStats.Children.Add(myGridBicyQ);
-        }*/
+        }
         #endregion
         #region Stock
 
@@ -1426,9 +1370,7 @@ namespace VeloMax
             DynamicGridDemo.Children.Add(txtBlock0);
 
             // On genere la video 
-            
-            //meVideo.Source = new Uri("C:\\Users\\petil\\OneDrive\\Documents\\GitHub\\VeloMax\\VeloMax\\demoVideo.mp4");
-            Uri test = new Uri("http://pierre-petillion.fr/musique/musique.mp4");
+            Uri test = new Uri("http://pierre-petillion.fr/musique/demo.mp4");
             meVideo.Source = test;
             //MessageBox.Show(meVideo.Source.PathAndQuery);
             meVideo.Height = 800;
@@ -1468,23 +1410,13 @@ namespace VeloMax
             Grid.SetColumn(btnPlay, 0);
             Grid.SetColumnSpan(btnPlay, 1);
 
-            //Slider temps
-
-            //Slider tempsSlider = new Slider();
-            //tempsSlider.Width = 200;
-            //tempsSlider.Header = "Volume";
-            //tempsSlider.ValueChanged += Slider.ValueChanged;
-
-            //meVideo.MouseDown += new MouseButtonEventHandler(meVideo_Clicked);
             meVideo.Play();
             btnPause.Click += new RoutedEventHandler(ButtonPauseVideo);
             btnPlay.Click += new RoutedEventHandler(ButtonPlayVideo);
             meVideo.Pause();
-            //myGrid.ColumnDefinitions.Add(meVideo);
             DynamicGridDemo.Children.Add(meVideo);
             DynamicGridDemo.Children.Add(btnPause);
             DynamicGridDemo.Children.Add(btnPlay);
-            // myCanvas.Children.Add(myGrid);
         }
 
         #endregion Demo
@@ -1498,7 +1430,7 @@ namespace VeloMax
             GeneClient();
             GeneCommande();
             GeneFournisseur();
-            //GeneStat();
+            GeneStat();
             GeneDemo();
             GeneStock();
         }
@@ -1762,9 +1694,145 @@ namespace VeloMax
             StatistiqueBtn.Background = new SolidColorBrush(Colors.White);
             MainGrid.Children.Add(DynamicGridStats);
         }
-        #endregion Evenement Commandes
 
-        #region Evenement Fournisseur
+        static void AfficherPrettyJson(string nomFichier)
+        {
+            MessageBox.Show(nomFichier);
+            StreamReader reader = new StreamReader(nomFichier);
+            JsonTextReader jreader = new JsonTextReader(reader);
+            while (jreader.Read())
+            {
+                if (jreader.Value != null)
+                {
+                    if (jreader.TokenType.ToString() == "PropertyName")
+                    {
+                        Console.Write(jreader.Value + " : ");
+                    }
+                    else
+                    {
+                        Console.WriteLine(jreader.Value);
+                    }
+                }
+                else
+                {
+                    // Console.WriteLine("Token:{0} ", jreader.TokenType.ToString());
+                    if (jreader.TokenType.ToString() == "StartObject") Console.WriteLine("Nouvel objet\n--------------");
+                    if (jreader.TokenType.ToString() == "EndObject") Console.WriteLine("-------------\n");
+                    if (jreader.TokenType.ToString() == "StartArray") Console.WriteLine("Liste\n");
+                }
+            }
+            jreader.Close();
+            reader.Close();
+        }
+
+        private void genereJson(List<Particulier> Fideliolvl1,string fileToWrite)
+        {
+            //instanciation des flux d'écriture(writer)
+            StreamWriter fileWriter = new StreamWriter(fileToWrite);
+            JsonTextWriter jsonWriter = new JsonTextWriter(fileWriter);
+
+            // sérialisation des objets vers le flux d'écriture fichier
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Serialize(jsonWriter, Fideliolvl1);
+
+            //fermture des flux (writer)
+            jsonWriter.Close();
+            fileWriter.Close();
+
+            //AfficherPrettyJson(fileToWrite);
+            MessageBox.Show("Le fichier Json à été généré avec succès dans le repertoire : " + System.AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private void JsonFidelio(object sender, RoutedEventArgs e)
+        {
+            //fichier destinataire de la sérialisation
+            string fileToWrite = "./Fidelio.json";
+
+            //instanciation des objets <Chat>
+            List<Particulier> Fideliolvl1 = new List<Particulier>();
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "select idclient,idparticulier,nomclient, prenomclient,idfidelio,rueclient,codepostaleclient,provinceclient,villeclient from velomax.clientele natural join velomax.particulier natural join fidelio where idfidelio = (SELECT idfidelio from velomax.fidelio where descfidelio = 'Fidélio');";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                Fideliolvl1.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+            }
+            connection.Close();
+            genereJson(Fideliolvl1, fileToWrite);
+        }
+
+        private void JsonFidelio2(object sender, RoutedEventArgs e)
+        {
+            //fichier destinataire de la sérialisation
+            string fileToWrite = "./FidelioOr.json";
+
+            //instanciation des objets <Chat>
+            List<Particulier> Fideliolvl1 = new List<Particulier>();
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "select idclient,idparticulier,nomclient, prenomclient,idfidelio,rueclient,codepostaleclient,provinceclient,villeclient from velomax.clientele natural join velomax.particulier natural join fidelio where idfidelio = (SELECT idfidelio from velomax.fidelio where descfidelio = 'Fidélio Or');";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                Fideliolvl1.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+            }
+            connection.Close();
+            genereJson(Fideliolvl1, fileToWrite);
+        }
+
+        private void JsonFidelio3(object sender, RoutedEventArgs e)
+        {
+            //fichier destinataire de la sérialisation
+            string fileToWrite = "./FidelioPlatine.json";
+
+            //instanciation des objets <Chat>
+            List<Particulier> Fideliolvl1 = new List<Particulier>();
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "select idclient,idparticulier,nomclient, prenomclient,idfidelio,rueclient,codepostaleclient,provinceclient,villeclient from velomax.clientele natural join velomax.particulier natural join fidelio where idfidelio = (SELECT idfidelio from velomax.fidelio where descfidelio = 'Fidélio Platine');";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                Fideliolvl1.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+            }
+            connection.Close();
+            genereJson(Fideliolvl1, fileToWrite);
+        }
+
+        private void JsonFidelio4(object sender, RoutedEventArgs e)
+        {
+            //fichier destinataire de la sérialisation
+            string fileToWrite = "FidelioMax.json";
+
+            //instanciation des objets <Chat>
+            List<Particulier> Fideliolvl1 = new List<Particulier>();
+
+            // on recupere les datas
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "select idclient,idparticulier,nomclient, prenomclient,idfidelio,rueclient,codepostaleclient,provinceclient,villeclient from velomax.clientele natural join velomax.particulier natural join fidelio where idfidelio = (SELECT idfidelio from velomax.fidelio where descfidelio = 'Fidélio Max');";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                Fideliolvl1.Add(new Particulier(Convert.ToInt32(reader.GetValue(0)), Convert.ToInt32(reader.GetValue(1)), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), Convert.ToInt32(reader.GetValue(4)), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString()));
+            }
+            connection.Close();
+            genereJson(Fideliolvl1, fileToWrite);
+        }
+            #endregion Evenement Commandes
+
+            #region Evenement Fournisseur
         private void FournisseurBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();

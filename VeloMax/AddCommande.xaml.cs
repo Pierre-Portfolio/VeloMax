@@ -130,28 +130,40 @@ namespace VeloMax
 
                     foreach (string MyItem in listCmdClient.Items)
                     {
-                        //MessageBox.Show(MyItem.ToString());
-                        string[] ItemsRecup = MyItem.ToString().Split();
+                        string[] separatingStrings = { " : " };
+                        string[] ItemsRecup = MyItem.ToString().Split(separatingStrings, System.StringSplitOptions.RemoveEmptyEntries);
                         if(ItemsRecup[0] == "Bicyclette")
                         {
-                            MessageBox.Show("1");
+
+                            connection.Open();
+                            command = connection.CreateCommand();
+                            command.CommandText = "SELECT idbicy FROM velomax.bicyclette where nom = '" + ItemsRecup[1] + "' AND grandeur = '" + ItemsRecup[2]  + "';";
+                            reader = command.ExecuteReader();
+                            connection.Close();
+                            string res = "";
+                            while (reader.Read())// parcours ligne par ligne
+                            {
+                                res = reader.GetValue(0).ToString();
+                            }
+
+
+                            // ON VERIF SI YEN A EN STOCK
+
+
+
+
                         }
                         else
                         {
-                            MessageBox.Show("2");
+                            
                         }
+
+                        connection.Open();
+                        command = connection.CreateCommand();
+                        command.CommandText = "INSERT INTO velomax.itemcmd (quantite,iditemstock,numcommande)VALUES(" + boxQuantiteProd.SelectedItem.ToString() + ",null,'" + mw.keyCommande.ToString() + "');";
+                        reader = command.ExecuteReader();
+                        connection.Close();
                     }
-
-                    /*
-                    connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "INSERT INTO velomax.bicyclette (numcommande,datecommande,adrlivraison,datelivraison,idclient)VALUES(" + mw.keyCommande.ToString() + ",'" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + BoxAddrLivraison.Text.ToString() + "'," + dt1.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + "','" + dt1.ToString("yyyy-MM-dd HH:mm:ss") + "','" + idclient + "');";
-                    MySqlDataReader reader;
-                    reader = command.ExecuteReader();
-                    connection.Close();
-                    */
-
-
                     this.Close();
                 }
                 else
