@@ -270,6 +270,6 @@ CREATE PROCEDURE fidelio
 BEGIN
 SELECT idfidelio 
 from velomax.fidelio 
-where descfidelio = 'Fidélio Max';
+where descfidelio = 'con';
 END //
 DELIMITER ;
