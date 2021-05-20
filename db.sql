@@ -1,5 +1,3 @@
-/*CREATE SCHEMA `velomax` ;
-SET FOREIGN_KEY_CHECKS=0;*/
 DROP TABLE IF EXISTS assemblage;
 CREATE TABLE assemblage(nom VARCHAR(255) NOT NULL,grandeur varchar(255) NOT NULL, cadre varchar(255), guidon varchar(255), freins varchar(255), selle varchar(255), derailleuravant varchar(255), derailleurarriere varchar(255), roueavant varchar(255), rouearriere varchar(255), reflecteur varchar(255), pedalleur varchar(255), ordinateur varchar(255), panier varchar(255));
 DROP TABLE IF EXISTS bicyclette;
