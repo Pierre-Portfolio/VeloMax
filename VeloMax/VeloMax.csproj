@@ -151,6 +151,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="modifCmd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="modifFournisseur.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +181,9 @@
     </Compile>
     <Compile Include="modifClientEntre.xaml.cs">
       <DependentUpon>modifClientEntre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="modifCmd.xaml.cs">
+      <DependentUpon>modifCmd.xaml</DependentUpon>
     </Compile>
     <Compile Include="modifFournisseur.xaml.cs">
       <DependentUpon>modifFournisseur.xaml</DependentUpon>

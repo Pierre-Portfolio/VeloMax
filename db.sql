@@ -263,3 +263,13 @@ INSERT INTO itemcmd (quantite,iditemstock,numcommande)
 (1,2,2),
 (1,3,2),
 (1,4,3);
+
+DELIMITER //
+CREATE PROCEDURE fidelio
+(IN con CHAR(20))
+BEGIN
+SELECT idfidelio 
+from velomax.fidelio 
+where descfidelio = 'Fidélio Max';
+END //
+DELIMITER ;

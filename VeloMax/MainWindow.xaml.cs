@@ -1820,7 +1820,7 @@ namespace VeloMax
             // on recupere les datas
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "select idclient,idparticulier,nomclient, prenomclient,idfidelio,rueclient,codepostaleclient,provinceclient,villeclient from velomax.clientele natural join velomax.particulier natural join fidelio where idfidelio = (SELECT idfidelio from velomax.fidelio where descfidelio = 'Fidélio Max');";
+            command.CommandText = "select idclient,idparticulier,nomclient, prenomclient,idfidelio,rueclient,codepostaleclient,provinceclient,villeclient from velomax.clientele natural join velomax.particulier natural join fidelio where idfidelio = (CALL fidelio('Fidélio Max');";
             MySqlDataReader reader;
             reader = command.ExecuteReader();
             while (reader.Read())// parcours ligne par ligne
