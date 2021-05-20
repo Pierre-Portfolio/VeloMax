@@ -41,6 +41,10 @@ namespace VeloMax
             this.panier = panier;
         }
 
+        public Assemblage()
+        {
+        }
+
         public string Nom
         {
             get { return this.nom; }

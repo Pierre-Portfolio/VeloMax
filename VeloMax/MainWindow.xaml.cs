@@ -20,6 +20,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Xml;
+using System.Xml.XPath;
+using System.Xml.Serialization;
 //using Newtonsoft.Json.Linq;
 
 namespace VeloMax
@@ -1176,6 +1179,21 @@ namespace VeloMax
             btnAddCommande4.Click += new RoutedEventHandler(JsonFidelio4);
             DynamicGridStats.Children.Add(btnAddCommande4);
 
+            //Btn ajouter
+            Button btnAddCommande5 = new Button();
+            btnAddCommande5.Content = "";
+            btnAddCommande5.Foreground = Brushes.Black;
+            btnAddCommande5.Height = 50;
+            btnAddCommande5.Width = 300;
+            Grid.SetRow(btnAddCommande5, 5);
+            Grid.SetColumn(btnAddCommande5, 0);
+            Grid.SetColumnSpan(btnAddCommande5, 6);
+            btnAddCommande5.BorderThickness = new Thickness(0, 0, 0, 0);
+            btnAddCommande5.Content = "Export Table Assemblage en XML";
+            btnAddCommande5.Background = Brushes.Green;
+            btnAddCommande5.Click += new RoutedEventHandler(XmlExportTable);
+            DynamicGridStats.Children.Add(btnAddCommande5);
+
         }
         #endregion
         #region Stock
@@ -1695,6 +1713,31 @@ namespace VeloMax
             MainGrid.Children.Add(DynamicGridStats);
         }
 
+        private void XmlExportTable(object sender, RoutedEventArgs e)
+        {
+
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM velomax.assemblage;";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            List<Assemblage> myListAssemblageExport = new List<Assemblage>();
+            while (reader.Read())// parcours ligne par ligne
+            {
+                myListAssemblageExport.Add(new Assemblage(reader.GetValue(0).ToString(), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetValue(5).ToString(), reader.GetValue(6).ToString(), reader.GetValue(7).ToString(), reader.GetValue(8).ToString(), reader.GetValue(9).ToString(), reader.GetValue(10).ToString(), reader.GetValue(11).ToString(), reader.GetValue(12).ToString(), reader.GetValue(13).ToString()));
+
+            }
+            connection.Close();
+
+            // Code pour sérialiser l'objet piece en XML dans un fichier "exportstocksfaibles.xml"
+            XmlSerializer xs = new XmlSerializer(typeof(List<Assemblage>));  // l'outil de sérialisation
+            StreamWriter wr = new StreamWriter("exportTableAssemblage.xml");  // accès en écriture à un fichier (texte)
+            xs.Serialize(wr, myListAssemblageExport); // action de sérialiser en XML l'objet piece 
+                                        // et d'écrire le résultat dans le fichier manipulé par wr
+            wr.Close();
+            MessageBox.Show("sérialisation dans fichier exportTableAssemblage.xml terminée avec succès dans le repertoire : " + System.AppDomain.CurrentDomain.BaseDirectory);
+        }
+
         static void AfficherPrettyJson(string nomFichier)
         {
             MessageBox.Show(nomFichier);
@@ -1832,7 +1875,7 @@ namespace VeloMax
         }
             #endregion Evenement Commandes
 
-            #region Evenement Fournisseur
+        #region Evenement Fournisseur
         private void FournisseurBtn_Click(object sender, RoutedEventArgs e)
         {
             Refresh();

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAssemblage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Assemblage>
+    <Nom>BlueJay</Nom>
+    <Grandeur>Dames</Grandeur>
+    <Cadre>C43f</Cadre>
+    <Guidon>G9</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S35</Selle>
+    <Derailleuravant>DV57</Derailleuravant>
+    <Derailleurarriere>DR87</Derailleurarriere>
+    <Roueavant>R19</Roueavant>
+    <Rouearriere>R18</Rouearriere>
+    <Reflecteur>R02</Reflecteur>
+    <Pedalleur>P34</Pedalleur>
+    <Ordinateur>O4</Ordinateur>
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>BlueJay</Nom>
+    <Grandeur>Hommes</Grandeur>
+    <Cadre>C43</Cadre>
+    <Guidon>G9</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S37</Selle>
+    <Derailleuravant>DV57</Derailleuravant>
+    <Derailleurarriere>DR87</Derailleurarriere>
+    <Roueavant>R19</Roueavant>
+    <Rouearriere>R18</Rouearriere>
+    <Reflecteur>R02</Reflecteur>
+    <Pedalleur>P34</Pedalleur>
+    <Ordinateur>O4</Ordinateur>
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Hooligan</Nom>
+    <Grandeur>Jeunes</Grandeur>
+    <Cadre>C76</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F3</Freins>
+    <Selle>S88</Selle>
+    <Derailleuravant>DV87</Derailleuravant>
+    <Derailleurarriere>DR86</Derailleurarriere>
+    <Roueavant>R12</Roueavant>
+    <Rouearriere>R32</Rouearriere>
+    <Reflecteur />
+    <Pedalleur>P12</Pedalleur>
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Kilimandjaro</Nom>
+    <Grandeur>Adultes</Grandeur>
+    <Cadre>C32</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F3</Freins>
+    <Selle>S88</Selle>
+    <Derailleuravant>DV133</Derailleuravant>
+    <Derailleurarriere>DR56</Derailleurarriere>
+    <Roueavant>R45</Roueavant>
+    <Rouearriere>R46</Rouearriere>
+    <Reflecteur />
+    <Pedalleur>P12</Pedalleur>
+    <Ordinateur>O2</Ordinateur>
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>MontBlanc</Nom>
+    <Grandeur>Jeunes</Grandeur>
+    <Cadre>C76</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F3</Freins>
+    <Selle>S88</Selle>
+    <Derailleuravant>DV17</Derailleuravant>
+    <Derailleurarriere>DR87</Derailleurarriere>
+    <Roueavant>R48</Roueavant>
+    <Rouearriere>R47</Rouearriere>
+    <Reflecteur />
+    <Pedalleur>P12</Pedalleur>
+    <Ordinateur>O2</Ordinateur>
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Mud Zinger I</Nom>
+    <Grandeur>Jeunes</Grandeur>
+    <Cadre>C25</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F3</Freins>
+    <Selle>S87</Selle>
+    <Derailleuravant>DV132</Derailleuravant>
+    <Derailleurarriere>DR52</Derailleurarriere>
+    <Roueavant>R44</Roueavant>
+    <Rouearriere>R47</Rouearriere>
+    <Reflecteur />
+    <Pedalleur>P15</Pedalleur>
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Mud Zinger II</Nom>
+    <Grandeur>Adultes</Grandeur>
+    <Cadre>C26</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F3</Freins>
+    <Selle>S87</Selle>
+    <Derailleuravant>DV133</Derailleuravant>
+    <Derailleurarriere>DR52</Derailleurarriere>
+    <Roueavant>R44</Roueavant>
+    <Rouearriere>R47</Rouearriere>
+    <Reflecteur />
+    <Pedalleur>P12</Pedalleur>
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Night Hawk</Nom>
+    <Grandeur>Jeunes</Grandeur>
+    <Cadre>C15</Cadre>
+    <Guidon>G12</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S36</Selle>
+    <Derailleuravant>DV15</Derailleuravant>
+    <Derailleurarriere>DR23</Derailleurarriere>
+    <Roueavant>R11</Roueavant>
+    <Rouearriere>R12</Rouearriere>
+    <Reflecteur>R10</Reflecteur>
+    <Pedalleur>P15</Pedalleur>
+    <Ordinateur />
+    <Panier>S74</Panier>
+  </Assemblage>
+  <Assemblage>
+    <Nom>NorthPole</Nom>
+    <Grandeur>Adultes</Grandeur>
+    <Cadre>C34</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F3</Freins>
+    <Selle>S88</Selle>
+    <Derailleuravant>DV17</Derailleuravant>
+    <Derailleurarriere>DR87</Derailleurarriere>
+    <Roueavant>R48</Roueavant>
+    <Rouearriere>R47</Rouearriere>
+    <Reflecteur />
+    <Pedalleur>P12</Pedalleur>
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Orléans</Nom>
+    <Grandeur>Dames</Grandeur>
+    <Cadre>C44f</Cadre>
+    <Guidon>G9</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S35</Selle>
+    <Derailleuravant>DV57</Derailleuravant>
+    <Derailleurarriere>DR86</Derailleurarriere>
+    <Roueavant>R19</Roueavant>
+    <Rouearriere>R18</Rouearriere>
+    <Reflecteur>R02</Reflecteur>
+    <Pedalleur>P34</Pedalleur>
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Orléans</Nom>
+    <Grandeur>Hommes</Grandeur>
+    <Cadre>C43</Cadre>
+    <Guidon>G9</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S37</Selle>
+    <Derailleuravant>DV57</Derailleuravant>
+    <Derailleurarriere>DR86</Derailleurarriere>
+    <Roueavant>R19</Roueavant>
+    <Rouearriere>R18</Rouearriere>
+    <Reflecteur>R02</Reflecteur>
+    <Pedalleur>P34</Pedalleur>
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
+  <Assemblage>
+    <Nom>Tierra Verde</Nom>
+    <Grandeur>Dames</Grandeur>
+    <Cadre>C87f</Cadre>
+    <Guidon>G12</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S34</Selle>
+    <Derailleuravant>DV41</Derailleuravant>
+    <Derailleurarriere>DR76</Derailleurarriere>
+    <Roueavant>R11</Roueavant>
+    <Rouearriere>R12</Rouearriere>
+    <Reflecteur>R10</Reflecteur>
+    <Pedalleur>P15</Pedalleur>
+    <Ordinateur />
+    <Panier>S73</Panier>
+  </Assemblage>
+  <Assemblage>
+    <Nom>Tierra Verde</Nom>
+    <Grandeur>Hommes</Grandeur>
+    <Cadre>C87</Cadre>
+    <Guidon>G12</Guidon>
+    <Freins>F9</Freins>
+    <Selle>S36</Selle>
+    <Derailleuravant>DV41</Derailleuravant>
+    <Derailleurarriere>DR76</Derailleurarriere>
+    <Roueavant>R11</Roueavant>
+    <Rouearriere>R12</Rouearriere>
+    <Reflecteur>R10</Reflecteur>
+    <Pedalleur>P15</Pedalleur>
+    <Ordinateur />
+    <Panier>S74</Panier>
+  </Assemblage>
+  <Assemblage>
+    <Nom>Trail Explorer</Nom>
+    <Grandeur>Filles</Grandeur>
+    <Cadre>C01</Cadre>
+    <Guidon>G12</Guidon>
+    <Freins />
+    <Selle>S02</Selle>
+    <Derailleuravant />
+    <Derailleurarriere />
+    <Roueavant>R1</Roueavant>
+    <Rouearriere>R2</Rouearriere>
+    <Reflecteur>R09</Reflecteur>
+    <Pedalleur>P1</Pedalleur>
+    <Ordinateur />
+    <Panier>S01</Panier>
+  </Assemblage>
+  <Assemblage>
+    <Nom>Trail Explorer</Nom>
+    <Grandeur>Garçons</Grandeur>
+    <Cadre>C02</Cadre>
+    <Guidon>G12</Guidon>
+    <Freins />
+    <Selle>S03</Selle>
+    <Derailleuravant />
+    <Derailleurarriere />
+    <Roueavant>R1</Roueavant>
+    <Rouearriere>R2</Rouearriere>
+    <Reflecteur>R09</Reflecteur>
+    <Pedalleur>P1</Pedalleur>
+    <Ordinateur />
+    <Panier>S05</Panier>
+  </Assemblage>
+</ArrayOfAssemblage>
