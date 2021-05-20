@@ -240,4 +240,20 @@
     <Ordinateur />
     <Panier>S05</Panier>
   </Assemblage>
+  <Assemblage>
+    <Nom>YanisRevolution</Nom>
+    <Grandeur>Adultes</Grandeur>
+    <Cadre>C15</Cadre>
+    <Guidon>G7</Guidon>
+    <Freins>F9</Freins>
+    <Selle>YR01</Selle>
+    <Derailleuravant>DV41</Derailleuravant>
+    <Derailleurarriere>DR52</Derailleurarriere>
+    <Roueavant />
+    <Rouearriere />
+    <Reflecteur />
+    <Pedalleur />
+    <Ordinateur />
+    <Panier />
+  </Assemblage>
 </ArrayOfAssemblage>

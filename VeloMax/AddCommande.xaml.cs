@@ -139,13 +139,12 @@ namespace VeloMax
                             command = connection.CreateCommand();
                             command.CommandText = "SELECT idbicy FROM velomax.bicyclette where nom = '" + ItemsRecup[1] + "' AND grandeur = '" + ItemsRecup[2]  + "';";
                             reader = command.ExecuteReader();
-                            connection.Close();
                             string res = "";
                             while (reader.Read())// parcours ligne par ligne
                             {
                                 res = reader.GetValue(0).ToString();
                             }
-
+                            connection.Close();
 
                             // ON VERIF SI YEN A EN STOCK
 

@@ -73,7 +73,6 @@ namespace VeloMax
                     }
                     connection.Close();
 
-
                     connection.Open();
                     command = connection.CreateCommand();
                     command.CommandText = "INSERT INTO velomax.itemstock (idbicy,numpiece) VALUES ('" + res  + "',null);";

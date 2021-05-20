@@ -46,7 +46,7 @@ namespace VeloMax
                     {
                         connection.Open();
                         MySqlCommand command = connection.CreateCommand();
-                        command.CommandText = "UPDATE velomax.fournisseur set siret = " + BoxSiret.Text.ToString() + ", nomentreprise = '" + BoxNomEntreprise.Text.ToString() + "', contact = '" + BoxContact.Text.ToString() + "', adrfour = '" + BoxAddresse.Text.ToString() + "', libellefourniseur = '" + BoxLibelle.Text.ToString() + "' where libellefourniseur = '" + BoxLibelle.Text.ToString() + "';";
+                        command.CommandText = "SET foreign_key_checks = 0;UPDATE velomax.fournisseur set siret = " + BoxSiret.Text.ToString() + ", nomentreprise = '" + BoxNomEntreprise.Text.ToString() + "', contact = '" + BoxContact.Text.ToString() + "', adrfour = '" + BoxAddresse.Text.ToString() + "', libellefourniseur = '" + BoxLibelle.Text.ToString() + "' where libellefourniseur = '" + BoxLibelle.Text.ToString() + "';SET foreign_key_checks = 1;";
                         MySqlDataReader reader = command.ExecuteReader();
                         connection.Close();
 
