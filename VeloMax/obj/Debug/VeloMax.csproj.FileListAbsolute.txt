@@ -105,7 +105,6 @@ C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifAssembla
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifBicy.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\ModifPiece.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\App.g.cs
-C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax_Content.g.cs
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax_MarkupCompile.cache
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\VeloMax_MarkupCompile.lref
 C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddAssemblage.baml
@@ -166,3 +165,13 @@ C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\Newtonsoft.Js
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\Newtonsoft.Json.xml
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifCmd.g.cs
 C:\Users\petil\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifCmd.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddStock.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifCmd.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifFournisseur.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifStock.g.cs
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\AddStock.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifCmd.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifFournisseur.baml
+C:\Users\sacre\OneDrive\Documents\GitHub\VeloMax\VeloMax\obj\Debug\modifStock.baml

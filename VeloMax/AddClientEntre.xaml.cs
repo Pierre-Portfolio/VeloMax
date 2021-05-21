@@ -60,7 +60,8 @@ namespace VeloMax
 
                                             connection.Open();
                                             MySqlCommand command = connection.CreateCommand();
-                                            command.CommandText = "INSERT INTO velomax.clientele (idclient,rueclient,codepostaleclient,provinceclient,villeclient)VALUES(" + mw.keyClient.ToString() + ",'" + BoxRueClient.Text.ToString() + "','" + BoxCodePostale.Text.ToString() + "','" + BoxProvinceClient.Text.ToString() + "','" + BoxVilleClient.Text.ToString() + "');";
+                                            
+                                            command.CommandText = "INSERT INTO velomax.clientele (rueclient,codepostaleclient,provinceclient,villeclient)VALUES('" + BoxRueClient.Text.ToString() + "','" + BoxCodePostale.Text.ToString() + "','" + BoxProvinceClient.Text.ToString() + "','" + BoxVilleClient.Text.ToString() + "');";
                                             MySqlDataReader reader = command.ExecuteReader();
                                             connection.Close();
 
