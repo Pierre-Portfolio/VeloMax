@@ -35,7 +35,7 @@ de mieux gérer les ventes et les clients.
 <img src="./Assets/Document/UML/MCD.png" alt="VeloMax" />
 
 ## UI
-<img src="./static/logiciel.png" alt="VeloMax" />
+[![Watch the video]](https://www.youtube.com/watch?v=VnBKWS3Bti0)
 
 ## Auteur
 - [@Pierre](https://github.com/Pierre-Portfolio)
