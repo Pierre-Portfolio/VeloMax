@@ -34,8 +34,9 @@ de mieux gérer les ventes et les clients.
 ## UML
 <img src="./Assets/Document/UML/MCD.png" alt="VeloMax" />
 
-## UI
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/watch?v=VnBKWS3Bti0)
+## Demo
+[![Watch the video](./Assets/Picture/demo.jpg)](https://www.youtube.com/watch?v=VnBKWS3Bti0)
 
 ## Auteur
 - [@Pierre](https://github.com/Pierre-Portfolio)
+- [@Yanis](https://github.com/YanisOUARAS)
