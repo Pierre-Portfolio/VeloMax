@@ -14,7 +14,7 @@
 ## Objectif
 
 - Gestion des pièces de rechange.
-- Gestion des vélos.
+- Gestion des vélos en magasin.
 - Gestion des clients (particuliers ou entreprises).
 - Gestion des fournisseurs.
 - Gestion des commandes.
